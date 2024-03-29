@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trikeright/features/user_setup/presentation/widgets/my_choice_chip.dart';
+import 'package:trikeright/features/user_setup/presentation/widgets/my_elevated_button.dart';
 import 'package:trikeright/features/user_setup/presentation/widgets/my_labled_textfield.dart';
 import 'package:trikeright/features/user_setup/presentation/widgets/my_text_field.dart';
 
@@ -63,6 +64,7 @@ class _UserSetupPageState extends State<UserSetupPage> {
           SizedBox(height: 8.h),
           // Textfield for Mobile Number
           MyTextField(
+            keyboardType: TextInputType.phone,
             hintText: '(eg. 091234567891)',
             controller: mobileNumberController,
           ),
@@ -79,6 +81,12 @@ class _UserSetupPageState extends State<UserSetupPage> {
                 MyChoiceChip(isType: isRegular, typeName: 'Regular'),
               ],
             ),
+          ),
+          SizedBox(
+            height: 12.h,
+          ),
+          MyElevatedButton(
+            onPressed: () {},
           )
         ],
       ),
