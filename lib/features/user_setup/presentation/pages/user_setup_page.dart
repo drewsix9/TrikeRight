@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:trikeright/features/user_setup/presentation/widgets/labled_textfield.dart';
+import 'package:trikeright/features/user_setup/presentation/widgets/my_choice_chip.dart';
+import 'package:trikeright/features/user_setup/presentation/widgets/my_labled_textfield.dart';
 import 'package:trikeright/features/user_setup/presentation/widgets/my_text_field.dart';
 
 class UserSetupPage extends StatefulWidget {
@@ -13,6 +14,10 @@ class UserSetupPage extends StatefulWidget {
 class _UserSetupPageState extends State<UserSetupPage> {
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController mobileNumberController = TextEditingController();
+  bool isStudent = false;
+  bool isSenior = false;
+  bool isPWD = false;
+  bool isRegular = false;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +29,8 @@ class _UserSetupPageState extends State<UserSetupPage> {
           Stack(
             children: [
               Image.asset(
-                  'lib/features/user_setup/presentation/utils/images/bicycle.png'),
+                'lib/features/user_setup/presentation/utils/images/bicycle.png',
+              ),
               Positioned(
                 left: 16,
                 bottom: 16,
@@ -45,7 +51,7 @@ class _UserSetupPageState extends State<UserSetupPage> {
           ),
           // Full name
           SizedBox(height: 12.h),
-          const LabelTextField(label: 'Full Name'),
+          const MyLabelTextField(label: 'Full Name'),
           SizedBox(height: 8.h),
           // Textfield for full name
           MyTextField(
@@ -53,14 +59,27 @@ class _UserSetupPageState extends State<UserSetupPage> {
             controller: fullNameController,
           ),
           SizedBox(height: 24.h),
-          const LabelTextField(label: 'Mobile Number'),
+          const MyLabelTextField(label: 'Mobile Number'),
           SizedBox(height: 8.h),
           // Textfield for Mobile Number
           MyTextField(
             hintText: '(eg. 091234567891)',
             controller: mobileNumberController,
           ),
-          SizedBox(height: 24.h),
+          SizedBox(height: 12.h),
+          SizedBox(
+            width: 390.w,
+            height: 56.h,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                MyChoiceChip(isType: isStudent, typeName: 'Student'),
+                MyChoiceChip(isType: isSenior, typeName: 'Senior'),
+                MyChoiceChip(isType: isPWD, typeName: 'PWD'),
+                MyChoiceChip(isType: isRegular, typeName: 'Regular'),
+              ],
+            ),
+          )
         ],
       ),
     );

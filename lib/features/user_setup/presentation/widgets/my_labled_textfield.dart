@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LabelTextField extends StatelessWidget {
+class MyLabelTextField extends StatelessWidget {
   final String label;
 
-  const LabelTextField({
+  const MyLabelTextField({
     super.key,
     required this.label,
   });
