@@ -24,16 +24,14 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
-        title: const Text(
+        title: Text(
           'TrikeRight',
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: Color(0xFF0F1416),
-            fontSize: 18,
+            color: const Color(0xFF0F1416),
+            fontSize: 18.sp,
             fontFamily: 'Plus Jakarta Sans',
             fontWeight: FontWeight.w700,
-            height: 0.07,
-            letterSpacing: -0.27,
           ),
         ),
         backgroundColor: const Color(0xFFF7FAFC),
@@ -43,9 +41,9 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
         controller: panelController,
         maxHeight: ScreenUtil().screenHeight * 0.4367201426024955,
         color: const Color(0xFFF7FAFC),
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(18),
-          topRight: Radius.circular(18),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(18.r),
+          topRight: Radius.circular(18.r),
         ),
         parallaxEnabled: true,
         parallaxOffset: 0.5,

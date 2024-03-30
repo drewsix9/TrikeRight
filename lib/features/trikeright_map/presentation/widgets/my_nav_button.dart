@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyNavButton extends StatelessWidget {
   final IconData icon;
@@ -13,8 +14,8 @@ class MyNavButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 114,
-      height: 54,
+      width: 114.w,
+      height: 54.h,
       color: const Color(0xFFF7FAFC),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -27,12 +28,12 @@ class MyNavButton extends StatelessWidget {
           Text(
             label,
             textAlign: TextAlign.center,
-            style: const TextStyle(
-              color: Color(0xFF5E758C),
-              fontSize: 12,
+            style: TextStyle(
+              color: const Color(0xFF5E758C),
+              fontSize: 12.sp,
               fontFamily: 'Plus Jakarta Sans',
               fontWeight: FontWeight.w500,
-              letterSpacing: 0.18,
+              letterSpacing: 0.18.w,
             ),
           )
         ],
