@@ -69,6 +69,7 @@ class _UserSetupPageState extends State<UserSetupPage> {
             controller: mobileNumberController,
           ),
           SizedBox(height: 12.h),
+          // Choice Chips
           SizedBox(
             width: 390.w,
             height: 56.h,
@@ -86,8 +87,11 @@ class _UserSetupPageState extends State<UserSetupPage> {
             height: 12.h,
           ),
           MyElevatedButton(
-            onPressed: () {},
-          )
+            label: 'Next',
+            onPressed: () {
+              Navigator.of(context).pushNamed('/trikeright_map');
+            },
+          ),
         ],
       ),
     );

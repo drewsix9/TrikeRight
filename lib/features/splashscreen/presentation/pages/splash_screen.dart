@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:trikeright/features/user_setup/presentation/pages/user_setup_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,18 +15,17 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-    Future.delayed(const Duration(seconds: 2), () {
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => const UserSetupPage()));
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.of(context).pushNamed('/user_setup');
     });
   }
 
-  @override
-  void dispose() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: SystemUiOverlay.values);
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+  //       overlays: SystemUiOverlay.values);
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {

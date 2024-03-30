@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trikeright/core/themes/trikeright_theme.dart';
 import 'package:trikeright/features/splashscreen/presentation/pages/splash_screen.dart';
+import 'package:trikeright/routing/app_routing.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,12 +11,12 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(390, 844),
       builder: (context, child) => MaterialApp(
+        routes: AppRouting.routes,
         debugShowCheckedModeBanner: false,
         title: 'TrikeRight',
         theme: AppTheme.lightTheme,

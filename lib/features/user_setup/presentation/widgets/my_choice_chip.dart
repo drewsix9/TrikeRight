@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class MyChoiceChip extends StatefulWidget {
+  bool isType;
+  final String typeName;
+
   MyChoiceChip({
     super.key,
     required this.isType,
     required this.typeName,
   });
-
-  bool isType;
-  final String typeName;
 
   @override
   State<MyChoiceChip> createState() => _MyChoiceChipState();

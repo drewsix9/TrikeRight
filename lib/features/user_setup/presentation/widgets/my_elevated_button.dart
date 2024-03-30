@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyElevatedButton extends StatelessWidget {
-  const MyElevatedButton({super.key, required this.onPressed});
+  final String label;
+  final void Function() onPressed;
 
-  final VoidCallback onPressed;
+  const MyElevatedButton(
+      {super.key, required this.onPressed, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +23,10 @@ class MyElevatedButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(12.r),
             ),
           ),
-          onPressed: () {},
-          child: const Text(
-            'Next',
-            style: TextStyle(
+          onPressed: onPressed,
+          child: Text(
+            label,
+            style: const TextStyle(
               color: Color(0xFFF7F9FC),
               fontSize: 16,
               fontFamily: 'Plus Jakarta Sans',
