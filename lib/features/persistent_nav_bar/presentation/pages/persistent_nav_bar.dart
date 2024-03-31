@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:trikeright/features/history/presentation/pages/history_page.dart';
-import 'package:trikeright/features/preference/presentation/pages/preference_page.dart';
 import 'package:trikeright/features/trikeright_map/presentation/pages/trikeright_map_page.dart';
 
 class PersistentNavBar extends StatefulWidget {
@@ -40,13 +39,13 @@ class _PersistentNavBarState extends State<PersistentNavBar> {
             title: "History",
           ),
         ),
-        PersistentTabConfig(
-          screen: const PreferencePage(),
-          item: ItemConfig(
-            icon: const Icon(Icons.settings),
-            title: "Preferences",
-          ),
-        ),
+        // PersistentTabConfig(
+        //   screen: const PreferencePage(),
+        //   item: ItemConfig(
+        //     icon: const Icon(Icons.settings),
+        //     title: "Preferences",
+        //   ),
+        // ),
       ],
       navBarHeight: 75.h,
       navBarBuilder: (navBarConfig) => Style2BottomNavBar(

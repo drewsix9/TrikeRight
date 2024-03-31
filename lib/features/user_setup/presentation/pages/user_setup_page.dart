@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trikeright/features/persistent_nav_bar/presentation/pages/persistent_nav_bar.dart';
-import 'package:trikeright/features/user_setup/presentation/widgets/my_choice_chip.dart';
+import 'package:trikeright/features/trikeright_map/presentation/widgets/my_single_choice_chips.dart';
 import 'package:trikeright/features/user_setup/presentation/widgets/my_elevated_button.dart';
 import 'package:trikeright/features/user_setup/presentation/widgets/my_labled_textfield.dart';
 import 'package:trikeright/features/user_setup/presentation/widgets/my_text_field.dart';
@@ -74,15 +74,7 @@ class _UserSetupPageState extends State<UserSetupPage> {
           SizedBox(
             width: 390.w,
             height: 56.h,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                MyChoiceChip(isType: isStudent, typeName: 'Student'),
-                MyChoiceChip(isType: isSenior, typeName: 'Senior'),
-                MyChoiceChip(isType: isPWD, typeName: 'PWD'),
-                MyChoiceChip(isType: isRegular, typeName: 'Regular'),
-              ],
-            ),
+            child: const MySingleChoiceChips(),
           ),
           SizedBox(
             height: 12.h,
