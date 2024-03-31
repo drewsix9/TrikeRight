@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:trikeright/features/persistent_nav_bar/presentation/pages/persistent_nav_bar.dart';
 import 'package:trikeright/features/user_setup/presentation/widgets/my_choice_chip.dart';
 import 'package:trikeright/features/user_setup/presentation/widgets/my_elevated_button.dart';
 import 'package:trikeright/features/user_setup/presentation/widgets/my_labled_textfield.dart';
@@ -89,7 +90,11 @@ class _UserSetupPageState extends State<UserSetupPage> {
           MyElevatedButton(
             label: 'Next',
             onPressed: () {
-              Navigator.of(context).pushNamed('/persistent_nav_bar');
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const PersistentNavBar()),
+              );
             },
           ),
         ],

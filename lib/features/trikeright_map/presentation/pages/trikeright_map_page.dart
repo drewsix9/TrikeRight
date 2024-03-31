@@ -38,7 +38,8 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
       // Sliding Up Panel
       body: SlidingUpPanel(
         controller: panelController,
-        maxHeight: ScreenUtil().screenHeight * 0.4367201426024955,
+        minHeight: ScreenUtil().screenHeight * 0.25,
+        maxHeight: ScreenUtil().screenHeight * 0.6,
         color: const Color(0xFFF7FAFC),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(18.r),

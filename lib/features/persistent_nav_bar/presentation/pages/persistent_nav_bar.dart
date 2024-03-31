@@ -44,13 +44,21 @@ class _PersistentNavBarState extends State<PersistentNavBar> {
           screen: const PreferencePage(),
           item: ItemConfig(
             icon: const Icon(Icons.settings),
-            title: "Settings",
+            title: "Preferences",
           ),
         ),
       ],
       navBarHeight: 75.h,
-      navBarBuilder: (navBarConfig) =>
-          Style1BottomNavBar(navBarConfig: navBarConfig),
+      navBarBuilder: (navBarConfig) => Style2BottomNavBar(
+        navBarConfig: navBarConfig,
+        navBarDecoration: NavBarDecoration(
+          color: const Color(0xFFF7FAFC),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(18.r),
+            topRight: Radius.circular(18.r),
+          ),
+        ),
+      ),
     );
   }
 }

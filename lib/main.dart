@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trikeright/core/themes/trikeright_theme.dart';
-import 'package:trikeright/features/persistent_nav_bar/presentation/pages/persistent_nav_bar.dart';
+import 'package:trikeright/features/splashscreen/presentation/pages/splash_screen.dart';
 import 'package:trikeright/routing/app_routing.dart';
 
 void main() {
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         title: 'TrikeRight',
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
-        home: const PersistentNavBar(),
+        home: const SplashScreen(),
       ),
     );
   }
