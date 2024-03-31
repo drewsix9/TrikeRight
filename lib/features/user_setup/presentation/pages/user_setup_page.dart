@@ -90,10 +90,10 @@ class _UserSetupPageState extends State<UserSetupPage> {
           MyElevatedButton(
             label: 'Next',
             onPressed: () {
-              Navigator.push(
-                context,
+              Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                    builder: (context) => const PersistentNavBar()),
+                  builder: (context) => const PersistentNavBar(),
+                ),
               );
             },
           ),
