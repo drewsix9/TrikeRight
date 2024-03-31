@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'package:trikeright/features/trikeright_map/presentation/widgets/my_nav_button.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_sliding_up_panel.dart';
 
 class TrikeRightMapPage extends StatefulWidget {
@@ -61,37 +60,6 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
         ),
       ),
       // Bottom Navigation Bar
-      bottomNavigationBar: BottomAppBar(
-        elevation: 0,
-        height: 75.h,
-        color: const Color(0xFFF7FAFC),
-        child: Padding(
-          padding:
-              EdgeInsets.only(left: 8.w, right: 8.w, bottom: 6.h, top: 4.h),
-          child: Container(
-            width: 358.w,
-            height: 54.h,
-            color: const Color(0xFFF7FAFC),
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                MyNavButton(
-                  icon: Icons.route,
-                  label: 'Route',
-                ),
-                MyNavButton(
-                  icon: Icons.history,
-                  label: 'History',
-                ),
-                MyNavButton(
-                  icon: Icons.settings,
-                  label: 'Preferences',
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

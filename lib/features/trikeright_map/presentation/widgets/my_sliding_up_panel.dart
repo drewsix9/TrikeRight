@@ -10,8 +10,17 @@ class MySlidingUpPanel extends StatelessWidget {
   final TextEditingController sourceController = TextEditingController();
   final TextEditingController destinationController = TextEditingController();
 
-  MySlidingUpPanel(
-      {super.key, required this.controller, required this.panelController});
+  void togglePanel() {
+    panelController.isPanelOpen
+        ? panelController.close()
+        : panelController.open();
+  }
+
+  MySlidingUpPanel({
+    super.key,
+    required this.controller,
+    required this.panelController,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +28,11 @@ class MySlidingUpPanel extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         // Drag handle
-        GestureDetector(onTap: togglePanel, child: const MyDragHandle()),
+        GestureDetector(
+          onTap: togglePanel,
+          child: const MyDragHandle(),
+        ),
       ],
     );
-  }
-
-  void togglePanel() {
-    panelController.isPanelOpen
-        ? panelController.close()
-        : panelController.open();
   }
 }

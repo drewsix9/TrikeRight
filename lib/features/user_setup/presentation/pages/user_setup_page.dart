@@ -89,7 +89,7 @@ class _UserSetupPageState extends State<UserSetupPage> {
           MyElevatedButton(
             label: 'Next',
             onPressed: () {
-              Navigator.of(context).pushNamed('/trikeright_map');
+              Navigator.of(context).pushNamed('/persistent_nav_bar');
             },
           ),
         ],
