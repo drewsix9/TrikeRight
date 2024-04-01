@@ -11,7 +11,7 @@ class MySingleChoiceChips extends StatefulWidget {
 
 class _MySingleChoiceChipsState extends State<MySingleChoiceChips> {
   int tag = 3;
-  List<String> choices = ['Student', 'Senior', 'PWD', 'Regular'];
+  List<String> choices = ['Student', 'Senior/PWD', 'Regular'];
 
   @override
   Widget build(BuildContext context) {
