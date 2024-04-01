@@ -17,6 +17,7 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: const Color(0xFFF7FAFC),
         resizeToAvoidBottomInset: false,
         // AppBar - Search Page
         appBar: AppBar(
