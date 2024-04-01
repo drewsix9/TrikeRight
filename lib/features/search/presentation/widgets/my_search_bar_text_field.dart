@@ -1,26 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MyTextField extends StatelessWidget {
+class MySearchBarTextField extends StatelessWidget {
   final String hintText;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final TextInputType keyboardType;
-  final Icon? prefixIcon;
-  final Icon? suffixIcon;
 
-  const MyTextField({
+  const MySearchBarTextField({
     super.key,
     required this.hintText,
-    required this.controller,
-    this.keyboardType = TextInputType.text,
-    this.prefixIcon,
-    this.suffixIcon,
+    this.controller,
+    required this.keyboardType,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 8, bottom: 8.h),
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: TextField(
         keyboardType: keyboardType,
         controller: controller,
@@ -32,6 +28,14 @@ class MyTextField extends StatelessWidget {
           height: 1.h,
         ),
         decoration: InputDecoration(
+          contentPadding:
+              EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.h),
+          filled: true,
+          fillColor: const Color(0xFFE8EDF4),
+          prefixIcon: const Icon(
+            Icons.search,
+            color: Color(0xFF5E758C),
+          ),
           hintText: hintText,
           hintStyle: TextStyle(
             color: const Color(0xFF5E758C),
@@ -40,10 +44,6 @@ class MyTextField extends StatelessWidget {
             fontWeight: FontWeight.w400,
             height: 1.h,
           ),
-          prefixIcon: prefixIcon,
-          suffixIcon: suffixIcon,
-          filled: true,
-          fillColor: const Color(0xFFE8EDF4),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: const BorderSide(

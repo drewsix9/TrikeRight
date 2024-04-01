@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:trikeright/features/persistent_nav_bar/presentation/pages/persistent_nav_bar.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_single_choice_chips.dart';
 import 'package:trikeright/features/user_setup/presentation/widgets/my_elevated_button.dart';
 import 'package:trikeright/features/user_setup/presentation/widgets/my_labled_textfield.dart';
@@ -82,11 +81,11 @@ class _UserSetupPageState extends State<UserSetupPage> {
           MyElevatedButton(
             label: 'Next',
             onPressed: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => const PersistentNavBar(),
-                ),
+              debugPrint(
+                'Name: ${fullNameController.text} \n Mobile Number: ${mobileNumberController.text}',
               );
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/persistent_nav_bar', (route) => false);
             },
           ),
         ],

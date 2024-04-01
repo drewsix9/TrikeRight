@@ -12,7 +12,6 @@ class TrikeRightMapPage extends StatefulWidget {
 }
 
 class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
-  late double screenHeight;
   static const LatLng _pTagbilaran = LatLng(9.6477, 123.8557);
   final PanelController panelController = PanelController();
 
@@ -20,6 +19,7 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        extendBodyBehindAppBar: true,
         resizeToAvoidBottomInset: false,
         // AppBar - Trike Right
         appBar: AppBar(
@@ -35,12 +35,12 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
               fontWeight: FontWeight.w700,
             ),
           ),
-          backgroundColor: const Color(0xFFF7FAFC),
+          backgroundColor: Colors.transparent,
         ),
         // Sliding Up Panel
         body: SlidingUpPanel(
           controller: panelController,
-          minHeight: ScreenUtil().screenHeight * 0.2,
+          minHeight: ScreenUtil().screenHeight * 0.220,
           maxHeight: ScreenUtil().screenHeight * 0.45,
           color: const Color(0xFFF7FAFC),
           borderRadius: BorderRadius.only(

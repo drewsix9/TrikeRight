@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MyTextField extends StatelessWidget {
+class MyTextFieldToSearch extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
   final TextInputType keyboardType;
-  final Icon? prefixIcon;
-  final Icon? suffixIcon;
+  final void Function()? onTap;
 
-  const MyTextField({
+  const MyTextFieldToSearch({
     super.key,
     required this.hintText,
     required this.controller,
     this.keyboardType = TextInputType.text,
-    this.prefixIcon,
-    this.suffixIcon,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 8, bottom: 8.h),
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: TextField(
+        readOnly: true,
+        onTap: onTap,
         keyboardType: keyboardType,
         controller: controller,
         style: TextStyle(
@@ -40,8 +40,6 @@ class MyTextField extends StatelessWidget {
             fontWeight: FontWeight.w400,
             height: 1.h,
           ),
-          prefixIcon: prefixIcon,
-          suffixIcon: suffixIcon,
           filled: true,
           fillColor: const Color(0xFFE8EDF4),
           border: OutlineInputBorder(

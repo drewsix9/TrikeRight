@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_drag_handle.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_single_choice_chips.dart';
+import 'package:trikeright/features/trikeright_map/presentation/widgets/my_text_field_to_search.dart';
 import 'package:trikeright/features/user_setup/presentation/widgets/my_elevated_button.dart';
-import 'package:trikeright/features/user_setup/presentation/widgets/my_text_field.dart';
 
 class MySlidingUpPanel extends StatelessWidget {
   final ScrollController controller;
@@ -13,10 +13,10 @@ class MySlidingUpPanel extends StatelessWidget {
   final TextEditingController sourceController = TextEditingController();
   final TextEditingController destinationController = TextEditingController();
 
-  bool isStudent = false;
-  bool isSenior = false;
-  bool isPWD = false;
-  bool isRegular = false;
+  final bool isStudent = false;
+  final bool isSenior = false;
+  final bool isPWD = false;
+  final bool isRegular = false;
 
   void togglePanel() {
     panelController.isPanelOpen
@@ -41,14 +41,16 @@ class MySlidingUpPanel extends StatelessWidget {
           child: const MyDragHandle(),
         ),
         SizedBox(height: 12.h),
-        MyTextField(
+        MyTextFieldToSearch(
           hintText: 'From where?',
           controller: sourceController,
+          onTap: () => onTapTextField(context, sourceController),
         ),
         SizedBox(height: 24.h),
-        MyTextField(
+        MyTextFieldToSearch(
           hintText: 'To where?',
           controller: destinationController,
+          onTap: () => onTapTextField(context, destinationController),
         ),
         SizedBox(height: 12.h),
         SizedBox(
@@ -79,6 +81,14 @@ class MySlidingUpPanel extends StatelessWidget {
           onPressed: () {},
         )
       ],
+    );
+  }
+
+  void onTapTextField(
+      BuildContext context, TextEditingController textEditingController) {
+    Navigator.of(context).pushNamed(
+      '/search_page',
+      arguments: textEditingController,
     );
   }
 }
