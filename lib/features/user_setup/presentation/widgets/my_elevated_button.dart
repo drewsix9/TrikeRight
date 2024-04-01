@@ -26,9 +26,9 @@ class MyElevatedButton extends StatelessWidget {
           onPressed: onPressed,
           child: Text(
             label,
-            style: const TextStyle(
-              color: Color(0xFFF7F9FC),
-              fontSize: 16,
+            style: TextStyle(
+              color: const Color(0xFFF7F9FC),
+              fontSize: 16.sp,
               fontFamily: 'Plus Jakarta Sans',
               fontWeight: FontWeight.w700,
             ),

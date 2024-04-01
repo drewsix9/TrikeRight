@@ -26,11 +26,11 @@ class _MySingleChoiceChipsState extends State<MySingleChoiceChips> {
         label: (i, v) => v,
       ),
       choiceStyle: C2ChipStyle.toned(
-        height: 45,
+        height: 45.h,
         margin: EdgeInsets.only(left: 8.w),
-        foregroundStyle: const TextStyle(
-          color: Color(0xFF0F1416),
-          fontSize: 14,
+        foregroundStyle: TextStyle(
+          color: const Color(0xFF0F1416),
+          fontSize: 14.sp,
           fontFamily: 'Plus Jakarta Sans',
           fontWeight: FontWeight.w500,
         ),

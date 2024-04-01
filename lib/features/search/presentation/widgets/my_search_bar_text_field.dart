@@ -22,7 +22,7 @@ class MySearchBarTextField extends StatelessWidget {
         controller: controller,
         style: TextStyle(
           color: const Color(0xFF0F1416),
-          fontSize: 16,
+          fontSize: 16.sp,
           fontFamily: 'Plus Jakarta Sans',
           fontWeight: FontWeight.w400,
           height: 1.h,
@@ -39,13 +39,13 @@ class MySearchBarTextField extends StatelessWidget {
           hintText: hintText,
           hintStyle: TextStyle(
             color: const Color(0xFF5E758C),
-            fontSize: 16,
+            fontSize: 16.sp,
             fontFamily: 'Plus Jakarta Sans',
             fontWeight: FontWeight.w400,
             height: 1.h,
           ),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(12.r),
             borderSide: const BorderSide(
               width: 0,
               style: BorderStyle.none,

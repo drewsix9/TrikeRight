@@ -58,11 +58,11 @@ class MySlidingUpPanel extends StatelessWidget {
           width: 390.w,
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
-            child: const Text(
+            child: Text(
               'Passenger type',
               style: TextStyle(
-                color: Color(0xFF0F1416),
-                fontSize: 18,
+                color: const Color(0xFF0F1416),
+                fontSize: 18.sp,
                 fontFamily: 'Plus Jakarta Sans',
                 fontWeight: FontWeight.w700,
                 height: 0.07,

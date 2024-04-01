@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class MyChoiceChip extends StatefulWidget {
-  bool isType;
+  final bool isType;
   final String typeName;
 
-  MyChoiceChip({
+  const MyChoiceChip({
     super.key,
     required this.isType,
     required this.typeName,
@@ -15,6 +15,8 @@ class MyChoiceChip extends StatefulWidget {
 }
 
 class _MyChoiceChipState extends State<MyChoiceChip> {
+  set isType(bool selected) {}
+
   @override
   Widget build(BuildContext context) {
     return ChoiceChip(
@@ -31,7 +33,7 @@ class _MyChoiceChipState extends State<MyChoiceChip> {
       selected: widget.isType,
       onSelected: (selected) {
         setState(() {
-          widget.isType = selected;
+          isType = selected;
         });
       },
       // selectedColor: const Color(0xFFE8EDF4),
