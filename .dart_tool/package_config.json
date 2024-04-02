@@ -483,7 +483,7 @@
     },
     {
       "name": "widget_event",
-      "rootUri": "file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.dev/widget_event-1.2.6",
+      "rootUri": "file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.dev/widget_event-1.2.8",
       "packageUri": "lib/",
       "languageVersion": "3.1"
     },
@@ -518,7 +518,7 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2024-04-02T14:42:06.880425Z",
+  "generated": "2024-04-02T15:04:36.090004Z",
   "generator": "pub",
   "generatorVersion": "3.3.2"
 }

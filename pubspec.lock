@@ -633,10 +633,10 @@ packages:
     dependency: transitive
     description:
       name: widget_event
-      sha256: "1e97328db2d009d7475cf7a01762ec3925ba2fdad25f34b1289c6f4ab4f19279"
+      sha256: "14013fbdc15370ba0244a14cd0c24d11a5a0418062bcf06fb99dc69a20885e1a"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.6"
+    version: "1.2.8"
   win32:
     dependency: transitive
     description:
