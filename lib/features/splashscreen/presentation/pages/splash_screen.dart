@@ -16,21 +16,18 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+    // Delay for 3 seconds before navigating to the next page
     Future.delayed(const Duration(seconds: 3), () {
+      // Check if the user is a first time user
       SharedPreferences.getInstance().then((prefs) {
         if (prefs.getBool('isFirstTime') == null) {
           prefs.setBool('isFirstTime', true);
           Navigator.of(context).pushReplacementNamed('/user_setup');
         } else {
-          Navigator.of(context).pushReplacementNamed('/home');
+          Navigator.of(context).pushReplacementNamed('/persistent_nav_bar');
         }
       });
     });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   @override

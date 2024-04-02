@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:trikeright/core/utils/validator.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_single_choice_chips.dart';
+import 'package:trikeright/features/user_setup/data/passenger_type_provider.dart';
 import 'package:trikeright/features/user_setup/presentation/widgets/my_elevated_button.dart';
 import 'package:trikeright/features/user_setup/presentation/widgets/my_labled_textfield.dart';
 import 'package:trikeright/features/user_setup/presentation/widgets/my_text_field.dart';
+
+final _formKey = GlobalKey<FormState>();
 
 class UserSetupPage extends StatefulWidget {
   const UserSetupPage({super.key});
@@ -15,80 +20,98 @@ class UserSetupPage extends StatefulWidget {
 class _UserSetupPageState extends State<UserSetupPage> {
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController mobileNumberController = TextEditingController();
-  bool isStudent = false;
-  bool isSenior = false;
-  bool isPWD = false;
-  bool isRegular = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Column(
-        children: [
-          // Image and text
-          Stack(
-            children: [
-              Image.asset(
-                'lib/features/user_setup/presentation/utils/images/bicycle.png',
-              ),
-              Positioned(
-                left: 16,
-                bottom: 16,
-                child: Text(
-                  'Let\'s get started with\nyour account',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 28.sp,
-                    fontFamily: 'Plus Jakarta Sans',
-                    fontWeight: FontWeight.w700,
-                    height: 1.4.h,
-                    letterSpacing: -0.70,
-                  ),
-                  maxLines: 2,
+      body: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            // Image and text
+            Stack(
+              children: [
+                Image.asset(
+                  'lib/features/user_setup/presentation/utils/images/bicycle.png',
                 ),
-              )
-            ],
-          ),
-          // Full name
-          SizedBox(height: 12.h),
-          const MyLabelTextField(label: 'Full Name'),
-          SizedBox(height: 8.h),
-          // Textfield for full name
-          MyTextField(
-            hintText: '(eg. Juan Dela Cruz)',
-            controller: fullNameController,
-          ),
-          SizedBox(height: 24.h),
-          const MyLabelTextField(label: 'Mobile Number'),
-          SizedBox(height: 8.h),
-          // Textfield for Mobile Number
-          MyTextField(
-            keyboardType: TextInputType.phone,
-            hintText: '(eg. 091234567891)',
-            controller: mobileNumberController,
-          ),
-          SizedBox(height: 12.h),
-          // Choice Chips
-          SizedBox(
-            width: 390.w,
-            height: 56.h,
-            child: const MySingleChoiceChips(),
-          ),
-          SizedBox(
-            height: 12.h,
-          ),
-          MyElevatedButton(
-            label: 'Next',
-            onPressed: () {
-              debugPrint(
-                'Name: ${fullNameController.text} \n Mobile Number: ${mobileNumberController.text}',
-              );
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                  '/persistent_nav_bar', (route) => false);
-            },
-          ),
-        ],
+                Positioned(
+                  left: 16,
+                  bottom: 16,
+                  child: Text(
+                    'Let\'s get started with\nyour account',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 28.sp,
+                      fontFamily: 'Plus Jakarta Sans',
+                      fontWeight: FontWeight.w700,
+                      height: 1.4.h,
+                      letterSpacing: -0.70,
+                    ),
+                    maxLines: 2,
+                  ),
+                )
+              ],
+            ),
+            // Full name
+            SizedBox(height: 12.h),
+            const MyLabelTextField(label: 'Full Name'),
+            SizedBox(height: 8.h),
+            // Textfield for full name
+            MyTextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) =>
+                  Validator.isName(value!) ? null : 'Please enter a valid name',
+              hintText: '(eg. Juan Dela Cruz)',
+              controller: fullNameController,
+            ),
+            SizedBox(height: 24.h),
+            const MyLabelTextField(label: 'Mobile Number'),
+            SizedBox(height: 8.h),
+            // Textfield for Mobile Number
+            MyTextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) => Validator.isPhoneNumber(value!)
+                  ? null
+                  : 'Please enter a valid mobile number',
+              keyboardType: TextInputType.phone,
+              hintText: '(eg. 091234567891)',
+              controller: mobileNumberController,
+            ),
+            SizedBox(height: 12.h),
+            // Choice Chips
+            SizedBox(
+              width: 390.w,
+              height: 56.h,
+              child: const MySingleChoiceChips(),
+            ),
+            SizedBox(
+              height: 12.h,
+            ),
+            Consumer<PassengerTypeProvider>(
+              builder: (context, value, child) => MyElevatedButton(
+                label: 'Next',
+                onPressed: () {
+                  // reference to the provider
+                  if (_formKey.currentState!.validate() &&
+                      (value.passengerType == PassengerType.student ||
+                          value.passengerType == PassengerType.seniorPWD ||
+                          value.passengerType == PassengerType.regular)) {
+                    debugPrint(
+                      'Name: ${fullNameController.text} \n Mobile Number: ${mobileNumberController.text}',
+                    );
+                    Navigator.of(context)
+                        .pushReplacementNamed('/persistent_nav_bar');
+                  } else {
+                    // You can show a message to the user here
+                    debugPrint(
+                        'Please fill all the fields and choose a choice');
+                  }
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

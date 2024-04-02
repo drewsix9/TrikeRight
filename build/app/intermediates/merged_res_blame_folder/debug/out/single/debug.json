@@ -1,11 +1,11 @@
 [
     {
-        "merged": "com.example.trikeright.app-merged_res-14:/mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "com.example.trikeright.app-main-8:/mipmap-xxhdpi/ic_launcher.png"
-    },
-    {
         "merged": "com.example.trikeright.app-merged_res-14:/mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "com.example.trikeright.app-main-8:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.trikeright.app-merged_res-14:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.example.trikeright.app-main-8:/mipmap-xxhdpi/ic_launcher.png"
     },
     {
         "merged": "com.example.trikeright.app-merged_res-14:/mipmap-hdpi_ic_launcher.png.flat",
@@ -30,6 +30,10 @@
     {
         "merged": "com.example.trikeright.app-merged_res-14:/drawable-mdpi_ic_launcher_foreground.png.flat",
         "source": "com.example.trikeright.app-main-8:/drawable-mdpi/ic_launcher_foreground.png"
+    },
+    {
+        "merged": "com.example.trikeright.app-merged_res-14:/drawable-v21_launch_background.xml.flat",
+        "source": "com.example.trikeright.app-main-8:/drawable-v21/launch_background.xml"
     },
     {
         "merged": "com.example.trikeright.app-merged_res-14:/mipmap-xxxhdpi_ic_launcher.png.flat",

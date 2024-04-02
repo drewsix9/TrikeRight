@@ -182,6 +182,10 @@ meta
 2.12
 file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.dev/meta-1.11.0/
 file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.dev/meta-1.11.0/lib/
+nested
+2.12
+file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.dev/nested-1.0.0/
+file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.dev/nested-1.0.0/lib/
 path
 3.0
 file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.dev/path-1.9.0/
@@ -218,6 +222,10 @@ pointycastle
 3.0
 file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.dev/pointycastle-3.7.4/
 file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.dev/pointycastle-3.7.4/lib/
+provider
+2.12
+file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.dev/provider-6.1.2/
+file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.dev/provider-6.1.2/lib/
 rxdart
 2.12
 file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.dev/rxdart-0.27.7/
@@ -340,6 +348,6 @@ file:///C:/flutter/packages/flutter_web_plugins/
 file:///C:/flutter/packages/flutter_web_plugins/lib/
 trikeright
 3.3
-file:///E:/GitHub%20Local%20Files/trikeright/
-file:///E:/GitHub%20Local%20Files/trikeright/lib/
+file:///E:/GitHub%20Local%20Files/TrikeRight/
+file:///E:/GitHub%20Local%20Files/TrikeRight/lib/
 2

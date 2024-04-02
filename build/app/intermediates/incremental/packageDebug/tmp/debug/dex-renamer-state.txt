@@ -1,4 +1,4 @@
-#Tue Apr 02 01:48:22 SGT 2024
-base.0=E\:\\GitHub Local Files\\trikeright\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+#Wed Apr 03 00:59:02 SGT 2024
+base.0=E\:\\GitHub Local Files\\TrikeRight\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

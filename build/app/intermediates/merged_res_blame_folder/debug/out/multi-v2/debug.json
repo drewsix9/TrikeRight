@@ -860,6 +860,23 @@
                     }
                 },
                 {
+                    "source": "E:\\GitHub Local Files\\TrikeRight\\android\\app\\src\\main\\res\\values\\colors.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "57",
+                        "endColumns": "56",
+                        "endOffsets": "109"
+                    },
+                    "to": {
+                        "startLines": "21",
+                        "startColumns": "4",
+                        "startOffsets": "1332",
+                        "endColumns": "56",
+                        "endOffsets": "1384"
+                    }
+                },
+                {
                     "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-3\\b4788c193f13f554649fe724431810b5\\transformed\\jetified-play-services-maps-18.2.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "4",
@@ -876,23 +893,6 @@
                         "endLines": "332",
                         "endColumns": "20",
                         "endOffsets": "15706"
-                    }
-                },
-                {
-                    "source": "E:\\GitHub Local Files\\trikeright\\android\\app\\src\\main\\res\\values\\colors.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "56",
-                        "endOffsets": "107"
-                    },
-                    "to": {
-                        "startLines": "21",
-                        "startColumns": "4",
-                        "startOffsets": "1332",
-                        "endColumns": "56",
-                        "endOffsets": "1384"
                     }
                 },
                 {
@@ -913,7 +913,7 @@
                     }
                 },
                 {
-                    "source": "E:\\GitHub Local Files\\trikeright\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "E:\\GitHub Local Files\\TrikeRight\\android\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
@@ -4556,7 +4556,7 @@
             "outputFile": "com.example.trikeright.app-merged_res-14:/values-night-v8_values-night-v8.arsc.flat",
             "map": [
                 {
-                    "source": "E:\\GitHub Local Files\\trikeright\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "E:\\GitHub Local Files\\TrikeRight\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

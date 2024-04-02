@@ -39,13 +39,6 @@ class _PersistentNavBarState extends State<PersistentNavBar> {
             title: "History",
           ),
         ),
-        // PersistentTabConfig(
-        //   screen: const PreferencePage(),
-        //   item: ItemConfig(
-        //     icon: const Icon(Icons.settings),
-        //     title: "Preferences",
-        //   ),
-        // ),
       ],
       navBarHeight: 75.h,
       navBarBuilder: (navBarConfig) => Style2BottomNavBar(

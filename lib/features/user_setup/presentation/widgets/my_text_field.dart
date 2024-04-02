@@ -1,27 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MyTextField extends StatelessWidget {
+class MyTextFormField extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
   final TextInputType keyboardType;
   final Icon? prefixIcon;
   final Icon? suffixIcon;
+  final String? Function(String?)? validator;
+  final AutovalidateMode autovalidateMode = AutovalidateMode.onUserInteraction;
 
-  const MyTextField({
+  const MyTextFormField({
     super.key,
     required this.hintText,
     required this.controller,
+    required AutovalidateMode autovalidateMode,
     this.keyboardType = TextInputType.text,
     this.prefixIcon,
     this.suffixIcon,
+    this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 8, bottom: 8.h),
-      child: TextField(
+      child: TextFormField(
+        autovalidateMode: autovalidateMode,
+        validator: validator,
         keyboardType: keyboardType,
         controller: controller,
         style: TextStyle(
