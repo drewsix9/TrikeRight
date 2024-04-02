@@ -16,16 +16,23 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.of(context).pushNamed('/user_setup');
+      // Navigator.of(context).pushNamed('/user_setup');
+      SharedPreferences.getInstance().then((prefs) {
+        if (prefs.getBool('isFirstTime') == null) {
+          Navigator.of(context).pushNamed('/user_setup');
+        } else {
+          Navigator.of(context).pushNamed('/home');
+        }
+      });
     });
   }
 
-  // @override
-  // void dispose() {
-  //   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-  //       overlays: SystemUiOverlay.values);
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+    //     overlays: SystemUiOverlay.values);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

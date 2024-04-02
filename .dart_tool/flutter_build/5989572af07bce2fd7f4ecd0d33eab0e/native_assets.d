@@ -1,0 +1,1 @@
+ E:\\GitHub\ Local\ Files\\trikeright\\.dart_tool\\flutter_build\\5989572af07bce2fd7f4ecd0d33eab0e\\native_assets.yaml: 
