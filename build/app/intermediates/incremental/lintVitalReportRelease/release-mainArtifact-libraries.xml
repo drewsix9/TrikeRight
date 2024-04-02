@@ -1,13 +1,13 @@
 <libraries>
   <library
-      name="__local_aars__:E:\GitHub Local Files\trikeright\build\app\intermediates\flutter\release\libs.jar:unspecified@jar"
-      jars="E:\GitHub Local Files\trikeright\build\app\intermediates\flutter\release\libs.jar"
-      resolved="__local_aars__:E:\GitHub Local Files\trikeright\build\app\intermediates\flutter\release\libs.jar:unspecified"/>
+      name="__local_aars__:E:\GitHub Local Files\TrikeRight\build\app\intermediates\flutter\release\libs.jar:unspecified@jar"
+      jars="E:\GitHub Local Files\TrikeRight\build\app\intermediates\flutter\release\libs.jar"
+      resolved="__local_aars__:E:\GitHub Local Files\TrikeRight\build\app\intermediates\flutter\release\libs.jar:unspecified"/>
   <library
-      name="E:\GitHub Local Files\trikeright\android@@:flutter_plugin_android_lifecycle::release"
-      jars="E:\GitHub Local Files\trikeright\build\flutter_plugin_android_lifecycle\.transforms\f3f6301486ba3f218352af72d687fe4f\transformed\out\jars\classes.jar;E:\GitHub Local Files\trikeright\build\flutter_plugin_android_lifecycle\.transforms\f3f6301486ba3f218352af72d687fe4f\transformed\out\jars\libs\R.jar"
-      resolved="io.flutter.plugins.flutter_plugin_android_lifecycle:flutter_plugin_android_lifecycle:unspecified"
-      folder="E:\GitHub Local Files\trikeright\build\flutter_plugin_android_lifecycle\.transforms\f3f6301486ba3f218352af72d687fe4f\transformed\out"
+      name="E:\GitHub Local Files\TrikeRight\android@@:shared_preferences_android::release"
+      jars="E:\GitHub Local Files\TrikeRight\build\shared_preferences_android\.transforms\36353ae5fae8af550aa5c62a9daac20d\transformed\out\jars\classes.jar;E:\GitHub Local Files\TrikeRight\build\shared_preferences_android\.transforms\36353ae5fae8af550aa5c62a9daac20d\transformed\out\jars\libs\R.jar"
+      resolved="io.flutter.plugins.sharedpreferences:shared_preferences_android:unspecified"
+      folder="E:\GitHub Local Files\TrikeRight\build\shared_preferences_android\.transforms\36353ae5fae8af550aa5c62a9daac20d\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -17,10 +17,23 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="E:\GitHub Local Files\trikeright\android@@:google_maps_flutter_android::release"
-      jars="E:\GitHub Local Files\trikeright\build\google_maps_flutter_android\.transforms\26bbbfaf7f415522ae6e6bfd2ed1b4a3\transformed\out\jars\classes.jar;E:\GitHub Local Files\trikeright\build\google_maps_flutter_android\.transforms\26bbbfaf7f415522ae6e6bfd2ed1b4a3\transformed\out\jars\libs\R.jar"
+      name="E:\GitHub Local Files\TrikeRight\android@@:flutter_plugin_android_lifecycle::release"
+      jars="E:\GitHub Local Files\TrikeRight\build\flutter_plugin_android_lifecycle\.transforms\35252cf5ef5e33d4f75526ff43c1f069\transformed\out\jars\classes.jar;E:\GitHub Local Files\TrikeRight\build\flutter_plugin_android_lifecycle\.transforms\35252cf5ef5e33d4f75526ff43c1f069\transformed\out\jars\libs\R.jar"
+      resolved="io.flutter.plugins.flutter_plugin_android_lifecycle:flutter_plugin_android_lifecycle:unspecified"
+      folder="E:\GitHub Local Files\TrikeRight\build\flutter_plugin_android_lifecycle\.transforms\35252cf5ef5e33d4f75526ff43c1f069\transformed\out"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="E:\GitHub Local Files\TrikeRight\android@@:google_maps_flutter_android::release"
+      jars="E:\GitHub Local Files\TrikeRight\build\google_maps_flutter_android\.transforms\6d884646ad682e25fa4012006bc70591\transformed\out\jars\classes.jar;E:\GitHub Local Files\TrikeRight\build\google_maps_flutter_android\.transforms\6d884646ad682e25fa4012006bc70591\transformed\out\jars\libs\R.jar"
       resolved="io.flutter.plugins.googlemaps:google_maps_flutter_android:unspecified"
-      folder="E:\GitHub Local Files\trikeright\build\google_maps_flutter_android\.transforms\26bbbfaf7f415522ae6e6bfd2ed1b4a3\transformed\out"
+      folder="E:\GitHub Local Files\TrikeRight\build\google_maps_flutter_android\.transforms\6d884646ad682e25fa4012006bc70591\transformed\out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"

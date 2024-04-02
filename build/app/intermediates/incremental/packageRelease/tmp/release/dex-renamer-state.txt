@@ -1,4 +1,4 @@
-#Tue Apr 02 01:32:31 SGT 2024
-base.0=E\:\\GitHub Local Files\\trikeright\\build\\app\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
+#Wed Apr 03 01:46:15 SGT 2024
+base.0=E\:\\GitHub Local Files\\TrikeRight\\build\\app\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

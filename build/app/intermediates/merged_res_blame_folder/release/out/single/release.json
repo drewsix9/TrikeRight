@@ -208,6 +208,10 @@
         "source": "com.example.trikeright.app-core-1.6.0-3:/layout-v21/notification_template_icon_group.xml"
     },
     {
+        "merged": "com.example.trikeright.app-merged_res-14:/drawable-v21_launch_background.xml.flat",
+        "source": "com.example.trikeright.app-main-7:/drawable-v21/launch_background.xml"
+    },
+    {
         "merged": "com.example.trikeright.app-merged_res-14:/drawable-hdpi-v4_common_google_signin_btn_icon_dark_normal_background.9.png.flat",
         "source": "com.example.trikeright.app-jetified-play-services-base-18.0.1-5:/drawable-hdpi-v4/common_google_signin_btn_icon_dark_normal_background.9.png"
     },

@@ -4472,7 +4472,6 @@ io.flutter.embedding.engine.dart.DartExecutor$DartCallback
 io.flutter.embedding.engine.dart.DartExecutor$DefaultBinaryMessenger:
     public void disableBufferingIncomingMessages()
     public void enableBufferingIncomingMessages()
-    public io.flutter.plugin.common.BinaryMessenger$TaskQueue makeBackgroundTaskQueue(io.flutter.plugin.common.BinaryMessenger$TaskQueueOptions)
     public void send(java.lang.String,java.nio.ByteBuffer)
 io.flutter.embedding.engine.dart.DartExecutor:
     private static final java.lang.String TAG
@@ -4483,23 +4482,13 @@ io.flutter.embedding.engine.dart.DartExecutor:
     public io.flutter.plugin.common.BinaryMessenger getBinaryMessenger()
     public java.lang.String getIsolateServiceId()
     public int getPendingChannelResponseCount()
-    public io.flutter.plugin.common.BinaryMessenger$TaskQueue makeBackgroundTaskQueue(io.flutter.plugin.common.BinaryMessenger$TaskQueueOptions)
     public void send(java.lang.String,java.nio.ByteBuffer)
     public void setIsolateServiceIdListener(io.flutter.embedding.engine.dart.DartExecutor$IsolateServiceIdListener)
-io.flutter.embedding.engine.dart.DartMessenger$1
-io.flutter.embedding.engine.dart.DartMessenger$ConcurrentTaskQueue
-io.flutter.embedding.engine.dart.DartMessenger$DefaultTaskQueueFactory:
-    public io.flutter.embedding.engine.dart.DartMessenger$DartMessengerTaskQueue makeBackgroundTaskQueue(io.flutter.plugin.common.BinaryMessenger$TaskQueueOptions)
-io.flutter.embedding.engine.dart.DartMessenger$SerialTaskQueue
-io.flutter.embedding.engine.dart.DartMessenger$TaskQueueFactory:
-    public abstract io.flutter.embedding.engine.dart.DartMessenger$DartMessengerTaskQueue makeBackgroundTaskQueue(io.flutter.plugin.common.BinaryMessenger$TaskQueueOptions)
-io.flutter.embedding.engine.dart.DartMessenger$TaskQueueToken
 io.flutter.embedding.engine.dart.DartMessenger:
     private static final java.lang.String TAG
     public void disableBufferingIncomingMessages()
     public void enableBufferingIncomingMessages()
     public int getPendingChannelResponseCount()
-    public io.flutter.plugin.common.BinaryMessenger$TaskQueue makeBackgroundTaskQueue(io.flutter.plugin.common.BinaryMessenger$TaskQueueOptions)
     public void send(java.lang.String,java.nio.ByteBuffer)
 io.flutter.embedding.engine.deferredcomponents.DeferredComponentManager:
     public abstract void loadAssets(int,java.lang.String)
@@ -4694,14 +4683,11 @@ io.flutter.plugin.common.BasicMessageChannel:
     public static void setWarnsOnChannelOverflow(io.flutter.plugin.common.BinaryMessenger,java.lang.String,boolean)
     public void setWarnsOnChannelOverflow(boolean)
 io.flutter.plugin.common.BinaryCodec
-io.flutter.plugin.common.BinaryMessenger$-CC:
-    public static io.flutter.plugin.common.BinaryMessenger$TaskQueue $default$makeBackgroundTaskQueue(io.flutter.plugin.common.BinaryMessenger)
-io.flutter.plugin.common.BinaryMessenger$TaskQueueOptions
+io.flutter.plugin.common.BinaryMessenger$TaskQueueOptions:
+    public io.flutter.plugin.common.BinaryMessenger$TaskQueueOptions setIsSerial(boolean)
 io.flutter.plugin.common.BinaryMessenger:
     public void disableBufferingIncomingMessages()
     public void enableBufferingIncomingMessages()
-    public io.flutter.plugin.common.BinaryMessenger$TaskQueue makeBackgroundTaskQueue()
-    public io.flutter.plugin.common.BinaryMessenger$TaskQueue makeBackgroundTaskQueue(io.flutter.plugin.common.BinaryMessenger$TaskQueueOptions)
     public abstract void send(java.lang.String,java.nio.ByteBuffer)
 io.flutter.plugin.common.ErrorLogResult
 io.flutter.plugin.common.EventChannel$1
@@ -4857,6 +4843,29 @@ io.flutter.plugins.googlemaps.TileOverlaySink:
     public abstract void setTileProvider(com.google.android.gms.maps.model.TileProvider)
 io.flutter.plugins.googlemaps.TileProviderController:
     private static final java.lang.String TAG
+io.flutter.plugins.sharedpreferences.BuildConfig
+io.flutter.plugins.sharedpreferences.Messages$FlutterError:
+    public void <init>(java.lang.String,java.lang.String,java.lang.Object)
+io.flutter.plugins.sharedpreferences.Messages:
+    public void <init>()
+io.flutter.plugins.sharedpreferences.R$attr
+io.flutter.plugins.sharedpreferences.R$color
+io.flutter.plugins.sharedpreferences.R$dimen
+io.flutter.plugins.sharedpreferences.R$drawable
+io.flutter.plugins.sharedpreferences.R$id
+io.flutter.plugins.sharedpreferences.R$integer
+io.flutter.plugins.sharedpreferences.R$layout
+io.flutter.plugins.sharedpreferences.R$string
+io.flutter.plugins.sharedpreferences.R$style
+io.flutter.plugins.sharedpreferences.R$styleable
+io.flutter.plugins.sharedpreferences.R
+io.flutter.plugins.sharedpreferences.SharedPreferencesPlugin:
+    private static final java.lang.String BIG_INTEGER_PREFIX
+    private static final java.lang.String DOUBLE_PREFIX
+    private static final java.lang.String LIST_IDENTIFIER
+    private static final java.lang.String SHARED_PREFERENCES_NAME
+    private static final java.lang.String TAG
+    public static void registerWith(io.flutter.plugin.common.PluginRegistry$Registrar)
 io.flutter.util.HandlerCompat:
     public void <init>()
 io.flutter.util.PathUtils:
@@ -11343,7 +11352,9 @@ io.flutter.embedding.engine.loader.ResourceExtractor:
 io.flutter.embedding.engine.systemchannels.PlatformChannel$PlatformMessageHandler$-CC
 io.flutter.embedding.engine.systemchannels.SettingsChannel:
     static final synthetic boolean $assertionsDisabled
-io.flutter.plugin.common.BinaryMessenger$-CC
+io.flutter.plugin.common.BinaryMessenger$-CC:
+    public static io.flutter.plugin.common.BinaryMessenger$TaskQueue $default$makeBackgroundTaskQueue(io.flutter.plugin.common.BinaryMessenger,io.flutter.plugin.common.BinaryMessenger$TaskQueueOptions)
+    public static void $default$setMessageHandler(io.flutter.plugin.common.BinaryMessenger,java.lang.String,io.flutter.plugin.common.BinaryMessenger$BinaryMessageHandler,io.flutter.plugin.common.BinaryMessenger$TaskQueue)
 io.flutter.plugin.platform.PlatformPlugin$PlatformPluginDelegate$-CC
 io.flutter.plugin.platform.VirtualDisplayController:
     private static java.lang.String TAG

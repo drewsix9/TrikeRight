@@ -3,6 +3,31 @@
 
 library {
   maven_library {
+    groupId: "io.flutter"
+    artifactId: "flutter_embedding_release"
+    version: "1.0.0-a5c24f538d05aaf66f7972fb23959d8cafb9f95a"
+  }
+  digests {
+    sha256: "\254\350\026\177\335\345\343\034\372\331\017\022\316\2006\206\320\227\254\365N\350\2338\n\347?\362\302p?\277"
+  }
+  repo_index {
+    value: 2
+  }
+}
+library {
+  maven_library {
+    groupId: "androidx.lifecycle"
+    artifactId: "lifecycle-common"
+    version: "2.2.0"
+  }
+  digests {
+    sha256: "c\211\215\253\367\317\345\354]~\330\270\302VL\024\'\276\207n\024\226\352\331\\\'\003\317Y\323sK"
+  }
+  repo_index {
+  }
+}
+library {
+  maven_library {
     groupId: "androidx.annotation"
     artifactId: "annotation"
     version: "1.7.0"
@@ -59,31 +84,6 @@ library {
   }
   repo_index {
     value: 1
-  }
-}
-library {
-  maven_library {
-    groupId: "io.flutter"
-    artifactId: "flutter_embedding_release"
-    version: "1.0.0-a5c24f538d05aaf66f7972fb23959d8cafb9f95a"
-  }
-  digests {
-    sha256: "\254\350\026\177\335\345\343\034\372\331\017\022\316\2006\206\320\227\254\365N\350\2338\n\347?\362\302p?\277"
-  }
-  repo_index {
-    value: 2
-  }
-}
-library {
-  maven_library {
-    groupId: "androidx.lifecycle"
-    artifactId: "lifecycle-common"
-    version: "2.2.0"
-  }
-  digests {
-    sha256: "c\211\215\253\367\317\345\354]~\330\270\302VL\024\'\276\207n\024\226\352\331\\\'\003\317Y\323sK"
-  }
-  repo_index {
   }
 }
 library {
@@ -477,11 +477,18 @@ library {
 }
 library {
   digests {
-    sha256: "\304\262Q\234\240\004\214\0214\237Z\"\031\224o1C3^&\212\341$\300/%k,\340@\371h"
+    sha256: "t\316$J1\232\"\213\210\264\347Z\r-3\r&\246/T\232\273*Nf\0163$Z.z\351"
   }
 }
 library_dependencies {
   library_dep_index: 1
+  library_dep_index: 7
+  library_dep_index: 8
+  library_dep_index: 10
+  library_dep_index: 2
+  library_dep_index: 24
+  library_dep_index: 11
+  library_dep_index: 25
 }
 library_dependencies {
   library_index: 1
@@ -490,41 +497,34 @@ library_dependencies {
 library_dependencies {
   library_index: 2
   library_dep_index: 3
+}
+library_dependencies {
+  library_index: 3
   library_dep_index: 4
 }
 library_dependencies {
-  library_index: 5
+  library_index: 4
+  library_dep_index: 5
   library_dep_index: 6
-  library_dep_index: 7
-  library_dep_index: 8
-  library_dep_index: 10
-  library_dep_index: 0
-  library_dep_index: 24
-  library_dep_index: 11
-  library_dep_index: 25
-}
-library_dependencies {
-  library_index: 6
-  library_dep_index: 0
 }
 library_dependencies {
   library_index: 7
-  library_dep_index: 6
-  library_dep_index: 0
+  library_dep_index: 1
+  library_dep_index: 2
 }
 library_dependencies {
   library_index: 8
-  library_dep_index: 6
+  library_dep_index: 1
   library_dep_index: 9
-  library_dep_index: 0
+  library_dep_index: 2
 }
 library_dependencies {
   library_index: 9
-  library_dep_index: 0
+  library_dep_index: 2
 }
 library_dependencies {
   library_index: 10
-  library_dep_index: 0
+  library_dep_index: 2
   library_dep_index: 11
   library_dep_index: 14
   library_dep_index: 15
@@ -534,7 +534,7 @@ library_dependencies {
 }
 library_dependencies {
   library_index: 11
-  library_dep_index: 0
+  library_dep_index: 2
   library_dep_index: 12
   library_dep_index: 8
   library_dep_index: 13
@@ -542,27 +542,27 @@ library_dependencies {
 }
 library_dependencies {
   library_index: 13
-  library_dep_index: 0
+  library_dep_index: 2
   library_dep_index: 14
 }
 library_dependencies {
   library_index: 14
-  library_dep_index: 0
+  library_dep_index: 2
 }
 library_dependencies {
   library_index: 15
-  library_dep_index: 0
+  library_dep_index: 2
   library_dep_index: 11
   library_dep_index: 16
 }
 library_dependencies {
   library_index: 16
-  library_dep_index: 0
+  library_dep_index: 2
   library_dep_index: 11
 }
 library_dependencies {
   library_index: 17
-  library_dep_index: 0
+  library_dep_index: 2
   library_dep_index: 11
   library_dep_index: 18
   library_dep_index: 21
@@ -575,22 +575,22 @@ library_dependencies {
 }
 library_dependencies {
   library_index: 19
-  library_dep_index: 0
+  library_dep_index: 2
   library_dep_index: 9
 }
 library_dependencies {
   library_index: 20
-  library_dep_index: 6
+  library_dep_index: 1
   library_dep_index: 9
   library_dep_index: 19
 }
 library_dependencies {
   library_index: 21
-  library_dep_index: 0
+  library_dep_index: 2
 }
 library_dependencies {
   library_index: 22
-  library_dep_index: 0
+  library_dep_index: 2
   library_dep_index: 11
   library_dep_index: 8
   library_dep_index: 21
@@ -598,17 +598,17 @@ library_dependencies {
 }
 library_dependencies {
   library_index: 23
-  library_dep_index: 0
+  library_dep_index: 2
   library_dep_index: 9
-  library_dep_index: 6
+  library_dep_index: 1
 }
 library_dependencies {
   library_index: 24
-  library_dep_index: 0
+  library_dep_index: 2
 }
 library_dependencies {
   library_index: 25
-  library_dep_index: 2
+  library_dep_index: 4
   library_dep_index: 26
   library_dep_index: 30
   library_dep_index: 11
@@ -620,22 +620,22 @@ library_dependencies {
 library_dependencies {
   library_index: 27
   library_dep_index: 28
-  library_dep_index: 3
+  library_dep_index: 5
 }
 library_dependencies {
   library_index: 28
-  library_dep_index: 2
+  library_dep_index: 4
   library_dep_index: 29
 }
 library_dependencies {
   library_index: 29
-  library_dep_index: 2
+  library_dep_index: 4
 }
 library_dependencies {
   library_index: 30
-  library_dep_index: 2
+  library_dep_index: 4
   library_dep_index: 31
-  library_dep_index: 0
+  library_dep_index: 2
   library_dep_index: 14
   library_dep_index: 11
 }
@@ -676,7 +676,7 @@ module_dependencies {
   dependency_index: 37
   dependency_index: 38
   dependency_index: 0
-  dependency_index: 5
+  dependency_index: 2
   dependency_index: 32
   dependency_index: 39
 }
@@ -693,6 +693,16 @@ repositories {
 repositories {
   maven_repo {
     url: "https://storage.googleapis.com/download.flutter.io"
+  }
+}
+repositories {
+  maven_repo {
+    url: "https://dl.google.com/dl/android/maven2/"
+  }
+}
+repositories {
+  maven_repo {
+    url: "https://repo.maven.apache.org/maven2/"
   }
 }
 repositories {

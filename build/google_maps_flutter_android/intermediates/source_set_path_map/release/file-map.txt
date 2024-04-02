@@ -7,10 +7,10 @@ io.flutter.plugins.googlemaps.google_maps_flutter_android-jetified-play-services
 io.flutter.plugins.googlemaps.google_maps_flutter_android-jetified-play-services-maps-18.2.0-6 C:\Users\Administrator\.gradle\caches\transforms-3\b4788c193f13f554649fe724431810b5\transformed\jetified-play-services-maps-18.2.0\res
 io.flutter.plugins.googlemaps.google_maps_flutter_android-main-7 C:\Users\Administrator\AppData\Local\Pub\Cache\hosted\pub.dev\google_maps_flutter_android-2.7.0\android\src\main\res
 io.flutter.plugins.googlemaps.google_maps_flutter_android-release-8 C:\Users\Administrator\AppData\Local\Pub\Cache\hosted\pub.dev\google_maps_flutter_android-2.7.0\android\src\release\res
-io.flutter.plugins.googlemaps.google_maps_flutter_android-packaged_res-9 E:\GitHub Local Files\trikeright\build\flutter_plugin_android_lifecycle\intermediates\packaged_res\release
-io.flutter.plugins.googlemaps.google_maps_flutter_android-pngs-10 E:\GitHub Local Files\trikeright\build\google_maps_flutter_android\generated\res\pngs\release
-io.flutter.plugins.googlemaps.google_maps_flutter_android-resValues-11 E:\GitHub Local Files\trikeright\build\google_maps_flutter_android\generated\res\resValues\release
-io.flutter.plugins.googlemaps.google_maps_flutter_android-rs-12 E:\GitHub Local Files\trikeright\build\google_maps_flutter_android\generated\res\rs\release
-io.flutter.plugins.googlemaps.google_maps_flutter_android-mergeReleaseResources-13 E:\GitHub Local Files\trikeright\build\google_maps_flutter_android\intermediates\incremental\release\mergeReleaseResources\merged.dir
-io.flutter.plugins.googlemaps.google_maps_flutter_android-mergeReleaseResources-14 E:\GitHub Local Files\trikeright\build\google_maps_flutter_android\intermediates\incremental\release\mergeReleaseResources\stripped.dir
-io.flutter.plugins.googlemaps.google_maps_flutter_android-merged_res-15 E:\GitHub Local Files\trikeright\build\google_maps_flutter_android\intermediates\merged_res\release
+io.flutter.plugins.googlemaps.google_maps_flutter_android-packaged_res-9 E:\GitHub Local Files\TrikeRight\build\flutter_plugin_android_lifecycle\intermediates\packaged_res\release
+io.flutter.plugins.googlemaps.google_maps_flutter_android-pngs-10 E:\GitHub Local Files\TrikeRight\build\google_maps_flutter_android\generated\res\pngs\release
+io.flutter.plugins.googlemaps.google_maps_flutter_android-resValues-11 E:\GitHub Local Files\TrikeRight\build\google_maps_flutter_android\generated\res\resValues\release
+io.flutter.plugins.googlemaps.google_maps_flutter_android-rs-12 E:\GitHub Local Files\TrikeRight\build\google_maps_flutter_android\generated\res\rs\release
+io.flutter.plugins.googlemaps.google_maps_flutter_android-mergeReleaseResources-13 E:\GitHub Local Files\TrikeRight\build\google_maps_flutter_android\intermediates\incremental\release\mergeReleaseResources\merged.dir
+io.flutter.plugins.googlemaps.google_maps_flutter_android-mergeReleaseResources-14 E:\GitHub Local Files\TrikeRight\build\google_maps_flutter_android\intermediates\incremental\release\mergeReleaseResources\stripped.dir
+io.flutter.plugins.googlemaps.google_maps_flutter_android-merged_res-15 E:\GitHub Local Files\TrikeRight\build\google_maps_flutter_android\intermediates\merged_res\release

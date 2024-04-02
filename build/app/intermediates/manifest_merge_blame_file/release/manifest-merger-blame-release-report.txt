@@ -6,9 +6,9 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="20"
-8-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml
+8-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml
 9        android:targetSdkVersion="33" />
-9-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml
+9-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml
 10    <!--
 11         Required to query activities that can process text, see:
 12         https://developer.android.com/training/package-visibility?hl=en and
@@ -17,16 +17,16 @@
 15         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin.
 16    -->
 17    <queries>
-17-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:40:5-45:15
+17-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:40:5-45:15
 18        <intent>
-18-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:41:9-44:18
+18-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:41:9-44:18
 19            <action android:name="android.intent.action.PROCESS_TEXT" />
-19-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:42:13-72
-19-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:42:21-70
+19-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:42:13-72
+19-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:42:21-70
 20
 21            <data android:mimeType="text/plain" />
-21-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:43:13-50
-21-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:43:19-48
+21-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:43:13-50
+21-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:43:19-48
 22        </intent>
 23        <!-- Needs to be explicitly declared on Android R+ -->
 24        <package android:name="com.google.android.apps.maps" />
@@ -50,29 +50,29 @@
 33
 34    <application
 35        android:name="android.app.Application"
-35-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:4:9-42
+35-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:4:9-42
 36        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 36-->[androidx.core:core:1.6.0] C:\Users\Administrator\.gradle\caches\transforms-3\2579a7de00054bf46a8dbc332552f622\transformed\core-1.6.0\AndroidManifest.xml:24:18-86
 37        android:icon="@mipmap/ic_launcher"
-37-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:5:9-43
+37-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:5:9-43
 38        android:label="TrikeRight" >
-38-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:3:9-35
+38-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:3:9-35
 39        <activity
-39-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:6:9-26:20
+39-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:6:9-26:20
 40            android:name="com.example.trikeright.MainActivity"
-40-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:7:13-41
+40-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:7:13-41
 41            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-41-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:11:13-163
+41-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:11:13-163
 42            android:exported="true"
-42-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:8:13-36
+42-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:8:13-36
 43            android:hardwareAccelerated="true"
-43-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:12:13-47
+43-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:12:13-47
 44            android:launchMode="singleTop"
-44-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:9:13-43
+44-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:9:13-43
 45            android:theme="@style/LaunchTheme"
-45-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:10:13-47
+45-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:10:13-47
 46            android:windowSoftInputMode="adjustResize" >
-46-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:13:13-55
+46-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:13:13-55
 47
 48            <!--
 49                 Specifies an Android theme to apply to this Activity as soon as
@@ -81,21 +81,21 @@
 52                 to determine the Window background behind the Flutter UI.
 53            -->
 54            <meta-data
-54-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:18:13-21:17
+54-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:18:13-21:17
 55                android:name="io.flutter.embedding.android.NormalTheme"
-55-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:19:15-70
+55-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:19:15-70
 56                android:resource="@style/NormalTheme" />
-56-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:20:15-52
+56-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:20:15-52
 57
 58            <intent-filter>
-58-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:22:13-25:29
+58-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:22:13-25:29
 59                <action android:name="android.intent.action.MAIN" />
-59-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:23:17-68
-59-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:23:25-66
+59-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:23:17-68
+59-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:23:25-66
 60
 61                <category android:name="android.intent.category.LAUNCHER" />
-61-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:24:17-76
-61-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:24:27-74
+61-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:24:17-76
+61-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:24:27-74
 62            </intent-filter>
 63        </activity>
 64        <!--
@@ -103,17 +103,17 @@
 66             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
 67        -->
 68        <meta-data
-68-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:29:9-31:33
+68-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:29:9-31:33
 69            android:name="flutterEmbedding"
-69-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:30:13-44
+69-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:30:13-44
 70            android:value="2" />
-70-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:31:13-30
+70-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:31:13-30
 71        <meta-data
-71-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:32:9-33:70
+71-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:32:9-33:70
 72            android:name="com.google.android.geo.API_KEY"
-72-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:32:20-65
+72-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:32:20-65
 73            android:value="AIzaSyBLSfzJCN9CqVEKYT1GOoAB0hxdy89YtAg" />
-73-->E:\GitHub Local Files\trikeright\android\app\src\main\AndroidManifest.xml:33:13-68
+73-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:33:13-68
 74
 75        <uses-library
 75-->[androidx.window:window:1.0.0-beta04] C:\Users\Administrator\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
