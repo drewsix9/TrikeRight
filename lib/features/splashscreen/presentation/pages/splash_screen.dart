@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,12 +17,12 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     Future.delayed(const Duration(seconds: 3), () {
-      // Navigator.of(context).pushNamed('/user_setup');
       SharedPreferences.getInstance().then((prefs) {
         if (prefs.getBool('isFirstTime') == null) {
-          Navigator.of(context).pushNamed('/user_setup');
+          prefs.setBool('isFirstTime', true);
+          Navigator.of(context).pushReplacementNamed('/user_setup');
         } else {
-          Navigator.of(context).pushNamed('/home');
+          Navigator.of(context).pushReplacementNamed('/home');
         }
       });
     });
@@ -29,8 +30,6 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   void dispose() {
-    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-    //     overlays: SystemUiOverlay.values);
     super.dispose();
   }
 
