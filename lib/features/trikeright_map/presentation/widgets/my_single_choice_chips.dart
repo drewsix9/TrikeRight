@@ -18,7 +18,7 @@ class _MySingleChoiceChipsState extends State<MySingleChoiceChips> {
   Widget build(BuildContext context) {
     return Consumer<PassengerTypeProvider>(
       builder: (context, value, child) => ChipsChoice.single(
-        value: value.passengerType.index,
+        value: value.passengerType?.index ?? 3,
         onChanged: (val) => value.setPassengerType(val),
         choiceItems: C2Choice.listFrom(
           source: choices,
