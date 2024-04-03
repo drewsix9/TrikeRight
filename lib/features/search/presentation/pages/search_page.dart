@@ -30,6 +30,7 @@ class _SearchPageState extends State<SearchPage> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
               child: GooglePlacesAutoCompleteTextFormField(
+                maxLines: 1,
                 decoration: InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.h),
@@ -39,6 +40,15 @@ class _SearchPageState extends State<SearchPage> {
                     Icons.search,
                     color: Color(0xFF5E758C),
                   ),
+                  suffixIcon: searchTextEditingController.text.isEmpty
+                      ? null
+                      : IconButton(
+                          color: const Color(0xFF5E758C),
+                          icon: const Icon(Icons.clear),
+                          onPressed: () {
+                            searchTextEditingController.clear();
+                          },
+                        ),
                   hintText: 'Search for a place',
                   hintStyle: TextStyle(
                     color: const Color(0xFF5E758C),
