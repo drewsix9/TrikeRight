@@ -23,16 +23,16 @@
 21         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin.
 22    -->
 23    <queries>
-23-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:40:5-45:15
+23-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:41:5-46:15
 24        <intent>
-24-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:41:9-44:18
+24-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:42:9-45:18
 25            <action android:name="android.intent.action.PROCESS_TEXT" />
-25-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:42:13-72
-25-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:42:21-70
+25-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:43:13-72
+25-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:43:21-70
 26
 27            <data android:mimeType="text/plain" />
-27-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:43:13-50
-27-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:43:19-48
+27-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:44:13-50
+27-->E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:44:19-48
 28        </intent>
 29        <!-- Needs to be explicitly declared on Android R+ -->
 30        <package android:name="com.google.android.apps.maps" />

@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 application
-INJECTED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:2:5-34:19
+INJECTED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:3:5-35:19
 MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\Administrator\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:24:5-31:19
 MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\Administrator\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:24:5-31:19
 MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\Administrator\.gradle\caches\transforms-3\b4788c193f13f554649fe724431810b5\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:36:5-42:19
@@ -20,11 +20,11 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Ad
 	android:name
 		INJECTED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml
 manifest
-ADDED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:1:1-46:12
-INJECTED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:1:1-46:12
-INJECTED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:1:1-46:12
-INJECTED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:1:1-46:12
-MERGED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:1:1-46:12
+ADDED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:1:1-47:12
+INJECTED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:1:1-47:12
+INJECTED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:1:1-47:12
+INJECTED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:1:1-47:12
+MERGED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:1:1-47:12
 MERGED from [:shared_preferences_android] E:\GitHub Local Files\TrikeRight\build\shared_preferences_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:google_maps_flutter_android] E:\GitHub Local Files\TrikeRight\build\google_maps_flutter_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:flutter_plugin_android_lifecycle] E:\GitHub Local Files\TrikeRight\build\flutter_plugin_android_lifecycle\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
@@ -53,33 +53,34 @@ INJECTED from E:\GitHub Local Files\TrikeRight\android\app\src\debug\AndroidMani
 INJECTED from E:\GitHub Local Files\TrikeRight\android\app\src\debug\AndroidManifest.xml:1:1-7:12
 INJECTED from E:\GitHub Local Files\TrikeRight\android\app\src\debug\AndroidManifest.xml:1:1-7:12
 	package
+		ADDED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:2:5-39
 		INJECTED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml
-		ADDED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:1:1-46:12
+		ADDED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:2:5-39
 		INJECTED from E:\GitHub Local Files\TrikeRight\android\app\src\debug\AndroidManifest.xml
 	android:versionName
 		INJECTED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml
-		ADDED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:1:1-46:12
+		ADDED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:1:1-47:12
 		INJECTED from E:\GitHub Local Files\TrikeRight\android\app\src\debug\AndroidManifest.xml
 	android:versionCode
 		INJECTED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml
-		ADDED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:1:1-46:12
+		ADDED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:1:1-47:12
 		INJECTED from E:\GitHub Local Files\TrikeRight\android\app\src\debug\AndroidManifest.xml
 	xmlns:android
 		ADDED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:1:11-69
 queries
-ADDED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:40:5-45:15
+ADDED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:41:5-46:15
 MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\Administrator\.gradle\caches\transforms-3\b4788c193f13f554649fe724431810b5\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:30:5-34:15
 MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\Administrator\.gradle\caches\transforms-3\b4788c193f13f554649fe724431810b5\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:30:5-34:15
 intent#action:name:android.intent.action.PROCESS_TEXT+data:mimeType:text/plain
-ADDED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:41:9-44:18
+ADDED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:42:9-45:18
 action#android.intent.action.PROCESS_TEXT
-ADDED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:42:13-72
+ADDED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:43:13-72
 	android:name
-		ADDED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:42:21-70
+		ADDED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:43:21-70
 data
-ADDED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:43:13-50
+ADDED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:44:13-50
 	android:mimeType
-		ADDED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:43:19-48
+		ADDED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml:44:19-48
 uses-sdk
 INJECTED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from E:\GitHub Local Files\TrikeRight\android\app\src\main\AndroidManifest.xml
