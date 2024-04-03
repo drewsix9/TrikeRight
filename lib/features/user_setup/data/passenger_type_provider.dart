@@ -7,7 +7,7 @@ enum PassengerType {
 }
 
 class PassengerTypeProvider extends ChangeNotifier {
-  PassengerType passengerType = PassengerType.regular;
+  PassengerType? passengerType;
 
   void setPassengerType(int index) {
     switch (index) {

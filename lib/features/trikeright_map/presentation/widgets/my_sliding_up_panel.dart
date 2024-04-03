@@ -13,11 +13,6 @@ class MySlidingUpPanel extends StatelessWidget {
   final TextEditingController sourceController = TextEditingController();
   final TextEditingController destinationController = TextEditingController();
 
-  final bool isStudent = false;
-  final bool isSenior = false;
-  final bool isPWD = false;
-  final bool isRegular = false;
-
   void togglePanel() {
     panelController.isPanelOpen
         ? panelController.close()

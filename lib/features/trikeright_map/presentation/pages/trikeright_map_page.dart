@@ -19,10 +19,15 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          extendBodyBehindAppBar: false,
+          extendBodyBehindAppBar: true,
           resizeToAvoidBottomInset: false,
           // AppBar - Trike Right
           appBar: AppBar(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(18.r),
+              ),
+            ),
             automaticallyImplyLeading: false,
             centerTitle: true,
             title: Text(
@@ -35,7 +40,7 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
                 fontWeight: FontWeight.w700,
               ),
             ),
-            backgroundColor: Colors.transparent,
+            backgroundColor: const Color(0xFFF7FAFC),
           ),
           // Sliding Up Panel
           body: SlidingUpPanel(
@@ -43,9 +48,8 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
             minHeight: ScreenUtil().screenHeight * 0.220,
             maxHeight: ScreenUtil().screenHeight * 0.45,
             color: const Color(0xFFF7FAFC),
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(18.r),
-              topRight: Radius.circular(18.r),
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(18.r),
             ),
             parallaxEnabled: true,
             parallaxOffset: 0.5,
