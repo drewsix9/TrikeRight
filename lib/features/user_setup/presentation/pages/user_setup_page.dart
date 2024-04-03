@@ -36,8 +36,8 @@ class _UserSetupPageState extends State<UserSetupPage> {
                   'lib/features/user_setup/presentation/utils/images/bicycle.png',
                 ),
                 Positioned(
-                  left: 16,
-                  bottom: 16,
+                  left: 16.w,
+                  bottom: 16.h,
                   child: Text(
                     'Let\'s get started with\nyour account',
                     style: TextStyle(
