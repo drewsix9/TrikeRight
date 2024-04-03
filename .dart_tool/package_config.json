@@ -290,6 +290,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "material_floating_search_bar_2",
+      "rootUri": "file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.dev/material_floating_search_bar_2-0.5.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "meta",
       "rootUri": "file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.dev/meta-1.11.0",
       "packageUri": "lib/",
@@ -530,7 +536,7 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2024-04-02T16:32:32.454880Z",
+  "generated": "2024-04-03T09:41:21.078845Z",
   "generator": "pub",
   "generatorVersion": "3.3.2"
 }

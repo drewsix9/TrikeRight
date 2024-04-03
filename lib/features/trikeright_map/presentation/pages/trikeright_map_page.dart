@@ -19,51 +19,51 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        extendBodyBehindAppBar: true,
-        resizeToAvoidBottomInset: false,
-        // AppBar - Trike Right
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          title: Text(
-            'TrikeRight',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: const Color(0xFF0F1416),
-              fontSize: 18.sp,
-              fontFamily: 'Plus Jakarta Sans',
-              fontWeight: FontWeight.w700,
+          extendBodyBehindAppBar: false,
+          resizeToAvoidBottomInset: false,
+          // AppBar - Trike Right
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            centerTitle: true,
+            title: Text(
+              'TrikeRight',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: const Color(0xFF0F1416),
+                fontSize: 18.sp,
+                fontFamily: 'Plus Jakarta Sans',
+                fontWeight: FontWeight.w700,
+              ),
             ),
+            backgroundColor: Colors.transparent,
           ),
-          backgroundColor: Colors.transparent,
-        ),
-        // Sliding Up Panel
-        body: SlidingUpPanel(
-          controller: panelController,
-          minHeight: ScreenUtil().screenHeight * 0.220,
-          maxHeight: ScreenUtil().screenHeight * 0.45,
-          color: const Color(0xFFF7FAFC),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(18.r),
-            topRight: Radius.circular(18.r),
-          ),
-          parallaxEnabled: true,
-          parallaxOffset: 0.5,
-          // Google Map
-          body: const GoogleMap(
-            initialCameraPosition: CameraPosition(
-              target: _pTagbilaran,
-              zoom: 15,
+          // Sliding Up Panel
+          body: SlidingUpPanel(
+            controller: panelController,
+            minHeight: ScreenUtil().screenHeight * 0.220,
+            maxHeight: ScreenUtil().screenHeight * 0.45,
+            color: const Color(0xFFF7FAFC),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(18.r),
+              topRight: Radius.circular(18.r),
             ),
+            parallaxEnabled: true,
+            parallaxOffset: 0.5,
+            // Google Map
+            body: const GoogleMap(
+              initialCameraPosition: CameraPosition(
+                target: _pTagbilaran,
+                zoom: 15,
+              ),
+            ),
+            // Sliding Up Panel Builder
+            panelBuilder: (controller) => MySlidingUpPanel(
+              controller: controller,
+              panelController: panelController,
+            ),
+          )
+          // Bottom Navigation Bar
           ),
-          // Sliding Up Panel Builder
-          panelBuilder: (controller) => MySlidingUpPanel(
-            controller: controller,
-            panelController: panelController,
-          ),
-        ),
-        // Bottom Navigation Bar
-      ),
     );
   }
 }
