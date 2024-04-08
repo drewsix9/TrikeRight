@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:trikeright/core/themes/trikeright_theme.dart';
@@ -6,7 +7,8 @@ import 'package:trikeright/features/splashscreen/presentation/pages/splash_scree
 import 'package:trikeright/features/user_setup/data/passenger_type_provider.dart';
 import 'package:trikeright/routing/app_routing.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: "assets/config/.env");
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => PassengerTypeProvider()),
