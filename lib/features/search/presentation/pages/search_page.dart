@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_places_autocomplete_text_field/google_places_autocomplete_text_field.dart';
+import 'package:trikeright/features/search/presentation/widgets/my_auto_complete_text_form_field.dart';
 
 class SearchPage extends StatefulWidget {
   final TextEditingController searchTextEditingController;
@@ -24,66 +24,19 @@ class _SearchPageState extends State<SearchPage> {
           automaticallyImplyLeading: true,
           backgroundColor: Colors.transparent,
         ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-              child: GooglePlacesAutoCompleteTextFormField(
-                maxLines: 1,
-                decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.h),
-                  filled: true,
-                  fillColor: const Color(0xFFE8EDF4),
-                  prefixIcon: const Icon(
-                    Icons.search,
-                    color: Color(0xFF5E758C),
-                  ),
-                  suffixIcon: searchTextEditingController.text.isEmpty
-                      ? null
-                      : IconButton(
-                          color: const Color(0xFF5E758C),
-                          icon: const Icon(Icons.clear),
-                          onPressed: () {
-                            searchTextEditingController.clear();
-                          },
-                        ),
-                  hintText: 'Search for a place',
-                  hintStyle: TextStyle(
-                    color: const Color(0xFF5E758C),
-                    fontSize: 16,
-                    fontFamily: 'Plus Jakarta Sans',
-                    fontWeight: FontWeight.w400,
-                    height: 1.h,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(
-                      width: 0,
-                      style: BorderStyle.none,
-                    ),
-                  ),
-                ),
-                textEditingController: searchTextEditingController,
-                googleAPIKey: "AIzaSyBLSfzJCN9CqVEKYT1GOoAB0hxdy89YtAg",
-                debounceTime: 1000,
-                countries: const ["en"],
-                isLatLngRequired: true,
-                getPlaceDetailWithLatLng: (prediction) {
-                  debugPrint(
-                      "Coordinates: (${prediction.lat},${prediction.lng})");
-                },
-                itmClick: (prediction) {
-                  searchTextEditingController.text = prediction.description;
-                  searchTextEditingController.selection =
-                      TextSelection.fromPosition(
-                    TextPosition(offset: prediction.description!.length),
-                  );
-                },
-              ),
-            )
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+                  child: MyAutoCompleteTextFormField(
+                      hintText: 'Search for a Place',
+                      controller: searchTextEditingController,
+                      onChanged: (value) {}))
+            ],
+          ),
         ),
       ),
     );

@@ -59,9 +59,9 @@ android {
         }
     }
 
-    defaultConfig {                                                                                               
-     minSdkVersion 20                                                                                            
-   }  
+    defaultConfig {
+        minSdkVersion 20
+    }
 }
 
 flutter {
