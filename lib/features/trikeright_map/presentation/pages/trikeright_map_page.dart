@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart' as latlng;
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:trikeright/features/trikeright_map/data/openrouteservice_api.dart';
-import 'package:trikeright/features/trikeright_map/data/response_api_model.dart';
+import 'package:trikeright/features/trikeright_map/data/routeresponse_api_model.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_sliding_up_panel.dart';
 
 class TrikeRightMapPage extends StatefulWidget {
@@ -20,16 +20,17 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
       latlng.LatLng(9.64697490569609, 123.85528213870656);
   final PanelController panelController = PanelController();
 
-  ResponseApiModel responseApiModel = ResponseApiModel();
+  RouteResponseApiModel routeResponseApiModel = RouteResponseApiModel();
   List<latlng.LatLng> points = [];
 
   getCoordinates(String startPoint, String endPoint) async {
-    var response = await http.get(getRouteUrl(startPoint, endPoint));
+    var response =
+        await http.get(OpenRouteServiceApi.getRouteUrl(startPoint, endPoint));
     setState(() {
       if (response.statusCode == 200) {
-        responseApiModel = responseApiModelFromJson(response.body);
-        debugPrint(responseApiModelToJson(responseApiModel));
-        points = responseApiModel.features![0].geometry!.coordinates!
+        routeResponseApiModel = responseApiModelFromJson(response.body);
+        debugPrint(responseApiModelToJson(routeResponseApiModel));
+        points = routeResponseApiModel.features![0].geometry!.coordinates!
             .map((e) => latlng.LatLng(e[1].toDouble(), e[0].toDouble()))
             .toList();
       }

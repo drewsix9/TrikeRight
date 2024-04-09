@@ -4,32 +4,32 @@
 
 import 'dart:convert';
 
-ResponseApiModel responseApiModelFromJson(String str) =>
-    ResponseApiModel.fromJson(json.decode(str));
+RouteResponseApiModel responseApiModelFromJson(String str) =>
+    RouteResponseApiModel.fromJson(json.decode(str));
 
-String responseApiModelToJson(ResponseApiModel data) =>
+String responseApiModelToJson(RouteResponseApiModel data) =>
     json.encode(data.toJson());
 
-class ResponseApiModel {
+class RouteResponseApiModel {
   List<double>? bbox;
   List<Feature>? features;
 
-  ResponseApiModel({
+  RouteResponseApiModel({
     this.bbox,
     this.features,
   });
 
-  ResponseApiModel copyWith({
+  RouteResponseApiModel copyWith({
     List<double>? bbox,
     List<Feature>? features,
   }) =>
-      ResponseApiModel(
+      RouteResponseApiModel(
         bbox: bbox ?? this.bbox,
         features: features ?? this.features,
       );
 
-  factory ResponseApiModel.fromJson(Map<String, dynamic> json) =>
-      ResponseApiModel(
+  factory RouteResponseApiModel.fromJson(Map<String, dynamic> json) =>
+      RouteResponseApiModel(
         bbox: json["bbox"] == null
             ? []
             : List<double>.from(json["bbox"]!.map((x) => x?.toDouble())),
