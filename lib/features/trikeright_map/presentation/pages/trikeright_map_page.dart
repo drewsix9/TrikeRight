@@ -83,12 +83,12 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
             panelController: panelController,
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: const Color(0xFFF7FAFC),
-          onPressed: () => getCoordinates("123.8566351246631,9.660094060006394",
-              "123.85528213870656,9.64697490569609"),
-          child: const Icon(Icons.directions),
-        ),
+        // floatingActionButton: FloatingActionButton(
+        //   backgroundColor: const Color(0xFFF7FAFC),
+        //   onPressed: () => getCoordinates("123.8566351246631,9.660094060006394",
+        //       "123.85528213870656,9.64697490569609"),
+        //   child: const Icon(Icons.directions),
+        // ),
       ),
     );
   }
