@@ -25,7 +25,7 @@ class _SearchPageState extends State<SearchPage> {
     if (_debounceTimer != null) {
       _debounceTimer!.cancel();
     }
-    _debounceTimer = Timer(const Duration(seconds: 1), () async {
+    _debounceTimer = Timer(const Duration(milliseconds: 500), () async {
       if (mounted) {
         setState(() {
           isLoading = true;
