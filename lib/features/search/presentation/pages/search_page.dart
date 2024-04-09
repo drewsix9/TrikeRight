@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_places_autocomplete_text_field/google_places_autocomplete_text_field.dart';
 
 class SearchPage extends StatefulWidget {
   final TextEditingController searchTextEditingController;
@@ -29,8 +28,7 @@ class _SearchPageState extends State<SearchPage> {
           children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-              child: GooglePlacesAutoCompleteTextFormField(
-                maxLines: 1,
+              child: TextFormField(
                 decoration: InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.h),
@@ -65,22 +63,6 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                   ),
                 ),
-                textEditingController: searchTextEditingController,
-                googleAPIKey: "AIzaSyBLSfzJCN9CqVEKYT1GOoAB0hxdy89YtAg",
-                debounceTime: 1000,
-                countries: const ["en"],
-                isLatLngRequired: true,
-                getPlaceDetailWithLatLng: (prediction) {
-                  debugPrint(
-                      "Coordinates: (${prediction.lat},${prediction.lng})");
-                },
-                itmClick: (prediction) {
-                  searchTextEditingController.text = prediction.description;
-                  searchTextEditingController.selection =
-                      TextSelection.fromPosition(
-                    TextPosition(offset: prediction.description!.length),
-                  );
-                },
               ),
             )
           ],
