@@ -3,11 +3,9 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart' as latlng;
-import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:trikeright/features/trikeright_map/data/openrouteservice_api.dart';
 import 'package:trikeright/features/trikeright_map/data/routeresponse_api_model.dart';
-import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_sliding_up_panel.dart';
 
 class TrikeRightMapPage extends StatefulWidget {
@@ -77,7 +75,6 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
           ),
           parallaxEnabled: true,
           parallaxOffset: 0.5,
-          // Google Map
           body: _buildMap(),
           // Sliding Up Panel Builder
           panelBuilder: (controller) => MySlidingUpPanel(
