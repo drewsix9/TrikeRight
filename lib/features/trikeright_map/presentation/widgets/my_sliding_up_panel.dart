@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_drag_handle.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_single_choice_chips.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_text_field_to_search.dart';
@@ -10,16 +12,13 @@ class MySlidingUpPanel extends StatelessWidget {
   final ScrollController controller;
   final PanelController panelController;
 
-  final TextEditingController sourceController = TextEditingController();
-  final TextEditingController destinationController = TextEditingController();
-
   void togglePanel() {
     panelController.isPanelOpen
         ? panelController.close()
         : panelController.open();
   }
 
-  MySlidingUpPanel({
+  const MySlidingUpPanel({
     super.key,
     required this.controller,
     required this.panelController,
@@ -37,15 +36,25 @@ class MySlidingUpPanel extends StatelessWidget {
         ),
         SizedBox(height: 12.h),
         MyTextFieldToSearch(
+          controller: Provider.of<TextEditingControllerProvider>(context)
+              .sourceController,
           hintText: 'From where?',
-          controller: sourceController,
-          onTap: () => onTapTextField(context, sourceController),
+          onTap: () => onTapTextField(
+            context,
+            Provider.of<TextEditingControllerProvider>(context, listen: false)
+                .sourceController,
+          ),
         ),
         SizedBox(height: 24.h),
         MyTextFieldToSearch(
+          controller: Provider.of<TextEditingControllerProvider>(context)
+              .destinationController,
           hintText: 'To where?',
-          controller: destinationController,
-          onTap: () => onTapTextField(context, destinationController),
+          onTap: () => onTapTextField(
+            context,
+            Provider.of<TextEditingControllerProvider>(context, listen: false)
+                .destinationController,
+          ),
         ),
         SizedBox(height: 12.h),
         SizedBox(
@@ -79,11 +88,10 @@ class MySlidingUpPanel extends StatelessWidget {
     );
   }
 
-  void onTapTextField(
-      BuildContext context, TextEditingController textEditingController) {
+  void onTapTextField(BuildContext context, TextEditingController controller) {
     Navigator.of(context).pushNamed(
       '/search_page',
-      arguments: textEditingController,
+      arguments: controller,
     );
   }
 }

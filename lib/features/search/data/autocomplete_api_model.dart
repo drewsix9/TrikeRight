@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final autoCompleteResponseApiModel = autoCompleteResponseApiModelFromJson(jsonString);
-
 import 'dart:convert';
 
 AutoCompleteResponseApiModel autoCompleteResponseApiModelFromJson(String str) =>

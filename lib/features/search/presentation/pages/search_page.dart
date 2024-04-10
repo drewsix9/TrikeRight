@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:trikeright/features/search/data/autocomplete_api_model.dart';
 import 'package:trikeright/features/trikeright_map/data/openrouteservice_api.dart';
+import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
 
 class SearchPage extends StatefulWidget {
   final TextEditingController searchTextEditingController;
@@ -55,6 +57,21 @@ class _SearchPageState extends State<SearchPage> {
     searchTextEditingController.addListener(() {
       getAutoCompleteData(searchTextEditingController.text);
     });
+  }
+
+  void updateUI() {
+    final TextEditingController sourceController =
+        Provider.of<TextEditingControllerProvider>(context, listen: false)
+            .sourceController;
+    final TextEditingController destinationController =
+        Provider.of<TextEditingControllerProvider>(context, listen: false)
+            .destinationController;
+
+    if (sourceController.text.isNotEmpty &&
+        destinationController.text.isNotEmpty) {
+      debugPrint(
+          "UPDATE EXECUTED\nSource: ${sourceController.text}\nDestination: ${destinationController.text}");
+    }
   }
 
   @override
@@ -127,6 +144,7 @@ class _SearchPageState extends State<SearchPage> {
                                 suggestionsReponse[index].properties!.name!;
                             suggestionsReponse = [];
                             Navigator.of(context).pop();
+                            updateUI();
                           },
                         );
                       },
