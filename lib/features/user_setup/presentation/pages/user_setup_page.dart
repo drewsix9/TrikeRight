@@ -21,6 +21,7 @@ class _UserSetupPageState extends State<UserSetupPage> {
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController mobileNumberController = TextEditingController();
 
+  // FIXME: FocusNode not working
   final focusTextField = FocusNode();
 
   @override
