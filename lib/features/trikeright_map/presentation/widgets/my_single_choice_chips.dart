@@ -15,16 +15,10 @@ class _MySingleChoiceChipsState extends State<MySingleChoiceChips> {
   List<String> choices = ['Student', 'Senior/PWD', 'Regular'];
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    Provider.of<PassengerTypeProvider>(context).initPassengerTypeSharedPref();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Consumer<PassengerTypeProvider>(
       builder: (context, value, child) => ChipsChoice.single(
-        value: value.passengerType,
+        value: value.passengerType ?? 2,
         onChanged: (val) => value.setPassengerType(val as int),
         choiceItems: C2Choice.listFrom(
           source: choices,

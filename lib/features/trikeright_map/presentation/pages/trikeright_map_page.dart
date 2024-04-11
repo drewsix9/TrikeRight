@@ -110,7 +110,7 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
               point: latlng.LatLng(9.66038, 123.85647),
               child: Icon(
                 Icons.location_on,
-                color: Colors.red,
+                color: Colors.blueAccent,
                 size: 30,
               ),
             ),
@@ -118,7 +118,7 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
               point: tagbilaranLatLng,
               child: Icon(
                 Icons.location_on,
-                color: Colors.red,
+                color: Colors.blueAccent,
                 size: 30,
               ),
             ),
