@@ -9,16 +9,18 @@ class MyTextFormField extends StatelessWidget {
   final Icon? suffixIcon;
   final String? Function(String?)? validator;
   final AutovalidateMode autovalidateMode = AutovalidateMode.onUserInteraction;
+  final TextInputAction textInputAction;
 
   const MyTextFormField({
     super.key,
+    required AutovalidateMode autovalidateMode,
     required this.hintText,
     required this.controller,
-    required AutovalidateMode autovalidateMode,
     this.keyboardType = TextInputType.text,
     this.prefixIcon,
     this.suffixIcon,
     this.validator,
+    required this.textInputAction,
   });
 
   @override

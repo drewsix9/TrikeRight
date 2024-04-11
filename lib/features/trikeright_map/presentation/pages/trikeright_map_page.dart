@@ -93,7 +93,7 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
             ),
             // _fAB
             Positioned(
-              top: 50.h,
+              top: 64.h,
               right: 16.w,
               child: _fAB(),
             ),

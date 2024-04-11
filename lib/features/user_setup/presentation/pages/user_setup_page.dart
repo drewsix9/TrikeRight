@@ -21,6 +21,9 @@ class _UserSetupPageState extends State<UserSetupPage> {
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController mobileNumberController = TextEditingController();
 
+  final focusTextField = FocusNode();
+
+  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,6 +62,7 @@ class _UserSetupPageState extends State<UserSetupPage> {
             SizedBox(height: 8.h),
             // Textfield for full name
             MyTextFormField(
+              textInputAction: TextInputAction.next,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) =>
                   Validator.isName(value!) ? null : 'Please enter a valid name',
@@ -70,6 +74,7 @@ class _UserSetupPageState extends State<UserSetupPage> {
             SizedBox(height: 8.h),
             // Textfield for Mobile Number
             MyTextFormField(
+              textInputAction: TextInputAction.done,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) => Validator.isPhoneNumber(value!)
                   ? null

@@ -91,6 +91,7 @@ class _SearchPageState extends State<SearchPage> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
               child: TextFormField(
+                autofocus: true,
                 onChanged: ((value) => getAutoCompleteData(value)),
                 decoration: InputDecoration(
                   contentPadding:
