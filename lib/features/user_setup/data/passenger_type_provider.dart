@@ -31,8 +31,8 @@ class PassengerTypeProvider extends ChangeNotifier {
     SharedPreferences.getInstance().then((prefs) {
       int indexFromSharedPref = prefs.getInt('passengerTypeIndex') ?? 2;
       setPassengerType(indexFromSharedPref);
+      notifyListeners();
     });
-    notifyListeners();
   }
 
   // call in setPassengerType
