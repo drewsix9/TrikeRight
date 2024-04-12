@@ -32,15 +32,25 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
     setState(() {
       if (response.statusCode == 200) {
         routeResponseApiModel = responseApiModelFromJson(response.body);
-        debugPrint(responseApiModelToJson(routeResponseApiModel));
+        debugPrint(response.body);
         points = routeResponseApiModel.features![0].geometry!.coordinates!
             .map((e) => latlng.LatLng(e[1].toDouble(), e[0].toDouble()))
             .toList();
       }
+      _updateMarkers();
+    });
+    final snackBar = SnackBar(
+      content: Text(
+          'Distance: ${routeResponseApiModel.features![0].properties!.summary!.distance.toString()}'),
+    );
+    Future.delayed(Duration.zero, () {
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     });
   }
 
-  void _processFeatureCoordinates(FeatureProvider featureProvider) {
+  void _processFeatureCoordinates() {
+    debugPrint('Called _processFeatureCoordinates');
+    var featureProvider = Provider.of<FeatureProvider>(context, listen: false);
     var sourceFeature = featureProvider.sourceFeature;
     var destinationFeature = featureProvider.destinationFeature;
     if (sourceFeature != null && destinationFeature != null) {
@@ -48,109 +58,110 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
         sourceFeature.geometry!.coordinates!.join(','),
         destinationFeature.geometry!.coordinates!.join(','),
       );
-      _updateMarkers(featureProvider);
     }
   }
 
-  void _updateMarkers(FeatureProvider featureProvider) {
+  void _updateMarkers() {
+    var featureProvider = Provider.of<FeatureProvider>(context, listen: false);
     var sourceFeature = featureProvider.sourceFeature;
     var destinationFeature = featureProvider.destinationFeature;
-    markers.add(Marker(
-      point: latlng.LatLng(sourceFeature.geometry!.coordinates![1],
-          sourceFeature.geometry!.coordinates![0]),
-      child: const Icon(
-        Icons.location_on,
-        color: Colors.blueAccent,
-        size: 30,
-      ),
-    ));
-    markers.add(Marker(
-      point: latlng.LatLng(destinationFeature.geometry!.coordinates![1],
-          destinationFeature.geometry!.coordinates![0]),
-      child: const Icon(
-        Icons.location_on,
-        color: Colors.blueAccent,
-        size: 30,
-      ),
-    ));
+    setState(() {
+      markers.clear();
+      markers.add(Marker(
+        point: latlng.LatLng(sourceFeature.geometry!.coordinates![1],
+            sourceFeature.geometry!.coordinates![0]),
+        child: const Icon(
+          Icons.location_on,
+          color: Colors.blueAccent,
+          size: 30,
+        ),
+      ));
+      markers.add(Marker(
+        point: latlng.LatLng(destinationFeature.geometry!.coordinates![1],
+            destinationFeature.geometry!.coordinates![0]),
+        child: const Icon(
+          Icons.location_on,
+          color: Colors.blueAccent,
+          size: 30,
+        ),
+      ));
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        extendBodyBehindAppBar: true,
-        resizeToAvoidBottomInset: false,
-        // AppBar - Trike Right
-        appBar: AppBar(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(18.r),
-            ),
+        child: Scaffold(
+      extendBodyBehindAppBar: true,
+      resizeToAvoidBottomInset: false,
+      // AppBar - Trike Right
+      appBar: AppBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(18.r),
           ),
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          title: Text(
-            'TrikeRight',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: const Color(0xFF0F1416),
-              fontSize: 18.sp,
-              fontFamily: 'Plus Jakarta Sans',
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          backgroundColor: const Color(0xFFF7FAFC),
         ),
-        // Stack containing _fAB and SlidingUpPanel
-        body: Consumer<FeatureProvider>(builder: (context, featureProvider, _) {
-          _processFeatureCoordinates(featureProvider);
-          return Stack(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: Text(
+          'TrikeRight',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: const Color(0xFF0F1416),
+            fontSize: 18.sp,
+            fontFamily: 'Plus Jakarta Sans',
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        backgroundColor: const Color(0xFFF7FAFC),
+      ),
+      // Stack containing _fAB and SlidingUpPanel
+      body: Stack(
+        children: [
+          // Map and SlidingUpPanel
+          Column(
             children: [
-              // Map and SlidingUpPanel
-              Column(
-                children: [
-                  Expanded(
-                    child: _buildMap(),
-                  ),
-                  // Sliding Up Panel
-                  SlidingUpPanel(
-                    controller: panelController,
-                    minHeight: 175.h,
-                    maxHeight: ScreenUtil().screenHeight * 0.45,
-                    color: const Color(0xFFF7FAFC),
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(18.r),
-                    ),
-                    parallaxEnabled: true,
-                    parallaxOffset: 0.5,
-                    panelBuilder: (controller) => MySlidingUpPanel(
-                      controller: controller,
-                      panelController: panelController,
-                    ),
-                  ),
-                ],
+              Expanded(
+                child: _buildMap(),
               ),
-              // _fAB
-              // Positioned(
-              //   top: 64.h,
-              //   right: 16.w,
-              //   child: _fAB(),
-              // ),
+              // Sliding Up Panel
+              SlidingUpPanel(
+                controller: panelController,
+                minHeight: 175.h,
+                maxHeight: ScreenUtil().screenHeight * 0.45,
+                color: const Color(0xFFF7FAFC),
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(18.r),
+                ),
+                parallaxEnabled: true,
+                parallaxOffset: 0.5,
+                panelBuilder: (controller) => MySlidingUpPanel(
+                  controller: controller,
+                  panelController: panelController,
+                ),
+              ),
             ],
-          );
-        }),
+          ),
+          Positioned(
+            top: 64.h,
+            right: 16.w,
+            child: _fAB(),
+          ),
+        ],
+      ),
+    ));
+  }
+
+  FloatingActionButton _fAB() {
+    return FloatingActionButton(
+      backgroundColor: const Color(0xFFF7FAFC),
+      onPressed: () => _processFeatureCoordinates(),
+      child: const Icon(
+        Icons.directions,
+        color: Color(0xFF1C91F2),
       ),
     );
   }
-
-  // FloatingActionButton _fAB() {
-  //   return FloatingActionButton(
-  //     backgroundColor: const Color(0xFFF7FAFC),
-  //     onPressed: () => _processFeatureCoordinates,
-  //     child: const Icon(Icons.directions),
-  //   );
-  // }
 
   FlutterMap _buildMap() {
     return FlutterMap(
@@ -168,25 +179,8 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
           urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
           userAgentPackageName: 'dev.fleaflet.flutter_map.example',
         ),
-        const MarkerLayer(
-          markers: [
-            Marker(
-              point: latlng.LatLng(9.66038, 123.85647),
-              child: Icon(
-                Icons.location_on,
-                color: Colors.blueAccent,
-                size: 30,
-              ),
-            ),
-            Marker(
-              point: tagbilaranLatLng,
-              child: Icon(
-                Icons.location_on,
-                color: Colors.blueAccent,
-                size: 30,
-              ),
-            ),
-          ],
+        MarkerLayer(
+          markers: markers,
         ),
         PolylineLayer(
           polylineCulling: false,
@@ -203,8 +197,7 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
   }
 }
 
-
-  /*
+/*
   import 'package:flutter/material.dart';
   import 'package:flutter_map/flutter_map.dart';
   import 'package:flutter_screenutil/flutter_screenutil.dart';

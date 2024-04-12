@@ -60,21 +60,6 @@ class _SearchPageState extends State<SearchPage> {
     });
   }
 
-  void _updateMapUI() {
-    final TextEditingController sourceController =
-        Provider.of<TextEditingControllerProvider>(context, listen: false)
-            .sourceController;
-    final TextEditingController destinationController =
-        Provider.of<TextEditingControllerProvider>(context, listen: false)
-            .destinationController;
-
-    if (sourceController.text.isNotEmpty &&
-        destinationController.text.isNotEmpty) {
-      debugPrint(
-          "UPDATE EXECUTED\nSource: ${sourceController.text}\nDestination: ${destinationController.text}");
-    }
-  }
-
   void _handleListItemTap(BuildContext context, Feature selectedFeature) {
     final TextEditingController sourceController =
         Provider.of<TextEditingControllerProvider>(context, listen: false)
@@ -95,7 +80,6 @@ class _SearchPageState extends State<SearchPage> {
     widget.searchTextEditingController.text = selectedFeature.properties!.name!;
     suggestionsReponse.clear();
     Navigator.of(context).pop();
-    _updateMapUI();
   }
 
   @override
