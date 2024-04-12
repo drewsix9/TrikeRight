@@ -93,5 +93,7 @@ class MySlidingUpPanel extends StatelessWidget {
       '/search_page',
       arguments: controller,
     );
+    Provider.of<TextEditingControllerProvider>(context, listen: false)
+        .updateControllers();
   }
 }

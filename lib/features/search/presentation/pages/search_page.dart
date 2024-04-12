@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:trikeright/features/search/data/autocomplete_api_model.dart';
+import 'package:trikeright/features/trikeright_map/data/feature_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/openrouteservice_api.dart';
 import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
 
@@ -59,7 +60,7 @@ class _SearchPageState extends State<SearchPage> {
     });
   }
 
-  void updateUI() {
+  void _updateMapUI() {
     final TextEditingController sourceController =
         Provider.of<TextEditingControllerProvider>(context, listen: false)
             .sourceController;
@@ -72,6 +73,29 @@ class _SearchPageState extends State<SearchPage> {
       debugPrint(
           "UPDATE EXECUTED\nSource: ${sourceController.text}\nDestination: ${destinationController.text}");
     }
+  }
+
+  void _handleListItemTap(BuildContext context, Feature selectedFeature) {
+    final TextEditingController sourceController =
+        Provider.of<TextEditingControllerProvider>(context, listen: false)
+            .sourceController;
+    final TextEditingController destinationController =
+        Provider.of<TextEditingControllerProvider>(context, listen: false)
+            .destinationController;
+
+    final FeatureProvider featureProvider =
+        Provider.of<FeatureProvider>(context, listen: false);
+
+    if (sourceController == widget.searchTextEditingController) {
+      featureProvider.setSourceFeature(selectedFeature);
+    } else if (destinationController == widget.searchTextEditingController) {
+      featureProvider.setDestinationFeature(selectedFeature);
+    }
+
+    widget.searchTextEditingController.text = selectedFeature.properties!.name!;
+    suggestionsReponse.clear();
+    Navigator.of(context).pop();
+    _updateMapUI();
   }
 
   @override
@@ -91,6 +115,7 @@ class _SearchPageState extends State<SearchPage> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
               child: TextFormField(
+                controller: searchTextEditingController,
                 autofocus: true,
                 onChanged: ((value) => getAutoCompleteData(value)),
                 decoration: InputDecoration(
@@ -141,11 +166,8 @@ class _SearchPageState extends State<SearchPage> {
                           title:
                               Text(suggestionsReponse[index].properties!.name!),
                           onTap: () {
-                            searchTextEditingController.text =
-                                suggestionsReponse[index].properties!.name!;
-                            suggestionsReponse = [];
-                            Navigator.of(context).pop();
-                            updateUI();
+                            _handleListItemTap(
+                                context, suggestionsReponse[index]);
                           },
                         );
                       },
