@@ -22,7 +22,7 @@ class _SearchPageState extends State<SearchPage> {
 
   bool isLoading = false;
   Timer? _debounceTimer;
-  List<Feature> suggestionsReponse = [];
+  List<ACFeature> suggestionsReponse = [];
 
   Future<void> getAutoCompleteData(String controllerText) async {
     if (_debounceTimer != null) {
@@ -60,7 +60,7 @@ class _SearchPageState extends State<SearchPage> {
     });
   }
 
-  void _handleListItemTap(BuildContext context, Feature selectedFeature) {
+  void _handleListItemTap(BuildContext context, ACFeature selectedFeature) {
     final TextEditingController sourceController =
         Provider.of<TextEditingControllerProvider>(context, listen: false)
             .sourceController;

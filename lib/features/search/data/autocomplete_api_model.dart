@@ -7,7 +7,7 @@ String autoCompleteResponseApiModelToJson(AutoCompleteResponseApiModel data) =>
     json.encode(data.toJson());
 
 class AutoCompleteResponseApiModel {
-  List<Feature>? features;
+  List<ACFeature>? features;
   List<double>? bbox;
 
   AutoCompleteResponseApiModel({
@@ -16,7 +16,7 @@ class AutoCompleteResponseApiModel {
   });
 
   AutoCompleteResponseApiModel copyWith({
-    List<Feature>? features,
+    List<ACFeature>? features,
     List<double>? bbox,
   }) =>
       AutoCompleteResponseApiModel(
@@ -28,8 +28,8 @@ class AutoCompleteResponseApiModel {
       AutoCompleteResponseApiModel(
         features: json["features"] == null
             ? []
-            : List<Feature>.from(
-                json["features"]!.map((x) => Feature.fromJson(x))),
+            : List<ACFeature>.from(
+                json["features"]!.map((x) => ACFeature.fromJson(x))),
         bbox: json["bbox"] == null
             ? []
             : List<double>.from(json["bbox"]!.map((x) => x?.toDouble())),
@@ -43,29 +43,29 @@ class AutoCompleteResponseApiModel {
       };
 }
 
-class Feature {
+class ACFeature {
   Geometry? geometry;
   Properties? properties;
   List<double>? bbox;
 
-  Feature({
+  ACFeature({
     this.geometry,
     this.properties,
     this.bbox,
   });
 
-  Feature copyWith({
+  ACFeature copyWith({
     Geometry? geometry,
     Properties? properties,
     List<double>? bbox,
   }) =>
-      Feature(
+      ACFeature(
         geometry: geometry ?? this.geometry,
         properties: properties ?? this.properties,
         bbox: bbox ?? this.bbox,
       );
 
-  factory Feature.fromJson(Map<String, dynamic> json) => Feature(
+  factory ACFeature.fromJson(Map<String, dynamic> json) => ACFeature(
         geometry: json["geometry"] == null
             ? null
             : Geometry.fromJson(json["geometry"]),
