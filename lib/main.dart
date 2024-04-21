@@ -12,14 +12,16 @@ import 'package:trikeright/routing/app_routing.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: "assets/config/.env");
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (_) => PassengerTypeProvider()),
-      ChangeNotifierProvider(create: (_) => TextEditingControllerProvider()),
-      ChangeNotifierProvider(create: (_) => FeatureProvider()),
-    ],
-    child: const MyApp(),
-  ));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => PassengerTypeProvider()),
+        ChangeNotifierProvider(create: (_) => TextEditingControllerProvider()),
+        ChangeNotifierProvider(create: (_) => FeatureProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
