@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum PassengerType {
-  student,
-  seniorPWD,
   regular,
+  studentSeniorPWD,
+  belowFiveYearsOld,
 }
 
 class PassengerTypeProvider extends ChangeNotifier {
@@ -13,13 +13,13 @@ class PassengerTypeProvider extends ChangeNotifier {
   void setPassengerType(int index) {
     switch (index) {
       case 0:
-        passengerType = PassengerType.student;
+        passengerType = PassengerType.regular;
         break;
       case 1:
-        passengerType = PassengerType.seniorPWD;
+        passengerType = PassengerType.studentSeniorPWD;
         break;
       case 2:
-        passengerType = PassengerType.regular;
+        passengerType = PassengerType.belowFiveYearsOld;
         break;
     }
     savePassengerTypeSharedPref(); // save to shared pref
@@ -39,17 +39,17 @@ class PassengerTypeProvider extends ChangeNotifier {
   void savePassengerTypeSharedPref() {
     SharedPreferences.getInstance().then((prefs) {
       switch (passengerType) {
-        case PassengerType.student:
+        case PassengerType.regular:
           prefs.setInt('passengerTypeIndex', 0);
           break;
-        case PassengerType.seniorPWD:
+        case PassengerType.studentSeniorPWD:
           prefs.setInt('passengerTypeIndex', 1);
           break;
-        case PassengerType.regular:
+        case PassengerType.belowFiveYearsOld:
           prefs.setInt('passengerTypeIndex', 2);
           break;
         case null:
-          prefs.setInt('passengerTypeIndex', 2);
+          prefs.setInt('passengerTypeIndex', 0);
           break;
       }
     });

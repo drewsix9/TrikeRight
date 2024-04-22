@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:trikeright/core/themes/trikeright_theme.dart';
 import 'package:trikeright/features/splashscreen/presentation/pages/splash_screen.dart';
 import 'package:trikeright/features/trikeright_map/data/feature_provider.dart';
+import 'package:trikeright/features/trikeright_map/data/routeresponse_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
 import 'package:trikeright/features/user_setup/data/passenger_type_provider.dart';
 import 'package:trikeright/routing/app_routing.dart';
@@ -18,6 +19,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => PassengerTypeProvider()),
         ChangeNotifierProvider(create: (_) => TextEditingControllerProvider()),
         ChangeNotifierProvider(create: (_) => FeatureProvider()),
+        ChangeNotifierProvider(create: (_) => RouteResponseProvider()),
       ],
       child: const MyApp(),
     ),

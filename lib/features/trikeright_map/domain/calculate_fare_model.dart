@@ -1,21 +1,24 @@
+import 'package:trikeright/features/user_setup/data/passenger_type_provider.dart';
+
 class CalculateFareModel {
-  String? totalFare;
-  String? totalDistance;
-  String? totalDuration;
+  final String source;
+  final String destination;
+  final String baseFare;
+  final double totalDistance;
+  final double totalDuration;
+  final PassengerType passengerType;
 
-  CalculateFareModel({this.totalFare, this.totalDistance, this.totalDuration});
+  CalculateFareModel({
+    required this.source,
+    required this.destination,
+    required this.baseFare,
+    required this.totalDistance,
+    required this.totalDuration,
+    required this.passengerType,
+  });
 
-  CalculateFareModel.fromJson(Map<String, dynamic> json) {
-    totalFare = json['total_fare'];
-    totalDistance = json['total_distance'];
-    totalDuration = json['total_duration'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['total_fare'] = totalFare;
-    data['total_distance'] = totalDistance;
-    data['total_duration'] = totalDuration;
-    return data;
+  @override
+  String toString() {
+    return 'CalculateFareModel(source: $source, destination: $destination, baseFare: $baseFare, totalDistance: $totalDistance, totalDuration: $totalDuration, passengerType: $passengerType)';
   }
 }

@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:trikeright/features/trikeright_map/data/feature_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/openrouteservice_api.dart';
-import 'package:trikeright/features/trikeright_map/data/routeresponse_api_model.dart';
+import 'package:trikeright/features/trikeright_map/data/routeresponse_provider.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_sliding_up_panel.dart';
 
 class TrikeRightMapPage extends StatefulWidget {
@@ -20,22 +20,30 @@ class TrikeRightMapPage extends StatefulWidget {
 class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
   static const latlng.LatLng tagbilaranLatLng =
       latlng.LatLng(9.64697490569609, 123.85528213870656);
+
   final PanelController panelController = PanelController();
 
-  RouteResponseApiModel routeResponseApiModel = RouteResponseApiModel();
   List<latlng.LatLng> points = [];
   List<Marker> markers = [];
 
   void _getCoordinates(String startPoint, String endPoint) async {
+    var routeResponseApiModelProvider = Provider.of<RouteResponseProvider>(
+      context,
+      listen: false,
+    );
     var response =
         await http.get(OpenRouteServiceApi.getRouteUrl(startPoint, endPoint));
     setState(() {
       if (response.statusCode == 200) {
-        routeResponseApiModel = responseApiModelFromJson(response.body);
-        // debugPrint(response.body);
+        // TODO: Call Provider to init routeResponseApiModel
+        routeResponseApiModelProvider
+            .updateRouteResponseApiModel(response.body);
         // ignore: avoid_print
-        print(routeResponseApiModel.toString());
-        points = routeResponseApiModel.features![0].geometry!.coordinates!
+        debugPrint(
+          routeResponseApiModelProvider.routeResponseApiModel.toString(),
+        );
+        points = routeResponseApiModelProvider
+            .routeResponseApiModel.features![0].geometry!.coordinates!
             .map((e) => latlng.LatLng(e[1].toDouble(), e[0].toDouble()))
             .toList();
       }
@@ -43,7 +51,7 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
     });
     final snackBar = SnackBar(
       content: Text(
-        'Distance: ${routeResponseApiModel.features![0].properties!.summary!.distance.toString()}',
+        'Distance: ${routeResponseApiModelProvider.routeResponseApiModel.features![0].properties!.summary!.distance.toString()}',
       ),
     );
     Future.delayed(Duration.zero, () {

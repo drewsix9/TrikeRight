@@ -77,6 +77,7 @@ class _UserSetupPageState extends State<UserSetupPage> {
             MyTextFormField(
               textInputAction: TextInputAction.done,
               autovalidateMode: AutovalidateMode.onUserInteraction,
+              // TODO: Add a validator for mobile number
               validator: (value) => Validator.isPhoneNumber(value!)
                   ? null
                   : 'Please enter a valid mobile number',
@@ -100,9 +101,11 @@ class _UserSetupPageState extends State<UserSetupPage> {
                 onPressed: () {
                   // reference to the provider
                   if (_formKey.currentState!.validate() &&
-                      (value.passengerType == PassengerType.student ||
-                          value.passengerType == PassengerType.seniorPWD ||
-                          value.passengerType == PassengerType.regular)) {
+                      (value.passengerType == PassengerType.regular ||
+                          value.passengerType ==
+                              PassengerType.studentSeniorPWD ||
+                          value.passengerType ==
+                              PassengerType.belowFiveYearsOld)) {
                     debugPrint(
                       'Name: ${fullNameController.text} \n Mobile Number: ${mobileNumberController.text}',
                     );

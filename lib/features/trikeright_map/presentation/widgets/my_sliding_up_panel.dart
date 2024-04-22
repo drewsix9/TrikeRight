@@ -94,9 +94,12 @@ class MySlidingUpPanel extends StatelessWidget {
         MyElevatedButton(
           label: 'Calculate Fare',
           onPressed: () {
+            // TODO: Check if source and destination are not empty
             Navigator.of(context).push(
               HeroDialogRoute(
-                builder: (context) => const MyAlertFromHero(),
+                builder: (context) {
+                  return const MyAlertFromHero();
+                },
               ),
             );
           },
