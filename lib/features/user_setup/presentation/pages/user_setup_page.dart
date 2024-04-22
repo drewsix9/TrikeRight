@@ -54,7 +54,7 @@ class _UserSetupPageState extends State<UserSetupPage> {
                     ),
                     maxLines: 2,
                   ),
-                )
+                ),
               ],
             ),
             // Full name
@@ -111,7 +111,8 @@ class _UserSetupPageState extends State<UserSetupPage> {
                   } else {
                     // You can show a message to the user here
                     debugPrint(
-                        'Please fill all the fields and choose a choice');
+                      'Please fill all the fields and choose a choice',
+                    );
                   }
                 },
               ),

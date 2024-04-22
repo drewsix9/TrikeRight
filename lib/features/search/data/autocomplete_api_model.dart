@@ -29,7 +29,7 @@ class AutoCompleteResponseApiModel {
         features: json["features"] == null
             ? []
             : List<ACFeature>.from(
-                json["features"]!.map((x) => ACFeature.fromJson(x))),
+                json["features"]!.map((x) => ACFeature.fromJson(x)),),
         bbox: json["bbox"] == null
             ? []
             : List<double>.from(json["bbox"]!.map((x) => x?.toDouble())),

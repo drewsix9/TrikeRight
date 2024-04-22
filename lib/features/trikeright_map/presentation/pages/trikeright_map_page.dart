@@ -32,7 +32,9 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
     setState(() {
       if (response.statusCode == 200) {
         routeResponseApiModel = responseApiModelFromJson(response.body);
-        debugPrint(response.body);
+        // debugPrint(response.body);
+        // ignore: avoid_print
+        print(routeResponseApiModel.toString());
         points = routeResponseApiModel.features![0].geometry!.coordinates!
             .map((e) => latlng.LatLng(e[1].toDouble(), e[0].toDouble()))
             .toList();
@@ -41,7 +43,8 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
     });
     final snackBar = SnackBar(
       content: Text(
-          'Distance: ${routeResponseApiModel.features![0].properties!.summary!.distance.toString()}'),
+        'Distance: ${routeResponseApiModel.features![0].properties!.summary!.distance.toString()}',
+      ),
     );
     Future.delayed(Duration.zero, () {
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -67,89 +70,99 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
     var destinationFeature = featureProvider.destinationFeature;
     setState(() {
       markers.clear();
-      markers.add(Marker(
-        point: latlng.LatLng(sourceFeature.geometry!.coordinates![1],
-            sourceFeature.geometry!.coordinates![0]),
-        child: const Icon(
-          Icons.location_on,
-          color: Colors.blueAccent,
-          size: 30,
+      markers.add(
+        Marker(
+          point: latlng.LatLng(
+            sourceFeature.geometry!.coordinates![1],
+            sourceFeature.geometry!.coordinates![0],
+          ),
+          child: const Icon(
+            Icons.location_on,
+            color: Colors.blueAccent,
+            size: 30,
+          ),
         ),
-      ));
-      markers.add(Marker(
-        point: latlng.LatLng(destinationFeature.geometry!.coordinates![1],
-            destinationFeature.geometry!.coordinates![0]),
-        child: const Icon(
-          Icons.location_on,
-          color: Colors.blueAccent,
-          size: 30,
+      );
+      markers.add(
+        Marker(
+          point: latlng.LatLng(
+            destinationFeature.geometry!.coordinates![1],
+            destinationFeature.geometry!.coordinates![0],
+          ),
+          child: const Icon(
+            Icons.location_on,
+            color: Colors.blueAccent,
+            size: 30,
+          ),
         ),
-      ));
+      );
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-      extendBodyBehindAppBar: true,
-      resizeToAvoidBottomInset: false,
-      // AppBar - Trike Right
-      appBar: AppBar(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(18.r),
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        resizeToAvoidBottomInset: false,
+        // AppBar - Trike Right
+        appBar: AppBar(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(18.r),
+            ),
           ),
+          automaticallyImplyLeading: false,
+          centerTitle: true,
+          title: Text(
+            'TrikeRight',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: const Color(0xFF0F1416),
+              fontSize: 18.sp,
+              fontFamily: 'Plus Jakarta Sans',
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          backgroundColor: const Color(0xFFF7FAFC),
         ),
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        title: Text(
-          'TrikeRight',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: const Color(0xFF0F1416),
-            fontSize: 18.sp,
-            fontFamily: 'Plus Jakarta Sans',
-            fontWeight: FontWeight.w700,
-          ),
+        // Stack containing _fAB and SlidingUpPanel
+        body: Stack(
+          children: [
+            // Map and SlidingUpPanel
+            Column(
+              children: [
+                Expanded(
+                  child: _buildMap(),
+                ),
+                // Sliding Up Panel
+                SlidingUpPanel(
+                  defaultPanelState: PanelState.OPEN,
+                  controller: panelController,
+                  minHeight: 175.h,
+                  maxHeight: ScreenUtil().screenHeight * 0.45,
+                  color: const Color(0xFFF7FAFC),
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(18.r),
+                  ),
+                  parallaxEnabled: true,
+                  parallaxOffset: 0.5,
+                  panelBuilder: (controller) => MySlidingUpPanel(
+                    controller: controller,
+                    panelController: panelController,
+                  ),
+                ),
+              ],
+            ),
+            Positioned(
+              top: 64.h,
+              right: 16.w,
+              child: _fAB(),
+            ),
+          ],
         ),
-        backgroundColor: const Color(0xFFF7FAFC),
       ),
-      // Stack containing _fAB and SlidingUpPanel
-      body: Stack(
-        children: [
-          // Map and SlidingUpPanel
-          Column(
-            children: [
-              Expanded(
-                child: _buildMap(),
-              ),
-              // Sliding Up Panel
-              SlidingUpPanel(
-                controller: panelController,
-                minHeight: 175.h,
-                maxHeight: ScreenUtil().screenHeight * 0.45,
-                color: const Color(0xFFF7FAFC),
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(18.r),
-                ),
-                parallaxEnabled: true,
-                parallaxOffset: 0.5,
-                panelBuilder: (controller) => MySlidingUpPanel(
-                  controller: controller,
-                  panelController: panelController,
-                ),
-              ),
-            ],
-          ),
-          Positioned(
-            top: 64.h,
-            right: 16.w,
-            child: _fAB(),
-          ),
-        ],
-      ),
-    ));
+    );
   }
 
   FloatingActionButton _fAB() {

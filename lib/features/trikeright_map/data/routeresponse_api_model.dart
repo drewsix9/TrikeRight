@@ -32,7 +32,8 @@ class RouteResponseApiModel {
         features: json["features"] == null
             ? []
             : List<Feature>.from(
-                json["features"]!.map((x) => Feature.fromJson(x))),
+                json["features"]!.map((x) => Feature.fromJson(x)),
+              ),
       );
 
   Map<String, dynamic> toJson() => {
@@ -41,6 +42,12 @@ class RouteResponseApiModel {
             ? []
             : List<dynamic>.from(features!.map((x) => x.toJson())),
       };
+
+  @override
+  String toString() {
+    var encoder = const JsonEncoder.withIndent("     ");
+    return encoder.convert(toJson());
+  }
 }
 
 class Feature {
@@ -93,15 +100,18 @@ class Geometry {
   factory Geometry.fromJson(Map<String, dynamic> json) => Geometry(
         coordinates: json["coordinates"] == null
             ? []
-            : List<List<double>>.from(json["coordinates"]!
-                .map((x) => List<double>.from(x.map((x) => x?.toDouble())))),
+            : List<List<double>>.from(
+                json["coordinates"]!
+                    .map((x) => List<double>.from(x.map((x) => x?.toDouble()))),
+              ),
       );
 
   Map<String, dynamic> toJson() => {
         "coordinates": coordinates == null
             ? []
             : List<dynamic>.from(
-                coordinates!.map((x) => List<dynamic>.from(x.map((x) => x)))),
+                coordinates!.map((x) => List<dynamic>.from(x.map((x) => x))),
+              ),
       };
 }
 

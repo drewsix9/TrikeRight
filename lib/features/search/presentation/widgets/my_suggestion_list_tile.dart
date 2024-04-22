@@ -4,8 +4,11 @@ class MySuggestionListTile extends StatelessWidget {
   final String location;
   final VoidCallback onTap;
 
-  const MySuggestionListTile(
-      {super.key, required this.location, required this.onTap});
+  const MySuggestionListTile({
+    super.key,
+    required this.location,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {

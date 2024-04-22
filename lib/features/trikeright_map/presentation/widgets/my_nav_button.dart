@@ -35,7 +35,7 @@ class MyNavButton extends StatelessWidget {
               fontWeight: FontWeight.w500,
               letterSpacing: 0.18.w,
             ),
-          )
+          ),
         ],
       ),
     );

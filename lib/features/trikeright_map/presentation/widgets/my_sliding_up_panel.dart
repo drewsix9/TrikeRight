@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
+import 'package:trikeright/features/trikeright_map/presentation/custom_route/hero_dialog_route.dart';
+import 'package:trikeright/features/trikeright_map/presentation/widgets/my_alert_from_hero.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_drag_handle.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_single_choice_chips.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_text_field_to_search.dart';
@@ -12,17 +14,26 @@ class MySlidingUpPanel extends StatelessWidget {
   final ScrollController controller;
   final PanelController panelController;
 
-  void togglePanel() {
-    panelController.isPanelOpen
-        ? panelController.close()
-        : panelController.open();
-  }
-
   const MySlidingUpPanel({
     super.key,
     required this.controller,
     required this.panelController,
   });
+
+  void _togglePanel() {
+    panelController.isPanelOpen
+        ? panelController.close()
+        : panelController.open();
+  }
+
+  void _onTapTextField(BuildContext context, TextEditingController controller) {
+    Navigator.of(context).pushNamed(
+      '/search_page',
+      arguments: controller,
+    );
+    Provider.of<TextEditingControllerProvider>(context, listen: false)
+        .updateControllers();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +42,7 @@ class MySlidingUpPanel extends StatelessWidget {
       children: [
         // Drag handle
         GestureDetector(
-          onTap: togglePanel,
+          onTap: _togglePanel,
           child: const MyDragHandle(),
         ),
         SizedBox(height: 12.h),
@@ -39,7 +50,7 @@ class MySlidingUpPanel extends StatelessWidget {
           controller: Provider.of<TextEditingControllerProvider>(context)
               .sourceController,
           hintText: 'From where?',
-          onTap: () => onTapTextField(
+          onTap: () => _onTapTextField(
             context,
             Provider.of<TextEditingControllerProvider>(context, listen: false)
                 .sourceController,
@@ -50,7 +61,7 @@ class MySlidingUpPanel extends StatelessWidget {
           controller: Provider.of<TextEditingControllerProvider>(context)
               .destinationController,
           hintText: 'To where?',
-          onTap: () => onTapTextField(
+          onTap: () => _onTapTextField(
             context,
             Provider.of<TextEditingControllerProvider>(context, listen: false)
                 .destinationController,
@@ -82,18 +93,15 @@ class MySlidingUpPanel extends StatelessWidget {
         ),
         MyElevatedButton(
           label: 'Calculate Fare',
-          onPressed: () {},
-        )
+          onPressed: () {
+            Navigator.of(context).push(
+              HeroDialogRoute(
+                builder: (context) => const MyAlertFromHero(),
+              ),
+            );
+          },
+        ),
       ],
     );
-  }
-
-  void onTapTextField(BuildContext context, TextEditingController controller) {
-    Navigator.of(context).pushNamed(
-      '/search_page',
-      arguments: controller,
-    );
-    Provider.of<TextEditingControllerProvider>(context, listen: false)
-        .updateControllers();
   }
 }

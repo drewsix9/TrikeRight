@@ -5,8 +5,11 @@ class MyElevatedButton extends StatelessWidget {
   final String label;
   final void Function() onPressed;
 
-  const MyElevatedButton(
-      {super.key, required this.onPressed, required this.label});
+  const MyElevatedButton({
+    super.key,
+    required this.onPressed,
+    required this.label,
+  });
 
   @override
   Widget build(BuildContext context) {

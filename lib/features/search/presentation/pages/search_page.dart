@@ -43,8 +43,11 @@ class _SearchPageState extends State<SearchPage> {
           if (response.statusCode == 200) {
             var autoCompleteResponseApiModel =
                 autoCompleteResponseApiModelFromJson(response.body);
-            debugPrint(autoCompleteResponseApiModelToJson(
-                autoCompleteResponseApiModel));
+            debugPrint(
+              autoCompleteResponseApiModelToJson(
+                autoCompleteResponseApiModel,
+              ),
+            );
             suggestionsReponse = autoCompleteResponseApiModel.features!;
           }
         });
@@ -151,7 +154,9 @@ class _SearchPageState extends State<SearchPage> {
                               Text(suggestionsReponse[index].properties!.name!),
                           onTap: () {
                             _handleListItemTap(
-                                context, suggestionsReponse[index]);
+                              context,
+                              suggestionsReponse[index],
+                            );
                           },
                         );
                       },
