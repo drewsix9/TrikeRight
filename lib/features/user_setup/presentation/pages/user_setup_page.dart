@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trikeright/core/utils/validator.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_single_choice_chips.dart';
 import 'package:trikeright/features/user_setup/data/passenger_type_provider.dart';
@@ -21,6 +22,10 @@ class _UserSetupPageState extends State<UserSetupPage> {
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController mobileNumberController = TextEditingController();
 
+  // FIXME: FocusNode not working
+  final focusTextField = FocusNode();
+
+  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +55,7 @@ class _UserSetupPageState extends State<UserSetupPage> {
                     ),
                     maxLines: 2,
                   ),
-                )
+                ),
               ],
             ),
             // Full name
@@ -59,6 +64,7 @@ class _UserSetupPageState extends State<UserSetupPage> {
             SizedBox(height: 8.h),
             // Textfield for full name
             MyTextFormField(
+              textInputAction: TextInputAction.next,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) =>
                   Validator.isName(value!) ? null : 'Please enter a valid name',
@@ -70,7 +76,9 @@ class _UserSetupPageState extends State<UserSetupPage> {
             SizedBox(height: 8.h),
             // Textfield for Mobile Number
             MyTextFormField(
+              textInputAction: TextInputAction.done,
               autovalidateMode: AutovalidateMode.onUserInteraction,
+              // TODO: Add a validator for mobile number
               validator: (value) => Validator.isPhoneNumber(value!)
                   ? null
                   : 'Please enter a valid mobile number',
@@ -94,18 +102,25 @@ class _UserSetupPageState extends State<UserSetupPage> {
                 onPressed: () {
                   // reference to the provider
                   if (_formKey.currentState!.validate() &&
-                      (value.passengerType == PassengerType.student ||
-                          value.passengerType == PassengerType.seniorPWD ||
-                          value.passengerType == PassengerType.regular)) {
+                      (value.passengerType == PassengerType.regular ||
+                          value.passengerType ==
+                              PassengerType.studentSeniorPWD ||
+                          value.passengerType ==
+                              PassengerType.belowFiveYearsOld)) {
                     debugPrint(
                       'Name: ${fullNameController.text} \n Mobile Number: ${mobileNumberController.text}',
                     );
-                    Navigator.of(context)
-                        .pushReplacementNamed('/persistent_nav_bar');
+                    // Navigator.of(context)
+                    //     .pushReplacementNamed('/persistent_nav_bar');
+                    SharedPreferences.getInstance().then((prefs) {
+                      prefs.setBool('isFirstTime', false);
+                      Navigator.of(context)
+                          .pushReplacementNamed('/persistent_nav_bar');
+                    });
                   } else {
-                    // You can show a message to the user here
                     debugPrint(
-                        'Please fill all the fields and choose a choice');
+                      'Please fill all the fields and choose a choice',
+                    );
                   }
                 },
               ),

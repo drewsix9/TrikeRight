@@ -12,13 +12,13 @@ class MySingleChoiceChips extends StatefulWidget {
 }
 
 class _MySingleChoiceChipsState extends State<MySingleChoiceChips> {
-  List<String> choices = ['Student', 'Senior/PWD', 'Regular'];
+  List<String> choices = ['Regular', 'Student/Senior/PWD', 'Below 5 years old'];
 
   @override
   Widget build(BuildContext context) {
     return Consumer<PassengerTypeProvider>(
       builder: (context, value, child) => ChipsChoice.single(
-        value: value.passengerType?.index ?? 3,
+        value: value.passengerType?.index,
         onChanged: (val) => value.setPassengerType(val),
         choiceItems: C2Choice.listFrom(
           source: choices,

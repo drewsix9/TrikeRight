@@ -19,7 +19,8 @@ class MyDragHandle extends StatelessWidget {
           decoration: ShapeDecoration(
             color: const Color(0xFFD8E0E8),
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(2.r)),
+              borderRadius: BorderRadius.circular(2.r),
+            ),
           ),
         ),
       ),

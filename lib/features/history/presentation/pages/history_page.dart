@@ -11,6 +11,7 @@ class HistoryPage extends StatelessWidget {
       backgroundColor: const Color(0xFFF7FAFC),
       // AppBar - Trike Right
       appBar: AppBar(
+        elevation: 0,
         automaticallyImplyLeading: false,
         centerTitle: true,
         title: Text(

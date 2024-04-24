@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
+import 'package:trikeright/features/trikeright_map/presentation/custom_route/hero_dialog_route.dart';
+import 'package:trikeright/features/trikeright_map/presentation/widgets/my_alert_from_hero.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_drag_handle.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_single_choice_chips.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_text_field_to_search.dart';
@@ -10,20 +14,26 @@ class MySlidingUpPanel extends StatelessWidget {
   final ScrollController controller;
   final PanelController panelController;
 
-  final TextEditingController sourceController = TextEditingController();
-  final TextEditingController destinationController = TextEditingController();
+  const MySlidingUpPanel({
+    super.key,
+    required this.controller,
+    required this.panelController,
+  });
 
-  void togglePanel() {
+  void _togglePanel() {
     panelController.isPanelOpen
         ? panelController.close()
         : panelController.open();
   }
 
-  MySlidingUpPanel({
-    super.key,
-    required this.controller,
-    required this.panelController,
-  });
+  void _onTapTextField(BuildContext context, TextEditingController controller) {
+    Navigator.of(context).pushNamed(
+      '/search_page',
+      arguments: controller,
+    );
+    Provider.of<TextEditingControllerProvider>(context, listen: false)
+        .updateControllers();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,20 +42,30 @@ class MySlidingUpPanel extends StatelessWidget {
       children: [
         // Drag handle
         GestureDetector(
-          onTap: togglePanel,
+          onTap: _togglePanel,
           child: const MyDragHandle(),
         ),
         SizedBox(height: 12.h),
         MyTextFieldToSearch(
+          controller: Provider.of<TextEditingControllerProvider>(context)
+              .sourceController,
           hintText: 'From where?',
-          controller: sourceController,
-          onTap: () => onTapTextField(context, sourceController),
+          onTap: () => _onTapTextField(
+            context,
+            Provider.of<TextEditingControllerProvider>(context, listen: false)
+                .sourceController,
+          ),
         ),
         SizedBox(height: 24.h),
         MyTextFieldToSearch(
+          controller: Provider.of<TextEditingControllerProvider>(context)
+              .destinationController,
           hintText: 'To where?',
-          controller: destinationController,
-          onTap: () => onTapTextField(context, destinationController),
+          onTap: () => _onTapTextField(
+            context,
+            Provider.of<TextEditingControllerProvider>(context, listen: false)
+                .destinationController,
+          ),
         ),
         SizedBox(height: 12.h),
         SizedBox(
@@ -73,17 +93,40 @@ class MySlidingUpPanel extends StatelessWidget {
         ),
         MyElevatedButton(
           label: 'Calculate Fare',
-          onPressed: () {},
-        )
-      ],
-    );
-  }
+          onPressed: () {
+            // TODO: Check if source and destination are not empty
 
-  void onTapTextField(
-      BuildContext context, TextEditingController textEditingController) {
-    Navigator.of(context).pushNamed(
-      '/search_page',
-      arguments: textEditingController,
+            var sourceController = Provider.of<TextEditingControllerProvider>(
+                    context,
+                    listen: false)
+                .sourceController;
+            var destinationController =
+                Provider.of<TextEditingControllerProvider>(context,
+                        listen: false)
+                    .destinationController;
+
+            if (sourceController.text.isNotEmpty &&
+                destinationController.text.isNotEmpty) {
+              Navigator.of(context).push(
+                HeroDialogRoute(
+                  builder: (context) {
+                    return const MyAlertFromHero();
+                  },
+                ),
+              );
+            } else {
+              const snackBar = SnackBar(
+                content: Text(
+                  'Please fill in the source and destination fields.',
+                ),
+              );
+              Future.delayed(Duration.zero, () {
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              });
+            }
+          },
+        ),
+      ],
     );
   }
 }

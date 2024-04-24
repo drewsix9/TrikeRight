@@ -9,6 +9,9 @@
 .history
 .svn/
 migrate_working_dir/
+.cc
+.cmake
+build
 
 # IntelliJ related
 *.iml
