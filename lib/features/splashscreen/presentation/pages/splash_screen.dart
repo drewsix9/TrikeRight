@@ -28,8 +28,8 @@ class _SplashScreenState extends State<SplashScreen>
     Future.delayed(const Duration(seconds: 3), () {
       // Check if the user is a first time user
       SharedPreferences.getInstance().then((prefs) {
-        if (prefs.getBool('isFirstTime') == null) {
-          prefs.setBool('isFirstTime', true);
+        if (prefs.getBool('isFirstTime') == null ||
+            prefs.getBool('isFirstTime') == true) {
           Navigator.of(context).pushReplacementNamed('/user_setup');
         } else {
           Navigator.of(context).pushReplacementNamed('/persistent_nav_bar');
