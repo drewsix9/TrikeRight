@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:trikeright/features/search/data/autocomplete_api_model.dart';
 import 'package:trikeright/features/trikeright_map/data/feature_provider.dart';
-import 'package:trikeright/features/trikeright_map/data/openrouteservice_api.dart';
+import 'package:trikeright/features/trikeright_map/data/services/openrouteservice_api.dart';
 import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
 
 class SearchPage extends StatefulWidget {

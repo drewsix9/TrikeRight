@@ -95,13 +95,35 @@ class MySlidingUpPanel extends StatelessWidget {
           label: 'Calculate Fare',
           onPressed: () {
             // TODO: Check if source and destination are not empty
-            Navigator.of(context).push(
-              HeroDialogRoute(
-                builder: (context) {
-                  return const MyAlertFromHero();
-                },
-              ),
-            );
+
+            var sourceController = Provider.of<TextEditingControllerProvider>(
+                    context,
+                    listen: false)
+                .sourceController;
+            var destinationController =
+                Provider.of<TextEditingControllerProvider>(context,
+                        listen: false)
+                    .destinationController;
+
+            if (sourceController.text.isNotEmpty &&
+                destinationController.text.isNotEmpty) {
+              Navigator.of(context).push(
+                HeroDialogRoute(
+                  builder: (context) {
+                    return const MyAlertFromHero();
+                  },
+                ),
+              );
+            } else {
+              const snackBar = SnackBar(
+                content: Text(
+                  'Please fill in the source and destination fields.',
+                ),
+              );
+              Future.delayed(Duration.zero, () {
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              });
+            }
           },
         ),
       ],

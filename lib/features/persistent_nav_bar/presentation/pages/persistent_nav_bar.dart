@@ -40,7 +40,7 @@ class _PersistentNavBarState extends State<PersistentNavBar> {
           ),
         ),
       ],
-      navBarHeight: 75.h,
+      navBarHeight: 70.h,
       navBarBuilder: (navBarConfig) => Style2BottomNavBar(
         navBarConfig: navBarConfig,
         navBarDecoration: NavBarDecoration(
