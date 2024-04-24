@@ -6,10 +6,26 @@ import 'package:provider/provider.dart';
 import 'package:trikeright/features/trikeright_map/data/feature_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/routeresponse_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/services/openrouteservice_api.dart';
-import 'package:trikeright/features/trikeright_map/presentation/widgets/my_build_map.dart';
 
-class OpenStreetMapApi {
-  static processFeatureCoordinates(
+class OpenStreetMapApi extends ChangeNotifier {
+  List<latlng.LatLng> _points = [];
+  List<Marker> _markers = [];
+
+  List<latlng.LatLng> get points => _points;
+  List<Marker> get markers => _markers;
+
+  set points(List<latlng.LatLng> value) {
+    _points = value;
+    notifyListeners();
+  }
+
+  set markers(List<Marker> value) {
+    _markers.clear();
+    _markers = value;
+    notifyListeners();
+  }
+
+  void processFeatureCoordinates(
     BuildContext context,
   ) {
     debugPrint('Called processFeatureCoordinates');
@@ -25,7 +41,7 @@ class OpenStreetMapApi {
     }
   }
 
-  static void getCoordinates(
+  void getCoordinates(
     BuildContext context,
     String startPoint,
     String endPoint,
@@ -60,13 +76,11 @@ class OpenStreetMapApi {
     });
   }
 
-  static void updateMarkers(BuildContext context) {
+  void updateMarkers(BuildContext context) {
     var featureProvider = Provider.of<FeatureProvider>(context, listen: false);
     var sourceFeature = featureProvider.sourceFeature;
     var destinationFeature = featureProvider.destinationFeature;
-// setStete(() {
-    markers.clear();
-    markers.add(
+    markers = [
       Marker(
         point: latlng.LatLng(
           sourceFeature.geometry!.coordinates![1],
@@ -78,8 +92,6 @@ class OpenStreetMapApi {
           size: 30,
         ),
       ),
-    );
-    markers.add(
       Marker(
         point: latlng.LatLng(
           destinationFeature.geometry!.coordinates![1],
@@ -90,8 +102,7 @@ class OpenStreetMapApi {
           color: Colors.blueAccent,
           size: 30,
         ),
-      ),
-    );
-// setStete(() {
+      )
+    ];
   }
 }

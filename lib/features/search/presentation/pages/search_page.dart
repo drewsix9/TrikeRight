@@ -44,9 +44,7 @@ class _SearchPageState extends State<SearchPage> {
             var autoCompleteResponseApiModel =
                 autoCompleteResponseApiModelFromJson(response.body);
             debugPrint(
-              autoCompleteResponseApiModelToJson(
-                autoCompleteResponseApiModel,
-              ),
+              autoCompleteResponseApiModel.toString(),
             );
             suggestionsReponse = autoCompleteResponseApiModel.features!;
           }

@@ -15,6 +15,12 @@ class AutoCompleteResponseApiModel {
     this.bbox,
   });
 
+  @override
+  String toString() {
+    var encoder = const JsonEncoder.withIndent("     ");
+    return encoder.convert(toJson());
+  }
+
   AutoCompleteResponseApiModel copyWith({
     List<ACFeature>? features,
     List<double>? bbox,
@@ -29,7 +35,8 @@ class AutoCompleteResponseApiModel {
         features: json["features"] == null
             ? []
             : List<ACFeature>.from(
-                json["features"]!.map((x) => ACFeature.fromJson(x)),),
+                json["features"]!.map((x) => ACFeature.fromJson(x)),
+              ),
         bbox: json["bbox"] == null
             ? []
             : List<double>.from(json["bbox"]!.map((x) => x?.toDouble())),

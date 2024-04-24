@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:latlong2/latlong.dart' as latlng;
+import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:trikeright/features/trikeright_map/data/services/openstreetmap_api.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_build_map.dart';
@@ -92,24 +91,13 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
     return FloatingActionButton(
       backgroundColor: const Color(0xFFF7FAFC),
       onPressed: () {
-        OpenStreetMapApi.processFeatureCoordinates(context);
+        Provider.of<OpenStreetMapApi>(context, listen: false)
+            .processFeatureCoordinates(context);
       },
       child: const Icon(
         Icons.directions,
         color: Color(0xFF1C91F2),
       ),
     );
-  }
-
-  updateMarkersCallback(List<Marker> newMarkers) {
-    setState(() {
-      markers = newMarkers;
-    });
-  }
-
-  getCoordinatesCallback(List<latlng.LatLng> newPoints) {
-    setState(() {
-      points = newPoints;
-    });
   }
 }

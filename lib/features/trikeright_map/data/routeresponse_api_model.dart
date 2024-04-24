@@ -15,6 +15,12 @@ class RouteResponseApiModel {
     this.features,
   });
 
+  @override
+  String toString() {
+    var encoder = const JsonEncoder.withIndent("     ");
+    return encoder.convert(toJson());
+  }
+
   RouteResponseApiModel copyWith({
     List<double>? bbox,
     List<Feature>? features,
@@ -42,12 +48,6 @@ class RouteResponseApiModel {
             ? []
             : List<dynamic>.from(features!.map((x) => x.toJson())),
       };
-
-  @override
-  String toString() {
-    var encoder = const JsonEncoder.withIndent("     ");
-    return encoder.convert(toJson());
-  }
 }
 
 class Feature {
