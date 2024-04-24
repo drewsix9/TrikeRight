@@ -49,13 +49,8 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
             // Map and SlidingUpPanel
             Column(
               children: [
-                Expanded(
-                  child: Visibility(
-                    visible: true,
-                    replacement:
-                        const Center(child: CircularProgressIndicator()),
-                    child: buildMap(),
-                  ),
+                const Expanded(
+                  child: MyBuildMap(),
                 ),
                 // Sliding Up Panel
                 SlidingUpPanel(
@@ -91,8 +86,8 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
     return FloatingActionButton(
       backgroundColor: const Color(0xFFF7FAFC),
       onPressed: () {
-        Provider.of<OpenStreetMapApi>(context, listen: false)
-            .processFeatureCoordinates(context);
+        var provider = Provider.of<OpenStreetMapApi>(context, listen: false);
+        provider.processFeatureCoordinates(context);
       },
       child: const Icon(
         Icons.directions,

@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(390, 844),
       builder: (context, child) => MaterialApp(
+        
         routes: AppRouting.routes,
         debugShowCheckedModeBanner: false,
         title: 'TrikeRight',

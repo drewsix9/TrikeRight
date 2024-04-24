@@ -8,11 +8,16 @@ import 'package:trikeright/features/trikeright_map/data/routeresponse_provider.d
 import 'package:trikeright/features/trikeright_map/data/services/openrouteservice_api.dart';
 
 class OpenStreetMapApi extends ChangeNotifier {
+  // TODO: Fix the issue with the map not loading:
+  bool isLoading = false;
   List<latlng.LatLng> _points = [];
   List<Marker> _markers = [];
+  final MapController mapController = MapController();
+  LatLngBounds? _bounds;
 
   List<latlng.LatLng> get points => _points;
   List<Marker> get markers => _markers;
+  LatLngBounds? get bounds => _bounds;
 
   set points(List<latlng.LatLng> value) {
     _points = value;
@@ -25,19 +30,32 @@ class OpenStreetMapApi extends ChangeNotifier {
     notifyListeners();
   }
 
+  set bounds(LatLngBounds? value) {
+    _bounds = value;
+    notifyListeners();
+  }
+
   void processFeatureCoordinates(
     BuildContext context,
   ) {
-    debugPrint('Called processFeatureCoordinates');
+    isLoading = true;
+    notifyListeners();
     var featureProvider = Provider.of<FeatureProvider>(context, listen: false);
     var sourceFeature = featureProvider.sourceFeature;
     var destinationFeature = featureProvider.destinationFeature;
     if (sourceFeature != null && destinationFeature != null) {
-      getCoordinates(
-        context,
-        sourceFeature.geometry!.coordinates!.join(','),
-        destinationFeature.geometry!.coordinates!.join(','),
-      );
+      try {
+        getCoordinates(
+          context,
+          sourceFeature.geometry!.coordinates!.join(','),
+          destinationFeature.geometry!.coordinates!.join(','),
+        );
+      } catch (e) {
+        // Handle errors
+        debugPrint('Error getting coordinates: $e');
+        isLoading = false;
+        notifyListeners();
+      }
     }
   }
 
@@ -50,21 +68,35 @@ class OpenStreetMapApi extends ChangeNotifier {
       context,
       listen: false,
     );
-    var response =
-        await http.get(OpenRouteServiceApi.getRouteUrl(startPoint, endPoint));
-// setStete(() {
-    if (response.statusCode == 200) {
-      routeResponseApiModelProvider.updateRouteResponseApiModel(response.body);
-      debugPrint(
-        routeResponseApiModelProvider.routeResponseApiModel.toString(),
-      );
-      points = routeResponseApiModelProvider
-          .routeResponseApiModel.features![0].geometry!.coordinates!
-          .map((e) => latlng.LatLng(e[1].toDouble(), e[0].toDouble()))
-          .toList();
+    try {
+      var response =
+          await http.get(OpenRouteServiceApi.getRouteUrl(startPoint, endPoint));
+      if (response.statusCode == 200) {
+        routeResponseApiModelProvider
+            .updateRouteResponseApiModel(response.body);
+
+        // Fetch coordinates
+        points = routeResponseApiModelProvider
+            .routeResponseApiModel.features![0].geometry!.coordinates!
+            .map((e) => latlng.LatLng(e[1].toDouble(), e[0].toDouble()))
+            .toList();
+
+        // Fetch bounds
+        bounds = routeResponseApiModelProvider.routeResponseApiModel
+            .toLatLngBounds();
+        updateMarkers(context);
+        updateBounds();
+      } else {
+        throw Exception('Failed to load coordinates: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Handle errors
+      debugPrint('Error getting coordinates: $e');
+      rethrow;
+    } finally {
+      isLoading = false;
+      notifyListeners();
     }
-    updateMarkers(context);
-// setStete(() {
 
     final snackBar = SnackBar(
       content: Text(
@@ -104,5 +136,11 @@ class OpenStreetMapApi extends ChangeNotifier {
         ),
       )
     ];
+  }
+
+  void updateBounds() {
+    mapController.fitCamera(
+      CameraFit.bounds(bounds: bounds!, padding: const EdgeInsets.all(50)),
+    );
   }
 }

@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart' as latlng;
+
 RouteResponseApiModel responseApiModelFromJson(String str) =>
     RouteResponseApiModel.fromJson(json.decode(str));
 
@@ -48,6 +51,11 @@ class RouteResponseApiModel {
             ? []
             : List<dynamic>.from(features!.map((x) => x.toJson())),
       };
+
+  LatLngBounds toLatLngBounds() => LatLngBounds(
+        latlng.LatLng(bbox![1], bbox![0]),
+        latlng.LatLng(bbox![3], bbox![2]),
+      );
 }
 
 class Feature {

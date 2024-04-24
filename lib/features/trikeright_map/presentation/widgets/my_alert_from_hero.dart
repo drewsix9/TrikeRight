@@ -78,15 +78,17 @@ class _MyAlertFromHeroState extends State<MyAlertFromHero> {
                           ),
                         ),
                         SizedBox(width: 18.w),
-                        Text(
-                          calculateFareModel.source,
-                          style: TextStyle(
-                            color: const Color(0xFF0A141F),
-                            fontSize: 14.sp,
-                            fontFamily: 'Plus Jakarta Sans',
-                            fontWeight: FontWeight.w400,
+                        Flexible(
+                          child: Text(
+                            calculateFareModel.source,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: const Color(0xFF0A141F),
+                              fontSize: 14.sp,
+                              fontFamily: 'Plus Jakarta Sans',
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
-                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),
@@ -105,15 +107,17 @@ class _MyAlertFromHeroState extends State<MyAlertFromHero> {
                           ),
                         ),
                         SizedBox(width: 18.w),
-                        Text(
-                          calculateFareModel.destination,
-                          style: TextStyle(
-                            color: const Color(0xFF0A141F),
-                            fontSize: 14.sp,
-                            fontFamily: 'Plus Jakarta Sans',
-                            fontWeight: FontWeight.w400,
+                        Flexible(
+                          child: Text(
+                            calculateFareModel.destination,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: const Color(0xFF0A141F),
+                              fontSize: 14.sp,
+                              fontFamily: 'Plus Jakarta Sans',
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
-                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),
