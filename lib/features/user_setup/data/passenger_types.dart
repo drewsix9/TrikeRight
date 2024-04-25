@@ -4,10 +4,10 @@ part 'passenger_types.g.dart';
 
 @HiveType(typeId: 6)
 enum PassengerType {
-  @HiveField(1)
+  @HiveField(0)
   regular,
-  @HiveField(2)
+  @HiveField(1)
   studentSeniorPWD,
-  @HiveField(3)
+  @HiveField(2)
   belowFiveYearsOld,
 }
