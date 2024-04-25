@@ -7,7 +7,7 @@ class RouteResponseProvider extends ChangeNotifier {
   RouteResponseApiModel get routeResponseApiModel => _routeResponseApiModel;
 
   void updateRouteResponseApiModel(String body) {
-    _routeResponseApiModel = responseApiModelFromJson(body);
+    _routeResponseApiModel = routeResponseApiModelFromJson(body);
     notifyListeners();
   }
 }

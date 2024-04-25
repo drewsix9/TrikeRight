@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:trikeright/features/history/presentation/widget/my_list_view_builder.dart';
 
 class HistoryPage extends StatelessWidget {
   const HistoryPage({super.key});
@@ -27,7 +26,7 @@ class HistoryPage extends StatelessWidget {
         backgroundColor: const Color(0xFFF7FAFC),
       ),
       // Sliding Up Panel
-      body: MyListViewBuilder(),
+      body: MyListViewBuilder().redacted(context: context, redact: true),
       // Bottom Navigation Bar
     );
   }

@@ -7,6 +7,7 @@ import 'package:trikeright/features/trikeright_map/data/routeresponse_provider.d
 import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
 import 'package:trikeright/features/trikeright_map/domain/calculate_fare_model.dart';
 import 'package:trikeright/features/user_setup/data/passenger_type_provider.dart';
+import 'package:trikeright/features/user_setup/data/passenger_types.dart';
 
 class MyAlertFromHero extends StatefulWidget {
   const MyAlertFromHero({super.key});

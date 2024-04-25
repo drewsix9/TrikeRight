@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' as latlng;
 import 'package:provider/provider.dart';
-import 'package:trikeright/features/trikeright_map/data/drag_handle_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/services/openstreetmap_api.dart';
 
 const latlng.LatLng tagbilaranLatLng =

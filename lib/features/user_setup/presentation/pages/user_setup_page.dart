@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trikeright/core/utils/validator.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_single_choice_chips.dart';
 import 'package:trikeright/features/user_setup/data/passenger_type_provider.dart';
+import 'package:trikeright/features/user_setup/data/passenger_types.dart';
 import 'package:trikeright/features/user_setup/presentation/widgets/my_elevated_button.dart';
 import 'package:trikeright/features/user_setup/presentation/widgets/my_labled_textfield.dart';
 import 'package:trikeright/features/user_setup/presentation/widgets/my_text_field.dart';

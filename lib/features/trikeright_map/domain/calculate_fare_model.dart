@@ -1,4 +1,4 @@
-import 'package:trikeright/features/user_setup/data/passenger_type_provider.dart';
+import 'package:trikeright/features/user_setup/data/passenger_types.dart';
 
 class CalculateFareModel {
   final String source;
