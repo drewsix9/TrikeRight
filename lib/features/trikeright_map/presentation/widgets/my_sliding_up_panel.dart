@@ -88,7 +88,7 @@ class MySlidingUpPanel extends StatelessWidget {
           child: const MySingleChoiceChips(),
         ),
         MyElevatedButton(
-          label: 'Calculate Fare',
+          label: 'Estimate Fare',
           onPressed: () {
             // TODO: Check if source and destination are not empty
 

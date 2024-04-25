@@ -84,9 +84,10 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
   FloatingActionButton _fAB() {
     return FloatingActionButton(
       backgroundColor: const Color(0xFFF7FAFC),
-      onPressed: () {
-        var provider = Provider.of<OpenStreetMapApi>(context, listen: false);
-        provider.processFeatureCoordinates(context);
+      onPressed: () async {
+        Provider.of<OpenStreetMapApi>(context, listen: false)
+            .processFeatureCoordinates(context);
+        Provider.of<DragHandleProvider>(context, listen: false).closePanel();
       },
       child: const Icon(
         Icons.directions,
