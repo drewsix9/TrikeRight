@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:trikeright/core/themes/trikeright_theme.dart';
 import 'package:trikeright/features/splashscreen/presentation/pages/splash_screen.dart';
+import 'package:trikeright/features/trikeright_map/data/drag_handle_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/feature_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/routeresponse_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/services/openstreetmap_api.dart';
@@ -22,6 +23,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => FeatureProvider()),
         ChangeNotifierProvider(create: (_) => RouteResponseProvider()),
         ChangeNotifierProvider(create: (_) => OpenStreetMapApi()),
+        ChangeNotifierProvider(create: (_) => DragHandleProvider()),
       ],
       child: const MyApp(),
     ),
@@ -36,7 +38,6 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(390, 844),
       builder: (context, child) => MaterialApp(
-        
         routes: AppRouting.routes,
         debugShowCheckedModeBanner: false,
         title: 'TrikeRight',

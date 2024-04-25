@@ -75,6 +75,9 @@ class OpenStreetMapApi extends ChangeNotifier {
         routeResponseApiModelProvider
             .updateRouteResponseApiModel(response.body);
 
+        debugPrint(
+            routeResponseApiModelProvider.routeResponseApiModel.toString());
+
         // Fetch coordinates
         points = routeResponseApiModelProvider
             .routeResponseApiModel.features![0].geometry!.coordinates!
@@ -120,7 +123,7 @@ class OpenStreetMapApi extends ChangeNotifier {
         ),
         child: const Icon(
           Icons.location_on,
-          color: Colors.blueAccent,
+          color: Colors.redAccent,
           size: 30,
         ),
       ),
@@ -131,7 +134,7 @@ class OpenStreetMapApi extends ChangeNotifier {
         ),
         child: const Icon(
           Icons.location_on,
-          color: Colors.blueAccent,
+          color: Colors.redAccent,
           size: 30,
         ),
       )

@@ -2,7 +2,7 @@ class OpenRouteServiceApi {
   static const String openrouteserviceApiKey =
       '5b3ce3597851110001cf62480cc8ac95b6ed4aa1a36da4adb41196ca';
   static const String routeBaseUrl =
-      'https://api.openrouteservice.org/v2/directions/driving-car';
+      'https://api.openrouteservice.org/v2/directions/cycling-road';
 
   static const String autoCompleteBaseUrl =
       'https://api.openrouteservice.org/geocode/autocomplete';

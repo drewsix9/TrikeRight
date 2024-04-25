@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:trikeright/features/trikeright_map/data/drag_handle_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
 import 'package:trikeright/features/trikeright_map/presentation/custom_route/hero_dialog_route.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_alert_from_hero.dart';
@@ -12,19 +12,11 @@ import 'package:trikeright/features/user_setup/presentation/widgets/my_elevated_
 
 class MySlidingUpPanel extends StatelessWidget {
   final ScrollController controller;
-  final PanelController panelController;
 
   const MySlidingUpPanel({
     super.key,
     required this.controller,
-    required this.panelController,
   });
-
-  void _togglePanel() {
-    panelController.isPanelOpen
-        ? panelController.close()
-        : panelController.open();
-  }
 
   void _onTapTextField(BuildContext context, TextEditingController controller) {
     Navigator.of(context).pushNamed(
@@ -41,9 +33,13 @@ class MySlidingUpPanel extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         // Drag handle
-        GestureDetector(
-          onTap: _togglePanel,
-          child: const MyDragHandle(),
+        Consumer<DragHandleProvider>(
+          builder: (context, value, child) => GestureDetector(
+            onTap: () {
+              value.togglePanel();
+            },
+            child: const MyDragHandle(),
+          ),
         ),
         SizedBox(height: 12.h),
         MyTextFieldToSearch(
