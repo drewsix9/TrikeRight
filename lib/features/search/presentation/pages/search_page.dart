@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+import 'package:trikeright/core/utils/log.dart';
 import 'package:trikeright/features/search/data/autocomplete_api_model.dart';
 import 'package:trikeright/features/trikeright_map/data/feature_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/services/openrouteservice_api.dart';
@@ -43,9 +44,7 @@ class _SearchPageState extends State<SearchPage> {
           if (response.statusCode == 200) {
             var autoCompleteResponseApiModel =
                 autoCompleteResponseApiModelFromJson(response.body);
-            debugPrint(
-              autoCompleteResponseApiModel.toString(),
-            );
+            Log.i(autoCompleteResponseApiModel.toString());
             suggestionsReponse = autoCompleteResponseApiModel.features!;
           }
         });

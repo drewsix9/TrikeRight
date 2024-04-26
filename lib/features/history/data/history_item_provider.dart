@@ -13,6 +13,7 @@ class HistoryListProvider extends ChangeNotifier {
     var box = await Hive.openBox<HistoryItem>(_boxName);
     _historyList = box.values.toList();
     notifyListeners();
+    Log.i('Got history list: $_historyList');
   }
 
   HistoryItem getHistoryItem(int index) {
@@ -30,5 +31,13 @@ class HistoryListProvider extends ChangeNotifier {
     var box = await Hive.openBox<HistoryItem>(_boxName);
     await box.deleteAt(index);
     getHistoryList();
+    Log.i("Deleted history item at index: $index");
+  }
+
+  void deleteHistoryList() async {
+    var box = await Hive.openBox<HistoryItem>(_boxName);
+    await box.clear();
+    getHistoryList();
+    Log.i("Deleted all history items");
   }
 }

@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:trikeright/core/const/fare_luggage_rates.dart';
+import 'package:trikeright/core/utils/log.dart';
+import 'package:trikeright/features/history/data/history_item.dart';
+import 'package:trikeright/features/history/data/history_item_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/routeresponse_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
-import 'package:trikeright/features/trikeright_map/domain/calculate_fare_model.dart';
+import 'package:trikeright/features/trikeright_map/domain/calculate_fare_helper.dart';
 import 'package:trikeright/features/user_setup/data/passenger_type_provider.dart';
-import 'package:trikeright/features/user_setup/data/passenger_types.dart';
 
 class MyAlertFromHero extends StatefulWidget {
   const MyAlertFromHero({super.key});
@@ -20,28 +22,27 @@ class _MyAlertFromHeroState extends State<MyAlertFromHero> {
   List<String> luggageOptions = ['None', '10-25 kgs.', '25-50 kgs'];
   int chosenLuggageIndex = 0;
 
-  CalculateFareModel _createCalculateFareModel() {
+  HistoryItem _createHistoryItem() {
     var routeResponseApiModelProvider =
         Provider.of<RouteResponseProvider>(context);
     var textEditingControllerProvider =
         Provider.of<TextEditingControllerProvider>(context);
     var passengerTypeProvider = Provider.of<PassengerTypeProvider>(context);
-    return CalculateFareModel(
+    return HistoryItem(
       source: textEditingControllerProvider.sourceController.text,
       destination: textEditingControllerProvider.destinationController.text,
-      baseFare: '0',
-      totalDistance: routeResponseApiModelProvider
-          .routeResponseApiModel.features![0].properties!.summary!.distance!,
-      totalDuration: routeResponseApiModelProvider
-          .routeResponseApiModel.features![0].properties!.summary!.duration!,
+      distance: routeResponseApiModelProvider
+          .routeResponseApiModel!.features![0].properties!.summary!.distance!,
+      duration: routeResponseApiModelProvider
+          .routeResponseApiModel!.features![0].properties!.summary!.duration!,
       passengerType: passengerTypeProvider.passengerType!,
+      baseRate: passengerTypeToBaseRate(passengerTypeProvider.passengerType!),
+      luggageCost: luggageRates[chosenLuggageIndex],
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    var calculateFareModel = _createCalculateFareModel();
-
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(32.0),
@@ -50,13 +51,15 @@ class _MyAlertFromHeroState extends State<MyAlertFromHero> {
           // createRectTween: (begin, end) {
           //   return CustomRectTween(begin: begin, end: end);
           // },
-          child: _buildPopUpDialog(calculateFareModel),
+          child: _buildPopUpDialog(),
         ),
       ),
     );
   }
 
-  Material _buildPopUpDialog(CalculateFareModel calculateFareModel) {
+  Material _buildPopUpDialog() {
+    var historyItem = _createHistoryItem();
+    var historyListProvider = Provider.of<HistoryListProvider>(context);
     return Material(
       color: const Color(0xFFF7FAFC),
       elevation: 2,
@@ -113,7 +116,7 @@ class _MyAlertFromHeroState extends State<MyAlertFromHero> {
                         SizedBox(width: 18.w),
                         Flexible(
                           child: Text(
-                            calculateFareModel.source,
+                            historyItem.source,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               color: const Color(0xFF0A141F),
@@ -142,7 +145,7 @@ class _MyAlertFromHeroState extends State<MyAlertFromHero> {
                         SizedBox(width: 18.w),
                         Flexible(
                           child: Text(
-                            calculateFareModel.destination,
+                            historyItem.destination,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               color: const Color(0xFF0A141F),
@@ -170,9 +173,9 @@ class _MyAlertFromHeroState extends State<MyAlertFromHero> {
                         ),
                         SizedBox(width: 18.w),
                         Text(
-                          calculateFareModel.totalDistance > 1000
-                              ? '${(calculateFareModel.totalDistance / 1000).toStringAsFixed(2)} km'
-                              : '${calculateFareModel.totalDistance} m',
+                          historyItem.distance > 1000
+                              ? '${(historyItem.distance / 1000).toStringAsFixed(2)} km'
+                              : '${historyItem.distance} m',
                           style: TextStyle(
                             color: const Color(0xFF0A141F),
                             fontSize: 14.sp,
@@ -197,20 +200,13 @@ class _MyAlertFromHeroState extends State<MyAlertFromHero> {
                           ),
                         ),
                         SizedBox(width: 18.w),
-                        Consumer<PassengerTypeProvider>(
-                          builder: (context, value, child) => Text(
-                            value.passengerType == PassengerType.regular
-                                ? '₱${fareRates['Regular']?.toStringAsFixed(2)}'
-                                : value.passengerType ==
-                                        PassengerType.studentSeniorPWD
-                                    ? '₱${fareRates['StudentSeniorPWD']?.toStringAsFixed(2)}'
-                                    : '₱${fareRates['Below5']?.toStringAsFixed(2)}',
-                            style: TextStyle(
-                              color: const Color(0xFF0A141F),
-                              fontSize: 14.sp,
-                              fontFamily: 'Plus Jakarta Sans',
-                              fontWeight: FontWeight.w400,
-                            ),
+                        Text(
+                          historyItem.baseRate.toStringAsFixed(2),
+                          style: TextStyle(
+                            color: const Color(0xFF0A141F),
+                            fontSize: 14.sp,
+                            fontFamily: 'Plus Jakarta Sans',
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
                         chosenLuggageIndex == 0
@@ -293,6 +289,14 @@ class _MyAlertFromHeroState extends State<MyAlertFromHero> {
                           ),
                         ),
                         onPressed: () {
+                          var newHistoryItem = historyItem.copyWith(
+                            luggageCost: luggageRates[chosenLuggageIndex],
+                            total: calculateTotalFare(historyItem),
+                          );
+                          historyListProvider.addHistoryItem(newHistoryItem);
+                          Log.i(
+                              'New History Item: ${newHistoryItem.toString()}');
+
                           Navigator.of(context).pop();
                         },
                         child: Text(

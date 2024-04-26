@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:trikeright/core/utils/log.dart';
 import 'package:trikeright/core/utils/validator.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_single_choice_chips.dart';
 import 'package:trikeright/features/user_setup/data/passenger_type_provider.dart';
@@ -108,9 +109,8 @@ class _UserSetupPageState extends State<UserSetupPage> {
                               PassengerType.studentSeniorPWD ||
                           value.passengerType ==
                               PassengerType.belowFiveYearsOld)) {
-                    debugPrint(
-                      'Name: ${fullNameController.text} \n Mobile Number: ${mobileNumberController.text}',
-                    );
+                    Log.i(
+                        'Name: ${fullNameController.text} \n Mobile Number: ${mobileNumberController.text}');
                     // Navigator.of(context)
                     //     .pushReplacementNamed('/persistent_nav_bar');
                     SharedPreferences.getInstance().then((prefs) {
@@ -119,9 +119,7 @@ class _UserSetupPageState extends State<UserSetupPage> {
                           .pushReplacementNamed('/persistent_nav_bar');
                     });
                   } else {
-                    debugPrint(
-                      'Please fill all the fields and choose a choice',
-                    );
+                    Log.i('Please fill all the fields and choose a choice');
                   }
                 },
               ),

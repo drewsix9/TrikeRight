@@ -13,11 +13,11 @@ class PassengerTypeAdapter extends TypeAdapter<PassengerType> {
   @override
   PassengerType read(BinaryReader reader) {
     switch (reader.readByte()) {
-      case 1:
+      case 0:
         return PassengerType.regular;
-      case 2:
+      case 1:
         return PassengerType.studentSeniorPWD;
-      case 3:
+      case 2:
         return PassengerType.belowFiveYearsOld;
       default:
         return PassengerType.regular;
@@ -28,13 +28,13 @@ class PassengerTypeAdapter extends TypeAdapter<PassengerType> {
   void write(BinaryWriter writer, PassengerType obj) {
     switch (obj) {
       case PassengerType.regular:
-        writer.writeByte(1);
+        writer.writeByte(0);
         break;
       case PassengerType.studentSeniorPWD:
-        writer.writeByte(2);
+        writer.writeByte(1);
         break;
       case PassengerType.belowFiveYearsOld:
-        writer.writeByte(3);
+        writer.writeByte(2);
         break;
     }
   }

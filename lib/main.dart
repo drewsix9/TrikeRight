@@ -2,24 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:trikeright/core/themes/trikeright_theme.dart';
+import 'package:trikeright/features/history/data/history_item.dart';
+import 'package:trikeright/features/history/data/history_item_provider.dart';
 import 'package:trikeright/features/splashscreen/presentation/pages/splash_screen.dart';
 import 'package:trikeright/features/trikeright_map/data/drag_handle_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/feature_provider.dart';
-import 'package:trikeright/features/trikeright_map/data/routeresponse_api_model.dart';
 import 'package:trikeright/features/trikeright_map/data/routeresponse_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/services/openstreetmap_api.dart';
 import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
 import 'package:trikeright/features/user_setup/data/passenger_type_provider.dart';
+import 'package:trikeright/features/user_setup/data/passenger_types.dart';
 import 'package:trikeright/routing/app_routing.dart';
-import 'package:trikeright/features/history/data/history_list_provider.dart';
 
 void main() async {
-  await Hive.initFlutter();
-  Hive.registerAdapter(RouteResponseApiModelAdapter());
-
   WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter(PassengerTypeAdapter());
+  Hive.registerAdapter(HistoryItemAdapter());
+
   await dotenv.load(fileName: "assets/config/.env");
   runApp(
     MultiProvider(
@@ -35,6 +38,11 @@ void main() async {
       child: const MyApp(),
     ),
   );
+}
+
+Future _initHive() async {
+  var dir = await getApplicationDocumentsDirectory();
+  Hive.init(dir.path);
 }
 
 class MyApp extends StatelessWidget {

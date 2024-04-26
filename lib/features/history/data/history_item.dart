@@ -10,33 +10,54 @@ class HistoryItem {
   @HiveField(1)
   final String source;
   @HiveField(2)
-  final String distance;
+  final double distance;
   @HiveField(3)
-  final double price;
-  @HiveField(4)
   final double duration;
+  @HiveField(4)
+  final PassengerType passengerType;
   @HiveField(5)
-  PassengerType passengerType = PassengerType.regular;
-  @HiveField(6)
   final double baseRate;
-  @HiveField(7, defaultValue: 0.0)
-  double luggageCost = 0.0;
-  @HiveField(8)
+  @HiveField(6, defaultValue: 0.0)
+  late double luggageCost = 0.0;
+  @HiveField(7)
   late double total;
 
   HistoryItem({
     required this.destination,
     required this.source,
     required this.distance,
-    required this.price,
     required this.duration,
     required this.passengerType,
     required this.baseRate,
     required this.luggageCost,
+    this.total = 0.0,
   });
+
+  HistoryItem copyWith({
+    String? destination,
+    String? source,
+    double? distance,
+    double? price,
+    double? duration,
+    PassengerType? passengerType,
+    double? baseRate,
+    double? luggageCost,
+    double? total,
+  }) {
+    return HistoryItem(
+      destination: destination ?? this.destination,
+      source: source ?? this.source,
+      distance: distance ?? this.distance,
+      duration: duration ?? this.duration,
+      passengerType: passengerType ?? this.passengerType,
+      baseRate: baseRate ?? this.baseRate,
+      luggageCost: luggageCost ?? this.luggageCost,
+      total: total ?? this.total,
+    );
+  }
 
   @override
   String toString() {
-    return 'HistoryItem(destination: $destination, source: $source, distance: $distance, price: $price, duration: $duration, passengerType: $passengerType, baseRate: $baseRate, luggageCost: $luggageCost, total: $total)';
+    return 'HistoryItem(destination: $destination, source: $source, distance: $distance, duration: $duration, passengerType: $passengerType, baseRate: $baseRate, luggageCost: $luggageCost, total: $total)';
   }
 }

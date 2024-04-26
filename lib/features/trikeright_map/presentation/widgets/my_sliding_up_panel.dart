@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:trikeright/features/trikeright_map/data/drag_handle_provider.dart';
+import 'package:trikeright/features/trikeright_map/data/routeresponse_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
 import 'package:trikeright/features/trikeright_map/presentation/custom_route/hero_dialog_route.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_alert_from_hero.dart';
@@ -29,6 +30,12 @@ class MySlidingUpPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var textControllerProvider =
+        Provider.of<TextEditingControllerProvider>(context);
+    var textControllerProviderListenFalse =
+        Provider.of<TextEditingControllerProvider>(context, listen: false);
+    var routeResponseProvider =
+        Provider.of<RouteResponseProvider>(context, listen: false);
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -43,25 +50,17 @@ class MySlidingUpPanel extends StatelessWidget {
         ),
         SizedBox(height: 12.h),
         MyTextFieldToSearch(
-          controller: Provider.of<TextEditingControllerProvider>(context)
-              .sourceController,
+          controller: textControllerProvider.sourceController,
           hintText: 'From where?',
           onTap: () => _onTapTextField(
-            context,
-            Provider.of<TextEditingControllerProvider>(context, listen: false)
-                .sourceController,
-          ),
+              context, textControllerProviderListenFalse.sourceController),
         ),
         SizedBox(height: 24.h),
         MyTextFieldToSearch(
-          controller: Provider.of<TextEditingControllerProvider>(context)
-              .destinationController,
+          controller: textControllerProvider.destinationController,
           hintText: 'To where?',
           onTap: () => _onTapTextField(
-            context,
-            Provider.of<TextEditingControllerProvider>(context, listen: false)
-                .destinationController,
-          ),
+              context, textControllerProviderListenFalse.destinationController),
         ),
         SizedBox(height: 12.h),
         SizedBox(
@@ -90,27 +89,12 @@ class MySlidingUpPanel extends StatelessWidget {
         MyElevatedButton(
           label: 'Estimate Fare',
           onPressed: () {
-            // TODO: Check if source and destination are not empty
-
-            var sourceController = Provider.of<TextEditingControllerProvider>(
-                    context,
-                    listen: false)
-                .sourceController;
+            var sourceController =
+                textControllerProviderListenFalse.sourceController;
             var destinationController =
-                Provider.of<TextEditingControllerProvider>(context,
-                        listen: false)
-                    .destinationController;
-
-            if (sourceController.text.isNotEmpty &&
-                destinationController.text.isNotEmpty) {
-              Navigator.of(context).push(
-                HeroDialogRoute(
-                  builder: (context) {
-                    return const MyAlertFromHero();
-                  },
-                ),
-              );
-            } else {
+                textControllerProviderListenFalse.destinationController;
+            if (sourceController.text.isEmpty &&
+                destinationController.text.isEmpty) {
               const snackBar = SnackBar(
                 content: Text(
                   'Please fill in the source and destination fields.',
@@ -119,6 +103,23 @@ class MySlidingUpPanel extends StatelessWidget {
               Future.delayed(Duration.zero, () {
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               });
+            } else if (routeResponseProvider.isInitialized == false) {
+              const snackBar = SnackBar(
+                content: Text(
+                  'Please press the route button.',
+                ),
+              );
+              Future.delayed(Duration.zero, () {
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              });
+            } else {
+              Navigator.of(context).push(
+                HeroDialogRoute(
+                  builder: (context) {
+                    return const MyAlertFromHero();
+                  },
+                ),
+              );
             }
           },
         ),

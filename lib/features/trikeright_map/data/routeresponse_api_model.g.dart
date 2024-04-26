@@ -93,7 +93,7 @@ class GeometryAdapter extends TypeAdapter<Geometry> {
     return Geometry(
       coordinates: (fields[0] as List?)
           ?.map((dynamic e) => (e as List).cast<double>())
-          ?.toList(),
+          .toList(),
     );
   }
 
