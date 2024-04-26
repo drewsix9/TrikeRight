@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trikeright/core/themes/trikeright_theme.dart';
 import 'package:trikeright/features/history/data/history_item.dart';
 import 'package:trikeright/features/history/data/history_item_provider.dart';
@@ -40,9 +41,11 @@ void main() async {
   );
 }
 
-Future _initHive() async {
+Future _initApp() async {
   var dir = await getApplicationDocumentsDirectory();
   Hive.init(dir.path);
+  await Future.delayed(const Duration(seconds: 3));
+  return SharedPreferences.getInstance();
 }
 
 class MyApp extends StatelessWidget {
@@ -58,7 +61,27 @@ class MyApp extends StatelessWidget {
         title: 'TrikeRight',
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
-        home: const SplashScreen(),
+        home: FutureBuilder(
+          future: _initApp(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const SplashScreen();
+            } else if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.data.getBool('isFirstTime') == null ||
+                  snapshot.data.getBool('isFirstTime') == true) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  Navigator.of(context).pushReplacementNamed('/user_setup');
+                });
+              } else {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  Navigator.of(context)
+                      .pushReplacementNamed('/persistent_nav_bar');
+                });
+              }
+            }
+            return Container(); // return an empty container if none of the conditions are met
+          },
+        ),
       ),
     );
   }
