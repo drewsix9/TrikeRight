@@ -13,6 +13,7 @@ import 'package:trikeright/features/trikeright_map/data/services/openstreetmap_a
 import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
 import 'package:trikeright/features/user_setup/data/passenger_type_provider.dart';
 import 'package:trikeright/routing/app_routing.dart';
+import 'package:trikeright/features/history/data/history_list_provider.dart';
 
 void main() async {
   await Hive.initFlutter();
@@ -29,6 +30,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => RouteResponseProvider()),
         ChangeNotifierProvider(create: (_) => OpenStreetMapApi()),
         ChangeNotifierProvider(create: (_) => DragHandleProvider()),
+        ChangeNotifierProvider(create: (_) => HistoryListProvider()),
       ],
       child: const MyApp(),
     ),

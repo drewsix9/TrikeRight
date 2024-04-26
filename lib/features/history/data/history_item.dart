@@ -34,4 +34,9 @@ class HistoryItem {
     required this.baseRate,
     required this.luggageCost,
   });
+
+  @override
+  String toString() {
+    return 'HistoryItem(destination: $destination, source: $source, distance: $distance, price: $price, duration: $duration, passengerType: $passengerType, baseRate: $baseRate, luggageCost: $luggageCost, total: $total)';
+  }
 }
