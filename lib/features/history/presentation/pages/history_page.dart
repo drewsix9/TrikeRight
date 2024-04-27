@@ -52,39 +52,36 @@ class _HistoryPageState extends State<HistoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Provider<HistoryListProvider>(
-      create: (_) => HistoryListProvider(),
-      child: Scaffold(
+    return Scaffold(
+      backgroundColor: const Color(0xFFF7FAFC),
+      // AppBar - Trike Right
+      appBar: AppBar(
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        centerTitle: true,
         backgroundColor: const Color(0xFFF7FAFC),
-        // AppBar - Trike Right
-        appBar: AppBar(
-          elevation: 0,
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          backgroundColor: const Color(0xFFF7FAFC),
-          title: Text(
-            'History',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: const Color(0xFF0F1416),
-              fontSize: 18.sp,
-              fontFamily: 'Plus Jakarta Sans',
-              fontWeight: FontWeight.w700,
-            ),
+        title: Text(
+          'History',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: const Color(0xFF0F1416),
+            fontSize: 18.sp,
+            fontFamily: 'Plus Jakarta Sans',
+            fontWeight: FontWeight.w700,
           ),
-          actions: [
-            IconButton(
-              onPressed: () {
-                showDeleteDialog();
-              },
-              icon: const Icon(Icons.clear),
-            ),
-          ],
         ),
-        // Sliding Up Panel
-        body: const MyListViewBuilder(),
-        // Bottom Navigation Bar
+        actions: [
+          IconButton(
+            onPressed: () {
+              showDeleteDialog();
+            },
+            icon: const Icon(Icons.clear),
+          ),
+        ],
       ),
+      // Sliding Up Panel
+      body: const MyListViewBuilder(),
+      // Bottom Navigation Bar
     );
   }
 }

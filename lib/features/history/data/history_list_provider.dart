@@ -16,7 +16,7 @@ class HistoryListProvider extends ChangeNotifier {
   Future<void> getHistoryList() async {
     _historyList = refBox.values.toList();
     notifyListeners();
-    Log.i('Got history list: $_historyList');
+    Log.i('Got history list:\n$_historyList');
   }
 
   HistoryItem getHistoryItem(int index) {
@@ -26,7 +26,7 @@ class HistoryListProvider extends ChangeNotifier {
   Future<void> addHistoryItem(HistoryItem historyItem) async {
     await refBox.add(historyItem);
     await getHistoryList();
-    Log.i("Added history item: $historyItem");
+    Log.i("Added history item:\n$historyItem");
   }
 
   Future<void> deleteHistoryItem(int index) async {
