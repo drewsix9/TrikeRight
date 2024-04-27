@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:trikeright/features/trikeright_map/data/drag_handle_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/services/openstreetmap_api.dart';
+import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_build_map.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_sliding_up_panel.dart';
 
@@ -75,6 +76,11 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
               right: 16.w,
               child: _fAB(),
             ),
+            Positioned(
+              top: 200.h,
+              right: 16.w,
+              child: _fAB2(),
+            ),
           ],
         ),
       ),
@@ -87,6 +93,26 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
       onPressed: () async {
         Provider.of<OpenStreetMapApi>(context, listen: false)
             .processFeatureCoordinates(context);
+        Provider.of<DragHandleProvider>(context, listen: false).closePanel();
+      },
+      child: const Icon(
+        Icons.directions,
+        color: Color(0xFF1C91F2),
+      ),
+    );
+  }
+
+  FloatingActionButton _fAB2() {
+    return FloatingActionButton(
+      backgroundColor: const Color(0xFFF7FAFC),
+      onPressed: () async {
+        var textProvider =
+            Provider.of<TextEditingControllerProvider>(context, listen: false);
+        textProvider.sourceController.text = 'Bohol Wisdom School';
+        textProvider.destinationController.text =
+            'Bohol Island State University';
+        Provider.of<OpenStreetMapApi>(context, listen: false)
+            .testProcessFeatureCoordinatesHardcoded(context);
         Provider.of<DragHandleProvider>(context, listen: false).closePanel();
       },
       child: const Icon(
