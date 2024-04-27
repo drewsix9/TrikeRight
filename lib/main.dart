@@ -20,7 +20,8 @@ import 'package:trikeright/routing/app_routing.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Hive.initFlutter();
+  var dir = await getApplicationDocumentsDirectory();
+  Hive.init(dir.path);
   Hive.registerAdapter(PassengerTypeAdapter());
   Hive.registerAdapter(HistoryItemAdapter());
 
@@ -42,8 +43,6 @@ void main() async {
 }
 
 Future _initApp() async {
-  var dir = await getApplicationDocumentsDirectory();
-  Hive.init(dir.path);
   await Future.delayed(const Duration(seconds: 3));
   return SharedPreferences.getInstance();
 }

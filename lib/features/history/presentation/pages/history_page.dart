@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-import 'package:trikeright/features/history/data/history_item_provider.dart';
 import 'package:trikeright/features/history/presentation/widget/my_list_view_builder.dart';
 
 class HistoryPage extends StatefulWidget {
@@ -14,10 +12,6 @@ class HistoryPage extends StatefulWidget {
 class _HistoryPageState extends State<HistoryPage> {
   @override
   Widget build(BuildContext context) {
-    var historyListProvider =
-        Provider.of<HistoryListProvider>(context, listen: false);
-    historyListProvider.getHistoryList();
-
     Future<void> showDeleteDialog() async {
       return showDialog(
         context: context,

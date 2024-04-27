@@ -9,7 +9,7 @@ class HistoryListProvider extends ChangeNotifier {
   List<HistoryItem> get historyList => _historyList;
   HistoryItem? _activeHistoryItem;
 
-  void getHistoryList() async {
+  Future<void> getHistoryList() async {
     var box = await Hive.openBox<HistoryItem>(_boxName);
     _historyList = box.values.toList();
     notifyListeners();
@@ -20,21 +20,21 @@ class HistoryListProvider extends ChangeNotifier {
     return _historyList[index];
   }
 
-  void addHistoryItem(HistoryItem historyItem) async {
+  Future<void> addHistoryItem(HistoryItem historyItem) async {
     var box = await Hive.openBox<HistoryItem>(_boxName);
     await box.add(historyItem);
     getHistoryList();
     Log.i("Added history item: $historyItem");
   }
 
-  void deleteHistoryItem(int index) async {
+  Future<void> deleteHistoryItem(int index) async {
     var box = await Hive.openBox<HistoryItem>(_boxName);
     await box.deleteAt(index);
     getHistoryList();
     Log.i("Deleted history item at index: $index");
   }
 
-  void deleteHistoryList() async {
+  Future<void> deleteHistoryList() async {
     var box = await Hive.openBox<HistoryItem>(_boxName);
     await box.clear();
     getHistoryList();
