@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:trikeright/core/utils/log.dart';
 
 class NetworkUtility {
   static Future<String?> fetchUrl(Uri uri,
@@ -10,7 +10,7 @@ class NetworkUtility {
         return response.body;
       }
     } catch (e) {
-      debugPrint(e.toString());
+      Log.e(e.toString());
     }
     return null;
   }

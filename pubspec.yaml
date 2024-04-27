@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  redacted: ^1.0.11
   chips_choice: ^3.0.1
   cupertino_icons: ^1.0.6
   flutter_dotenv: ^5.1.0
@@ -42,11 +43,18 @@ dependencies:
   provider: ^6.1.2
   shared_preferences: ^2.2.2
   sliding_up_panel: ^2.0.0+1
+  fluttertoast: ^8.2.5
+  path_provider: ^2.1.3
+  hive: ^2.2.3
+  logger: ^2.2.0
+  hive_flutter:
 
 dev_dependencies:
   flutter_lints: ^3.0.0
   flutter_test:
     sdk: flutter
+  hive_generator:
+  build_runner:
 
 flutter_icons:
   android: true

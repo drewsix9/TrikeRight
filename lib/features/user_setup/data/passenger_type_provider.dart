@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-enum PassengerType {
-  regular,
-  studentSeniorPWD,
-  belowFiveYearsOld,
-}
+import 'package:trikeright/features/user_setup/data/passenger_types.dart';
 
 class PassengerTypeProvider extends ChangeNotifier {
   PassengerType? passengerType;

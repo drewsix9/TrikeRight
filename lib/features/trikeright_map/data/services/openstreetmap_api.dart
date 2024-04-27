@@ -3,6 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart' as latlng;
 import 'package:provider/provider.dart';
+import 'package:trikeright/core/utils/log.dart';
 import 'package:trikeright/features/trikeright_map/data/feature_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/routeresponse_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/services/openrouteservice_api.dart';
@@ -35,9 +36,9 @@ class OpenStreetMapApi extends ChangeNotifier {
     notifyListeners();
   }
 
-  void processFeatureCoordinates(
+  Future<void> processFeatureCoordinates(
     BuildContext context,
-  ) {
+  ) async {
     isLoading = true;
     notifyListeners();
     var featureProvider = Provider.of<FeatureProvider>(context, listen: false);
@@ -52,7 +53,7 @@ class OpenStreetMapApi extends ChangeNotifier {
         );
       } catch (e) {
         // Handle errors
-        debugPrint('Error getting coordinates: $e');
+        Log.e('Error getting coordinates: $e');
         isLoading = false;
         notifyListeners();
       }
@@ -75,14 +76,16 @@ class OpenStreetMapApi extends ChangeNotifier {
         routeResponseApiModelProvider
             .updateRouteResponseApiModel(response.body);
 
+        Log.i(routeResponseApiModelProvider.routeResponseApiModel.toString());
+
         // Fetch coordinates
         points = routeResponseApiModelProvider
-            .routeResponseApiModel.features![0].geometry!.coordinates!
+            .routeResponseApiModel!.features![0].geometry!.coordinates!
             .map((e) => latlng.LatLng(e[1].toDouble(), e[0].toDouble()))
             .toList();
 
         // Fetch bounds
-        bounds = routeResponseApiModelProvider.routeResponseApiModel
+        bounds = routeResponseApiModelProvider.routeResponseApiModel!
             .toLatLngBounds();
         updateMarkers(context);
         updateBounds();
@@ -91,7 +94,7 @@ class OpenStreetMapApi extends ChangeNotifier {
       }
     } catch (e) {
       // Handle errors
-      debugPrint('Error getting coordinates: $e');
+      Log.e('Error getting coordinates: $e');
       rethrow;
     } finally {
       isLoading = false;
@@ -100,7 +103,7 @@ class OpenStreetMapApi extends ChangeNotifier {
 
     final snackBar = SnackBar(
       content: Text(
-        'Distance: ${routeResponseApiModelProvider.routeResponseApiModel.features![0].properties!.summary!.distance.toString()}',
+        'Distance: ${routeResponseApiModelProvider.routeResponseApiModel!.features![0].properties!.summary!.distance.toString()}',
       ),
     );
     Future.delayed(Duration.zero, () {
@@ -120,7 +123,7 @@ class OpenStreetMapApi extends ChangeNotifier {
         ),
         child: const Icon(
           Icons.location_on,
-          color: Colors.blueAccent,
+          color: Colors.redAccent,
           size: 30,
         ),
       ),
@@ -131,7 +134,7 @@ class OpenStreetMapApi extends ChangeNotifier {
         ),
         child: const Icon(
           Icons.location_on,
-          color: Colors.blueAccent,
+          color: Colors.redAccent,
           size: 30,
         ),
       )
