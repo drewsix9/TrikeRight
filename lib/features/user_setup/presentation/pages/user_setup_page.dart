@@ -48,7 +48,7 @@ class _UserSetupPageState extends State<UserSetupPage> {
                   bottom: 16.h,
                   child: Text(
                     'Let\'s get started with\nyour account',
-                    style: AppTextTheme.titleLarge,
+                    style: AppTextLightTheme.titleLarge,
                     maxLines: 2,
                   ),
                 ),

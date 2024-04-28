@@ -26,17 +26,17 @@ class _MyListViewBuilderState extends State<MyListViewBuilder> {
                     title: Text(
                       '${value.historyList[index].source} to ${value.historyList[index].destination}',
                       overflow: TextOverflow.ellipsis,
-                      style: AppTextTheme.listViewBuilderTitle,
+                      style: AppTextLightTheme.listViewBuilderTitle,
                     ),
                     subtitle: Text(
                       value.historyList[index].distance > 1000
                           ? '${(value.historyList[index].distance / 1000).toStringAsFixed(2)} km'
                           : '${value.historyList[index].distance} m',
-                      style: AppTextTheme.listViewBuilderSubtitle,
+                      style: AppTextLightTheme.listViewBuilderSubtitle,
                     ),
                     trailing: Text(
                       '₱  ${value.historyList[index].total}',
-                      style: AppTextTheme.listViewBuilderTrailing,
+                      style: AppTextLightTheme.listViewBuilderTrailing,
                     ),
                   );
                 },

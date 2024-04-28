@@ -19,7 +19,7 @@ class MyLabelTextField extends StatelessWidget {
         height: 24.h,
         child: Text(
           label,
-          style: AppTextTheme.labelTextField,
+          style: AppTextLightTheme.labelTextField,
         ),
       ),
     );

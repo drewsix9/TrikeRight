@@ -81,7 +81,7 @@ class _SearchPageState extends State<SearchPage> {
                           },
                         ),
                   hintText: 'Search for a place',
-                  hintStyle: AppTextTheme
+                  hintStyle: AppTextLightTheme
                       .searchBarTextFieldAndTextFieldToSearchAndTextFieldHintText,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),

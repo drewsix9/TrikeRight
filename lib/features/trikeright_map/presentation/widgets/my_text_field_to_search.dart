@@ -25,10 +25,11 @@ class MyTextFieldToSearch extends StatelessWidget {
         onTap: onTap,
         keyboardType: keyboardType,
         controller: controller,
-        style: AppTextTheme.searchBarTextFieldAndTextFieldToSearchAndTextField,
+        style: AppTextLightTheme
+            .searchBarTextFieldAndTextFieldToSearchAndTextField,
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: AppTextTheme
+          hintStyle: AppTextLightTheme
               .searchBarTextFieldAndTextFieldToSearchAndTextFieldHintText,
           filled: true,
           fillColor: const Color(0xFFE8EDF4),

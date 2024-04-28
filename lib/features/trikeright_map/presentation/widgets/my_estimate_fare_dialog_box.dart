@@ -82,7 +82,7 @@ class _EstimateFareDialogBoxState extends State<EstimateFareDialogBox> {
                         Text(
                           'Summary',
                           textAlign: TextAlign.center,
-                          style: AppTextTheme
+                          style: AppTextLightTheme
                               .estimateFareDialogBoxSummaryLuggageAndCargoWeight,
                         ),
                         IconButton(
@@ -104,7 +104,7 @@ class _EstimateFareDialogBoxState extends State<EstimateFareDialogBox> {
                       children: [
                         Text(
                           'Source:',
-                          style: AppTextTheme
+                          style: AppTextLightTheme
                               .estimateFareDialogBoxSourceDestinationDistanceBaseRate,
                         ),
                         SizedBox(width: 18.w),
@@ -112,7 +112,7 @@ class _EstimateFareDialogBoxState extends State<EstimateFareDialogBox> {
                           child: Text(
                             historyItem.source,
                             overflow: TextOverflow.ellipsis,
-                            style: AppTextTheme
+                            style: AppTextLightTheme
                                 .estimateFareDialogBoxSourceDestinationDistanceBaseRateBlack,
                           ),
                         ),
@@ -125,7 +125,7 @@ class _EstimateFareDialogBoxState extends State<EstimateFareDialogBox> {
                       children: [
                         Text(
                           'Destination:',
-                          style: AppTextTheme
+                          style: AppTextLightTheme
                               .estimateFareDialogBoxSourceDestinationDistanceBaseRate,
                         ),
                         SizedBox(width: 18.w),
@@ -133,7 +133,7 @@ class _EstimateFareDialogBoxState extends State<EstimateFareDialogBox> {
                           child: Text(
                             historyItem.destination,
                             overflow: TextOverflow.ellipsis,
-                            style: AppTextTheme
+                            style: AppTextLightTheme
                                 .estimateFareDialogBoxSourceDestinationDistanceBaseRateBlack,
                           ),
                         ),
@@ -146,7 +146,7 @@ class _EstimateFareDialogBoxState extends State<EstimateFareDialogBox> {
                       children: [
                         Text(
                           'Distance:',
-                          style: AppTextTheme
+                          style: AppTextLightTheme
                               .estimateFareDialogBoxSourceDestinationDistanceBaseRate,
                         ),
                         SizedBox(width: 18.w),
@@ -154,7 +154,7 @@ class _EstimateFareDialogBoxState extends State<EstimateFareDialogBox> {
                           historyItem.distance > 1000
                               ? '${(historyItem.distance / 1000).toStringAsFixed(2)} km'
                               : '${historyItem.distance} m',
-                          style: AppTextTheme
+                          style: AppTextLightTheme
                               .estimateFareDialogBoxSourceDestinationDistanceBaseRateBlack,
                         ),
                       ],
@@ -166,13 +166,13 @@ class _EstimateFareDialogBoxState extends State<EstimateFareDialogBox> {
                       children: [
                         Text(
                           'Base Rate:',
-                          style: AppTextTheme
+                          style: AppTextLightTheme
                               .estimateFareDialogBoxSourceDestinationDistanceBaseRate,
                         ),
                         SizedBox(width: 18.w),
                         Text(
                           historyItem.baseRate.toStringAsFixed(2),
-                          style: AppTextTheme
+                          style: AppTextLightTheme
                               .estimateFareDialogBoxSourceDestinationDistanceBaseRateBlack,
                         ),
                         chosenLuggageIndex == 0
@@ -181,7 +181,7 @@ class _EstimateFareDialogBoxState extends State<EstimateFareDialogBox> {
                                 padding: EdgeInsets.only(left: 12.w),
                                 child: Text(
                                   '+ ₱${luggageRates[chosenLuggageIndex].toStringAsFixed(2)}',
-                                  style: AppTextTheme
+                                  style: AppTextLightTheme
                                       .estimateFareDialogBoxSourceDestinationDistanceBaseRateBlack,
                                 ),
                               ),
@@ -196,7 +196,7 @@ class _EstimateFareDialogBoxState extends State<EstimateFareDialogBox> {
                       child: Text(
                         'Luggage and Cargo Weight',
                         textAlign: TextAlign.left,
-                        style: AppTextTheme
+                        style: AppTextLightTheme
                             .estimateFareDialogBoxSummaryLuggageAndCargoWeight,
                       ),
                     ),
@@ -219,8 +219,8 @@ class _EstimateFareDialogBoxState extends State<EstimateFareDialogBox> {
                     choiceStyle: C2ChipStyle.toned(
                       padding: EdgeInsets.only(left: 8.w),
                       height: 22.h,
-                      foregroundStyle:
-                          AppTextTheme.luggageAndCargoWeightSingleChoiceChips,
+                      foregroundStyle: AppTextLightTheme
+                          .luggageAndCargoWeightSingleChoiceChips,
                       borderRadius: BorderRadius.all(
                         Radius.circular(8.r),
                       ),
@@ -248,7 +248,7 @@ class _EstimateFareDialogBoxState extends State<EstimateFareDialogBox> {
                         },
                         child: Text(
                           'Calculate Fare',
-                          style: AppTextTheme.elevatedButtonTextStyle,
+                          style: AppTextLightTheme.elevatedButtonTextStyle,
                         ),
                       ),
                     ),

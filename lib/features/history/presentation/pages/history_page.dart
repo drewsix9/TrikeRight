@@ -61,7 +61,7 @@ class _HistoryPageState extends State<HistoryPage> {
         title: Text(
           'History',
           textAlign: TextAlign.center,
-          style: AppTextTheme.trikeRightAppBarTitle,
+          style: AppTextLightTheme.trikeRightAppBarTitle,
         ),
         actions: [
           IconButton(

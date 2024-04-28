@@ -33,10 +33,11 @@ class MyTextFormField extends StatelessWidget {
         validator: validator,
         keyboardType: keyboardType,
         controller: controller,
-        style: AppTextTheme.searchBarTextFieldAndTextFieldToSearchAndTextField,
+        style: AppTextLightTheme
+            .searchBarTextFieldAndTextFieldToSearchAndTextField,
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: AppTextTheme
+          hintStyle: AppTextLightTheme
               .searchBarTextFieldAndTextFieldToSearchAndTextFieldHintText,
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,

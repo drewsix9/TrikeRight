@@ -62,7 +62,7 @@ class MySlidingUpPanel extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
             child: Text(
               'Passenger type',
-              style: AppTextTheme.slidingUpPanelPassengerType,
+              style: AppTextLightTheme.slidingUpPanelPassengerType,
             ),
           ),
         ),

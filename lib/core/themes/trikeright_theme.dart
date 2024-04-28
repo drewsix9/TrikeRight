@@ -18,11 +18,23 @@ class AppTheme {
     ),
   );
 
-  static ThemeData darkTheme = ThemeData();
+  static ThemeData darkTheme = ThemeData(
+    useMaterial3: true,
+    fontFamily: 'Plus Jakarta Sans',
+    brightness: Brightness.light,
+    scaffoldBackgroundColor: const Color(0xFFF7FAFC),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: Color(0xFFF7FAFC),
+    ),
+    appBarTheme: const AppBarTheme(
+      elevation: 0,
+      backgroundColor: Color(0xFFF7FAFC),
+    ),
+  );
 }
 
-class AppTextTheme {
-  AppTextTheme._();
+class AppTextLightTheme {
+  AppTextLightTheme._();
 
   // lets get started with your account
   static TextStyle titleLarge = TextStyle(

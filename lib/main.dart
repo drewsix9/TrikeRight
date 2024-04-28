@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
         routes: AppRouting.routes,
         debugShowCheckedModeBanner: false,
         title: 'TrikeRight',
-        // themeMode: ThemeMode.system,
+        themeMode: ThemeMode.system,
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
         home: FutureBuilder(

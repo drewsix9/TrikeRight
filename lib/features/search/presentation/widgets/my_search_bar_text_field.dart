@@ -21,7 +21,8 @@ class MySearchBarTextField extends StatelessWidget {
       child: TextField(
         keyboardType: keyboardType,
         controller: controller,
-        style: AppTextTheme.searchBarTextFieldAndTextFieldToSearchAndTextField,
+        style: AppTextLightTheme
+            .searchBarTextFieldAndTextFieldToSearchAndTextField,
         decoration: InputDecoration(
           contentPadding:
               EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.h),
@@ -32,7 +33,7 @@ class MySearchBarTextField extends StatelessWidget {
             color: Color(0xFF5E758C),
           ),
           hintText: hintText,
-          hintStyle: AppTextTheme
+          hintStyle: AppTextLightTheme
               .searchBarTextFieldAndTextFieldToSearchAndTextFieldHintText,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12.r),

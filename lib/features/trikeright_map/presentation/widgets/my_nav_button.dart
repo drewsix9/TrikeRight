@@ -29,7 +29,7 @@ class MyNavButton extends StatelessWidget {
           Text(
             label,
             textAlign: TextAlign.center,
-            style: AppTextTheme.navBarButton,
+            style: AppTextLightTheme.navBarButton,
           ),
         ],
       ),

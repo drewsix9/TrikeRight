@@ -30,7 +30,7 @@ class _MySingleChoiceChipsState extends State<MySingleChoiceChips> {
         choiceStyle: C2ChipStyle.toned(
           height: 45.h,
           margin: EdgeInsets.only(left: 8.w),
-          foregroundStyle: AppTextTheme.singleChoiceChipsTextStyle,
+          foregroundStyle: AppTextLightTheme.singleChoiceChipsTextStyle,
           borderRadius: BorderRadius.all(
             Radius.circular(12.r),
           ),

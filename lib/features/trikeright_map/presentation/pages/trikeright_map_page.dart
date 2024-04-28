@@ -35,7 +35,7 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
           title: Text(
             'TrikeRight',
             textAlign: TextAlign.center,
-            style: AppTextTheme.trikeRightAppBarTitle,
+            style: AppTextLightTheme.trikeRightAppBarTitle,
           ),
         ),
         // Stack containing _fAB and SlidingUpPanel

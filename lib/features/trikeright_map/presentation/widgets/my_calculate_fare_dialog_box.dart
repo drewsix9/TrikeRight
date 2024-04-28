@@ -56,7 +56,7 @@ class _CalculateFareDialogState extends State<CalculateFareDialog> {
                           Text(
                             'Your Fare is:',
                             textAlign: TextAlign.center,
-                            style: AppTextTheme.yourFareIs,
+                            style: AppTextLightTheme.yourFareIs,
                           ),
                           IconButton(
                             padding: EdgeInsets.zero,
@@ -74,7 +74,7 @@ class _CalculateFareDialogState extends State<CalculateFareDialog> {
                     Text(
                       '₱ ${widget.historyItem.total.toStringAsFixed(2)}',
                       textAlign: TextAlign.center,
-                      style: AppTextTheme.totalFare,
+                      style: AppTextLightTheme.totalFare,
                     ),
                   ],
                 )
