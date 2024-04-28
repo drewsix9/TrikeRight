@@ -87,9 +87,7 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
       heroTag: 'fab',
       onPressed: () async {
         // TODO: Add a check if the text fields are empty
-        Provider.of<OpenStreetMapApi>(context, listen: false)
-            .processFeatureCoordinates(context);
-        Provider.of<DragHandleProvider>(context, listen: false).closePanel();
+        _onPressFAB(context);
       },
       child: const Icon(
         Icons.directions,
@@ -116,5 +114,30 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
         color: Color(0xFF1C91F2),
       ),
     );
+  }
+
+  void _onPressFAB(
+    BuildContext context,
+  ) {
+    var sourceController =
+        Provider.of<TextEditingControllerProvider>(context, listen: false)
+            .sourceController;
+    var destinationController =
+        Provider.of<TextEditingControllerProvider>(context, listen: false)
+            .destinationController;
+    if (sourceController.text.isEmpty && destinationController.text.isEmpty) {
+      const snackBar = SnackBar(
+        content: Text(
+          'Please fill in the source and destination fields.',
+        ),
+      );
+      Future.delayed(Duration.zero, () {
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      });
+    } else {
+      Provider.of<OpenStreetMapApi>(context, listen: false)
+          .processFeatureCoordinates(context);
+      Provider.of<DragHandleProvider>(context, listen: false).closePanel();
+    }
   }
 }
