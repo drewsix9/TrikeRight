@@ -67,10 +67,13 @@ class _SearchPageState extends State<SearchPage> {
       setState(() {
         currentposition = position;
         widget.searchTextEditingController.text =
-            "${place.locality}, ${place.postalCode}, ${place.country}";
+            "${place.street}, ${place.thoroughfare}, ${place.locality}";
       });
     } catch (e) {
       Log.e(e);
+    }
+    if (context.mounted) {
+      Navigator.of(context).pop();
     }
     return null;
   }
