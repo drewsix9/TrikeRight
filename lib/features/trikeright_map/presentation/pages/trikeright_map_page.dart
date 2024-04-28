@@ -91,6 +91,7 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
     return FloatingActionButton(
       backgroundColor: const Color(0xFFF7FAFC),
       onPressed: () async {
+        // TODO: Add a check if the text fields are empty
         Provider.of<OpenStreetMapApi>(context, listen: false)
             .processFeatureCoordinates(context);
         Provider.of<DragHandleProvider>(context, listen: false).closePanel();

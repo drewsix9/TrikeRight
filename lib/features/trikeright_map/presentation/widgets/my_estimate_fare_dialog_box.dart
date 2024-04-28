@@ -8,16 +8,18 @@ import 'package:trikeright/features/history/data/history_list_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/routeresponse_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
 import 'package:trikeright/features/trikeright_map/domain/calculate_fare_helper.dart';
+import 'package:trikeright/features/trikeright_map/presentation/custom_route/hero_dialog_route.dart';
+import 'package:trikeright/features/trikeright_map/presentation/widgets/my_calculate_fare_dialog_box.dart';
 import 'package:trikeright/features/user_setup/data/passenger_type_provider.dart';
 
-class MyAlertFromHero extends StatefulWidget {
-  const MyAlertFromHero({super.key});
+class EstimateFareDialogBox extends StatefulWidget {
+  const EstimateFareDialogBox({super.key});
 
   @override
-  State<MyAlertFromHero> createState() => _MyAlertFromHeroState();
+  State<EstimateFareDialogBox> createState() => _EstimateFareDialogBoxState();
 }
 
-class _MyAlertFromHeroState extends State<MyAlertFromHero> {
+class _EstimateFareDialogBoxState extends State<EstimateFareDialogBox> {
   List<String> luggageOptions = ['None', '10-25 kgs.', '25-50 kgs'];
   int chosenLuggageIndex = 0;
 
@@ -44,7 +46,7 @@ class _MyAlertFromHeroState extends State<MyAlertFromHero> {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(32.0),
+        padding: EdgeInsets.fromLTRB(32.0.w, 32.0.h, 32.0.w, 32.0.h),
         child: Hero(
           tag: 'alert-from-hero',
           // createRectTween: (begin, end) {
@@ -61,11 +63,11 @@ class _MyAlertFromHeroState extends State<MyAlertFromHero> {
     var historyListProvider = Provider.of<HistoryListProvider>(context);
     return Material(
       color: const Color(0xFFF7FAFC),
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+      elevation: 0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.r)),
       child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.fromLTRB(16.0.w, 16.0.h, 16.0.w, 16.0.h),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -225,7 +227,7 @@ class _MyAlertFromHeroState extends State<MyAlertFromHero> {
                       ],
                     ),
                   ),
-                  const Divider(thickness: 1),
+                  Divider(thickness: 1.h),
                   SizedBox(
                     width: double.infinity,
                     child: Padding(
@@ -288,12 +290,8 @@ class _MyAlertFromHeroState extends State<MyAlertFromHero> {
                           ),
                         ),
                         onPressed: () {
-                          var newHistoryItem = historyItem.copyWith(
-                            luggageCost: luggageRates[chosenLuggageIndex],
-                            total: calculateTotalFare(historyItem),
-                          );
-                          historyListProvider.addHistoryItem(newHistoryItem);
-                          Navigator.of(context).pop();
+                          _onPressCalculateFare(
+                              historyItem, historyListProvider);
                         },
                         child: Text(
                           'Calculate Fare',
@@ -314,5 +312,40 @@ class _MyAlertFromHeroState extends State<MyAlertFromHero> {
         ),
       ),
     );
+  }
+
+  void _onPressCalculateFare(
+      HistoryItem historyItem, HistoryListProvider historyListProvider) {
+    var newHistoryItem = historyItem.copyWith(
+      luggageCost: luggageRates[chosenLuggageIndex],
+      total: calculateTotalFare(historyItem),
+    );
+    historyListProvider.addHistoryItem(newHistoryItem);
+    GlobalKey<State> loadingKey = GlobalKey<State>();
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Center(
+          key: loadingKey,
+          child: const CircularProgressIndicator(),
+        );
+      },
+    );
+
+    // Simulate loading delay
+    Future.delayed(const Duration(seconds: 1), () {
+      Navigator.of(loadingKey.currentContext!).pop();
+      Navigator.of(context).pushReplacement(
+        HeroDialogRoute(
+          builder: (context) {
+            return CalculateFareDialog(
+              historyItem: newHistoryItem,
+            );
+          },
+        ),
+      );
+    });
   }
 }
