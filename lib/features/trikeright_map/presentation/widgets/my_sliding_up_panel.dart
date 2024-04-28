@@ -83,12 +83,15 @@ class MySlidingUpPanel extends StatelessWidget {
   }
 
   void _onTapTextField(BuildContext context, TextEditingController controller) {
-    Navigator.of(context).pushNamed(
+    Navigator.of(context)
+        .pushNamed(
       '/search_page',
       arguments: controller,
-    );
-    Provider.of<TextEditingControllerProvider>(context, listen: false)
-        .updateControllers();
+    )
+        .then((_) {
+      Provider.of<TextEditingControllerProvider>(context, listen: false)
+          .updateControllers();
+    });
   }
 
   void _onPressEstimateFare(

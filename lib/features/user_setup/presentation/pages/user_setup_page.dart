@@ -112,8 +112,6 @@ class _UserSetupPageState extends State<UserSetupPage> {
                               PassengerType.belowFiveYearsOld)) {
                     Log.i(
                         'Name: ${fullNameController.text} \n Mobile Number: ${mobileNumberController.text}');
-                    // Navigator.of(context)
-                    //     .pushReplacementNamed('/persistent_nav_bar');
                     SharedPreferences.getInstance().then((prefs) {
                       prefs.setBool('isFirstTime', false);
                       Navigator.of(context)

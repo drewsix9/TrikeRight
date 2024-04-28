@@ -40,7 +40,6 @@ class _HistoryPageState extends State<HistoryPage> {
               onPressed: () {
                 Provider.of<HistoryListProvider>(context, listen: false)
                     .deleteHistoryList();
-                setState(() {});
                 Navigator.of(context).pop();
               },
             ),
