@@ -8,7 +8,9 @@ class Validator {
   }
 
   static bool isPhoneNumber(String phoneNumber) {
-    return RegExp(r"^[0-9]{10}").hasMatch(phoneNumber);
+    bool regExp = RegExp(r"^[0-9]{10}").hasMatch(phoneNumber);
+    bool lengthEleven = phoneNumber.length == 11;
+    return regExp && lengthEleven;
   }
 
   static bool isName(String name) {

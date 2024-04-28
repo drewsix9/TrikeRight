@@ -8,6 +8,7 @@ import 'package:trikeright/features/trikeright_map/data/services/openstreetmap_a
 import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_build_map.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_sliding_up_panel.dart';
+import 'package:trikeright/features/user_setup/data/passenger_type_provider.dart';
 
 class TrikeRightMapPage extends StatefulWidget {
   const TrikeRightMapPage({super.key});
@@ -17,6 +18,13 @@ class TrikeRightMapPage extends StatefulWidget {
 }
 
 class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<PassengerTypeProvider>(context, listen: false)
+        .initPassengerTypeSharedPref();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -86,7 +94,6 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
     return FloatingActionButton(
       heroTag: 'fab',
       onPressed: () async {
-        // TODO: Add a check if the text fields are empty
         _onPressFAB(context);
       },
       child: const Icon(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -29,6 +30,13 @@ class _UserSetupPageState extends State<UserSetupPage> {
   final focusTextField = FocusNode();
 
   @override
+  void initState() {
+    super.initState();
+    FlutterNativeSplash.remove();
+    Provider.of<PassengerTypeProvider>(context, listen: false)
+        .initPassengerTypeSharedPref();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +82,6 @@ class _UserSetupPageState extends State<UserSetupPage> {
             MyTextFormField(
               textInputAction: TextInputAction.done,
               autovalidateMode: AutovalidateMode.onUserInteraction,
-              // TODO: Add a validator for mobile number
               validator: (value) => Validator.isPhoneNumber(value!)
                   ? null
                   : 'Please enter a valid mobile number',
