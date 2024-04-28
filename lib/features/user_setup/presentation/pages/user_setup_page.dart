@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:trikeright/core/themes/trikeright_theme.dart';
 import 'package:trikeright/core/utils/log.dart';
 import 'package:trikeright/core/utils/validator.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_single_choice_chips.dart';
@@ -47,14 +48,7 @@ class _UserSetupPageState extends State<UserSetupPage> {
                   bottom: 16.h,
                   child: Text(
                     'Let\'s get started with\nyour account',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 28.sp,
-                      fontFamily: 'Plus Jakarta Sans',
-                      fontWeight: FontWeight.w700,
-                      height: 1.4.h,
-                      letterSpacing: -0.70,
-                    ),
+                    style: AppTextTheme.titleLarge,
                     maxLines: 2,
                   ),
                 ),

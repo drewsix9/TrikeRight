@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:trikeright/core/themes/trikeright_theme.dart';
 
 class MyLabelTextField extends StatelessWidget {
   final String label;
@@ -18,12 +19,7 @@ class MyLabelTextField extends StatelessWidget {
         height: 24.h,
         child: Text(
           label,
-          style: TextStyle(
-            color: const Color(0xFF0C141C),
-            fontSize: 16.sp,
-            fontFamily: 'Plus Jakarta Sans',
-            fontWeight: FontWeight.w500,
-          ),
+          style: AppTextTheme.labelTextField,
         ),
       ),
     );

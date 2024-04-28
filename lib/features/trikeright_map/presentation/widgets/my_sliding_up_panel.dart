@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:trikeright/core/themes/trikeright_theme.dart';
 import 'package:trikeright/features/trikeright_map/data/drag_handle_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/routeresponse_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
@@ -61,14 +62,7 @@ class MySlidingUpPanel extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
             child: Text(
               'Passenger type',
-              style: TextStyle(
-                color: const Color(0xFF0F1416),
-                fontSize: 18.sp,
-                fontFamily: 'Plus Jakarta Sans',
-                fontWeight: FontWeight.w700,
-                height: 0.07,
-                letterSpacing: -0.27,
-              ),
+              style: AppTextTheme.slidingUpPanelPassengerType,
             ),
           ),
         ),

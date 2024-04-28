@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:trikeright/core/themes/trikeright_theme.dart';
 
 class MyNavButton extends StatelessWidget {
   final IconData icon;
@@ -28,13 +29,7 @@ class MyNavButton extends StatelessWidget {
           Text(
             label,
             textAlign: TextAlign.center,
-            style: TextStyle(
-              color: const Color(0xFF5E758C),
-              fontSize: 12.sp,
-              fontFamily: 'Plus Jakarta Sans',
-              fontWeight: FontWeight.w500,
-              letterSpacing: 0.18.w,
-            ),
+            style: AppTextTheme.navBarButton,
           ),
         ],
       ),

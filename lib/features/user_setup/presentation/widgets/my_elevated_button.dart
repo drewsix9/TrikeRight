@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:trikeright/core/themes/trikeright_theme.dart';
 
 class MyElevatedButton extends StatelessWidget {
   final String label;
@@ -29,12 +30,7 @@ class MyElevatedButton extends StatelessWidget {
           onPressed: onPressed,
           child: Text(
             label,
-            style: TextStyle(
-              color: const Color(0xFFF7F9FC),
-              fontSize: 16.sp,
-              fontFamily: 'Plus Jakarta Sans',
-              fontWeight: FontWeight.w700,
-            ),
+            style: AppTextTheme.elevatedButtonTextStyle,
           ),
         ),
       ),

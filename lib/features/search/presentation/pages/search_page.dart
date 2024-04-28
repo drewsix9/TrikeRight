@@ -8,6 +8,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+import 'package:trikeright/core/themes/trikeright_theme.dart';
 import 'package:trikeright/core/utils/log.dart';
 import 'package:trikeright/features/search/data/autocomplete_api_model.dart';
 import 'package:trikeright/features/trikeright_map/data/feature_provider.dart';
@@ -46,7 +47,6 @@ class _SearchPageState extends State<SearchPage> {
         // AppBar - Search Page
         appBar: AppBar(
           automaticallyImplyLeading: true,
-          backgroundColor: Colors.transparent,
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -81,13 +81,8 @@ class _SearchPageState extends State<SearchPage> {
                           },
                         ),
                   hintText: 'Search for a place',
-                  hintStyle: TextStyle(
-                    color: const Color(0xFF5E758C),
-                    fontSize: 16,
-                    fontFamily: 'Plus Jakarta Sans',
-                    fontWeight: FontWeight.w400,
-                    height: 1.h,
-                  ),
+                  hintStyle: AppTextTheme
+                      .searchBarTextFieldAndTextFieldToSearchAndTextFieldHintText,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: const BorderSide(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:trikeright/core/const/fare_luggage_rates.dart';
+import 'package:trikeright/core/themes/trikeright_theme.dart';
 import 'package:trikeright/features/history/data/history_item.dart';
 import 'package:trikeright/features/history/data/history_list_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/routeresponse_provider.dart';
@@ -81,12 +82,8 @@ class _EstimateFareDialogBoxState extends State<EstimateFareDialogBox> {
                         Text(
                           'Summary',
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: const Color(0xFF0F1416),
-                            fontSize: 16.sp,
-                            fontFamily: 'Plus Jakarta Sans',
-                            fontWeight: FontWeight.w700,
-                          ),
+                          style: AppTextTheme
+                              .estimateFareDialogBoxSummaryLuggageAndCargoWeight,
                         ),
                         IconButton(
                           padding: EdgeInsets.zero,
@@ -107,24 +104,16 @@ class _EstimateFareDialogBoxState extends State<EstimateFareDialogBox> {
                       children: [
                         Text(
                           'Source:',
-                          style: TextStyle(
-                            color: const Color(0xFF3575AA),
-                            fontSize: 14.sp,
-                            fontFamily: 'Plus Jakarta Sans',
-                            fontWeight: FontWeight.w400,
-                          ),
+                          style: AppTextTheme
+                              .estimateFareDialogBoxSourceDestinationDistanceBaseRate,
                         ),
                         SizedBox(width: 18.w),
                         Flexible(
                           child: Text(
                             historyItem.source,
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              color: const Color(0xFF0A141F),
-                              fontSize: 14.sp,
-                              fontFamily: 'Plus Jakarta Sans',
-                              fontWeight: FontWeight.w400,
-                            ),
+                            style: AppTextTheme
+                                .estimateFareDialogBoxSourceDestinationDistanceBaseRateBlack,
                           ),
                         ),
                       ],
@@ -136,24 +125,16 @@ class _EstimateFareDialogBoxState extends State<EstimateFareDialogBox> {
                       children: [
                         Text(
                           'Destination:',
-                          style: TextStyle(
-                            color: const Color(0xFF3575AA),
-                            fontSize: 14.sp,
-                            fontFamily: 'Plus Jakarta Sans',
-                            fontWeight: FontWeight.w400,
-                          ),
+                          style: AppTextTheme
+                              .estimateFareDialogBoxSourceDestinationDistanceBaseRate,
                         ),
                         SizedBox(width: 18.w),
                         Flexible(
                           child: Text(
                             historyItem.destination,
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              color: const Color(0xFF0A141F),
-                              fontSize: 14.sp,
-                              fontFamily: 'Plus Jakarta Sans',
-                              fontWeight: FontWeight.w400,
-                            ),
+                            style: AppTextTheme
+                                .estimateFareDialogBoxSourceDestinationDistanceBaseRateBlack,
                           ),
                         ),
                       ],
@@ -165,24 +146,16 @@ class _EstimateFareDialogBoxState extends State<EstimateFareDialogBox> {
                       children: [
                         Text(
                           'Distance:',
-                          style: TextStyle(
-                            color: const Color(0xFF3575AA),
-                            fontSize: 14.sp,
-                            fontFamily: 'Plus Jakarta Sans',
-                            fontWeight: FontWeight.w400,
-                          ),
+                          style: AppTextTheme
+                              .estimateFareDialogBoxSourceDestinationDistanceBaseRate,
                         ),
                         SizedBox(width: 18.w),
                         Text(
                           historyItem.distance > 1000
                               ? '${(historyItem.distance / 1000).toStringAsFixed(2)} km'
                               : '${historyItem.distance} m',
-                          style: TextStyle(
-                            color: const Color(0xFF0A141F),
-                            fontSize: 14.sp,
-                            fontFamily: 'Plus Jakarta Sans',
-                            fontWeight: FontWeight.w400,
-                          ),
+                          style: AppTextTheme
+                              .estimateFareDialogBoxSourceDestinationDistanceBaseRateBlack,
                         ),
                       ],
                     ),
@@ -193,22 +166,14 @@ class _EstimateFareDialogBoxState extends State<EstimateFareDialogBox> {
                       children: [
                         Text(
                           'Base Rate:',
-                          style: TextStyle(
-                            color: const Color(0xFF3575AA),
-                            fontSize: 14.sp,
-                            fontFamily: 'Plus Jakarta Sans',
-                            fontWeight: FontWeight.w400,
-                          ),
+                          style: AppTextTheme
+                              .estimateFareDialogBoxSourceDestinationDistanceBaseRate,
                         ),
                         SizedBox(width: 18.w),
                         Text(
                           historyItem.baseRate.toStringAsFixed(2),
-                          style: TextStyle(
-                            color: const Color(0xFF0A141F),
-                            fontSize: 14.sp,
-                            fontFamily: 'Plus Jakarta Sans',
-                            fontWeight: FontWeight.w400,
-                          ),
+                          style: AppTextTheme
+                              .estimateFareDialogBoxSourceDestinationDistanceBaseRateBlack,
                         ),
                         chosenLuggageIndex == 0
                             ? const SizedBox()
@@ -216,12 +181,8 @@ class _EstimateFareDialogBoxState extends State<EstimateFareDialogBox> {
                                 padding: EdgeInsets.only(left: 12.w),
                                 child: Text(
                                   '+ ₱${luggageRates[chosenLuggageIndex].toStringAsFixed(2)}',
-                                  style: TextStyle(
-                                    color: const Color(0xFF0A141F),
-                                    fontSize: 14.sp,
-                                    fontFamily: 'Plus Jakarta Sans',
-                                    fontWeight: FontWeight.w400,
-                                  ),
+                                  style: AppTextTheme
+                                      .estimateFareDialogBoxSourceDestinationDistanceBaseRateBlack,
                                 ),
                               ),
                       ],
@@ -235,12 +196,8 @@ class _EstimateFareDialogBoxState extends State<EstimateFareDialogBox> {
                       child: Text(
                         'Luggage and Cargo Weight',
                         textAlign: TextAlign.left,
-                        style: TextStyle(
-                          color: const Color(0xFF0F1416),
-                          fontSize: 16.sp,
-                          fontFamily: 'Plus Jakarta Sans',
-                          fontWeight: FontWeight.w700,
-                        ),
+                        style: AppTextTheme
+                            .estimateFareDialogBoxSummaryLuggageAndCargoWeight,
                       ),
                     ),
                   ),
@@ -262,12 +219,8 @@ class _EstimateFareDialogBoxState extends State<EstimateFareDialogBox> {
                     choiceStyle: C2ChipStyle.toned(
                       padding: EdgeInsets.only(left: 8.w),
                       height: 22.h,
-                      foregroundStyle: TextStyle(
-                        color: const Color(0xFF0F1416),
-                        fontSize: 14.sp,
-                        fontFamily: 'Plus Jakarta Sans',
-                        fontWeight: FontWeight.w500,
-                      ),
+                      foregroundStyle:
+                          AppTextTheme.luggageAndCargoWeightSingleChoiceChips,
                       borderRadius: BorderRadius.all(
                         Radius.circular(8.r),
                       ),
@@ -295,12 +248,7 @@ class _EstimateFareDialogBoxState extends State<EstimateFareDialogBox> {
                         },
                         child: Text(
                           'Calculate Fare',
-                          style: TextStyle(
-                            color: const Color(0xFFF7F9FC),
-                            fontSize: 16.sp,
-                            fontFamily: 'Plus Jakarta Sans',
-                            fontWeight: FontWeight.w700,
-                          ),
+                          style: AppTextTheme.elevatedButtonTextStyle,
                         ),
                       ),
                     ),

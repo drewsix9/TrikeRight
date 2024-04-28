@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:trikeright/core/themes/trikeright_theme.dart';
 import 'package:trikeright/features/history/data/history_item.dart';
 
 class CalculateFareDialog extends StatefulWidget {
@@ -55,12 +56,7 @@ class _CalculateFareDialogState extends State<CalculateFareDialog> {
                           Text(
                             'Your Fare is:',
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: const Color(0xFF0C141C),
-                              fontSize: 16.sp,
-                              fontFamily: 'Plus Jakarta Sans',
-                              fontWeight: FontWeight.w400,
-                            ),
+                            style: AppTextTheme.yourFareIs,
                           ),
                           IconButton(
                             padding: EdgeInsets.zero,
@@ -78,12 +74,7 @@ class _CalculateFareDialogState extends State<CalculateFareDialog> {
                     Text(
                       '₱ ${widget.historyItem.total.toStringAsFixed(2)}',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: const Color(0xFF0F1416),
-                        fontSize: 32.sp,
-                        fontFamily: 'Plus Jakarta Sans',
-                        fontWeight: FontWeight.w700,
-                      ),
+                      style: AppTextTheme.totalFare,
                     ),
                   ],
                 )

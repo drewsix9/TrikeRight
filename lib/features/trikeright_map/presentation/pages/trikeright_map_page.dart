@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:trikeright/core/themes/trikeright_theme.dart';
 import 'package:trikeright/features/trikeright_map/data/drag_handle_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/services/openstreetmap_api.dart';
 import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
@@ -34,14 +35,8 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
           title: Text(
             'TrikeRight',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              color: const Color(0xFF0F1416),
-              fontSize: 18.sp,
-              fontFamily: 'Plus Jakarta Sans',
-              fontWeight: FontWeight.w700,
-            ),
+            style: AppTextTheme.trikeRightAppBarTitle,
           ),
-          backgroundColor: const Color(0xFFF7FAFC),
         ),
         // Stack containing _fAB and SlidingUpPanel
         body: Stack(
@@ -89,7 +84,7 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
 
   FloatingActionButton _fAB() {
     return FloatingActionButton(
-      backgroundColor: const Color(0xFFF7FAFC),
+      heroTag: 'fab',
       onPressed: () async {
         // TODO: Add a check if the text fields are empty
         Provider.of<OpenStreetMapApi>(context, listen: false)
@@ -105,7 +100,7 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
 
   FloatingActionButton _fAB2() {
     return FloatingActionButton(
-      backgroundColor: const Color(0xFFF7FAFC),
+      heroTag: 'fab2',
       onPressed: () async {
         var textProvider =
             Provider.of<TextEditingControllerProvider>(context, listen: false);
