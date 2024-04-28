@@ -24,6 +24,7 @@ class _PersistentNavBarState extends State<PersistentNavBar> {
   @override
   Widget build(BuildContext context) {
     return PersistentTabView(
+      margin: const EdgeInsets.only(bottom: 48),
       controller: _controller,
       tabs: [
         PersistentTabConfig(
@@ -41,7 +42,7 @@ class _PersistentNavBarState extends State<PersistentNavBar> {
           ),
         ),
       ],
-      navBarHeight: 70.h,
+      navBarHeight: 56.h,
       navBarBuilder: (navBarConfig) => Style2BottomNavBar(
         navBarConfig: navBarConfig,
         navBarDecoration: NavBarDecoration(
