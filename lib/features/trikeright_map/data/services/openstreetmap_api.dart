@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart' as latlng;
 import 'package:provider/provider.dart';
@@ -164,15 +165,10 @@ class OpenStreetMapApi extends ChangeNotifier {
       isLoading = false;
       notifyListeners();
     }
-
-    final snackBar = SnackBar(
-      content: Text(
-        'Distance: ${routeResponseApiModelProvider.routeResponseApiModel!.features![0].properties!.summary!.distance.toString()}',
-      ),
+    Fluttertoast.showToast(
+      msg: 'Routing Successful!',
+      backgroundColor: const Color(0xff4bb543),
     );
-    Future.delayed(Duration.zero, () {
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    });
   }
 
   void updateMarkers(BuildContext context) {

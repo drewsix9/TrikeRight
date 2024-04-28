@@ -28,9 +28,18 @@ class _SearchPageState extends State<SearchPage> {
   bool isLoading = false;
   Timer? _debounceTimer;
   List<ACFeature> suggestionsReponse = [];
-  late Position currentposition;
 
-  Future<Position?> _determinePosition() async {
+  Future<Position?> _determinePosition(BuildContext context) async {
+    final TextEditingController sourceController =
+        Provider.of<TextEditingControllerProvider>(context, listen: false)
+            .sourceController;
+    final TextEditingController destinationController =
+        Provider.of<TextEditingControllerProvider>(context, listen: false)
+            .destinationController;
+
+    final FeatureProvider featureProvider =
+        Provider.of<FeatureProvider>(context, listen: false);
+
     bool serviceEnabled;
     LocationPermission permission;
 
@@ -63,15 +72,27 @@ class _SearchPageState extends State<SearchPage> {
       Placemark place = placemarks[0];
 
       Log.i(place.toString());
+      Log.i(position.toString());
 
       setState(() {
-        currentposition = position;
         widget.searchTextEditingController.text =
             "${place.street}, ${place.thoroughfare}, ${place.locality}";
       });
     } catch (e) {
       Log.e(e);
     }
+
+    final generatedFeaturefromGeoCoding = ACFeature(
+        geometry: Geometry(
+      coordinates: [position.longitude, position.latitude],
+    ));
+
+    if (sourceController == widget.searchTextEditingController) {
+      featureProvider.setSourceFeature(generatedFeaturefromGeoCoding);
+    } else if (destinationController == widget.searchTextEditingController) {
+      featureProvider.setDestinationFeature(generatedFeaturefromGeoCoding);
+    }
+
     if (context.mounted) {
       Navigator.of(context).pop();
     }
@@ -165,7 +186,9 @@ class _SearchPageState extends State<SearchPage> {
                       Icons.my_location_rounded,
                       color: CupertinoColors.activeBlue,
                     ),
-                    onPressed: _determinePosition,
+                    onPressed: () {
+                      _determinePosition(context);
+                    },
                   ),
                   suffixIcon: searchTextEditingController.text.isEmpty
                       ? null
