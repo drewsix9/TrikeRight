@@ -1,7 +1,11 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:trikeright/core/utils/log.dart';
@@ -24,6 +28,52 @@ class _SearchPageState extends State<SearchPage> {
   bool isLoading = false;
   Timer? _debounceTimer;
   List<ACFeature> suggestionsReponse = [];
+  late Position currentposition;
+
+  Future<Position?> _determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      Fluttertoast.showToast(msg: 'Please enable Your Location Service');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        Fluttertoast.showToast(msg: 'Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      Fluttertoast.showToast(
+          msg:
+              'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+
+    try {
+      List<Placemark> placemarks =
+          await placemarkFromCoordinates(position.latitude, position.longitude);
+
+      Placemark place = placemarks[0];
+
+      Log.i(place.toString());
+
+      setState(() {
+        currentposition = position;
+        widget.searchTextEditingController.text =
+            "${place.locality}, ${place.postalCode}, ${place.country}";
+      });
+    } catch (e) {
+      Log.e(e);
+    }
+    return null;
+  }
 
   Future<void> getAutoCompleteData(String controllerText) async {
     if (_debounceTimer != null) {
@@ -107,9 +157,12 @@ class _SearchPageState extends State<SearchPage> {
                       EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.h),
                   filled: true,
                   fillColor: const Color(0xFFE8EDF4),
-                  prefixIcon: const Icon(
-                    Icons.search,
-                    color: Color(0xFF5E758C),
+                  prefixIcon: IconButton(
+                    icon: const Icon(
+                      Icons.my_location_rounded,
+                      color: CupertinoColors.activeBlue,
+                    ),
+                    onPressed: _determinePosition,
                   ),
                   suffixIcon: searchTextEditingController.text.isEmpty
                       ? null
