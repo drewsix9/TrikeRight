@@ -5,9 +5,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:trikeright/core/boxes/hive_boxes.dart';
 import 'package:trikeright/core/themes/trikeright_theme.dart';
 import 'package:trikeright/features/history/data/history_item.dart';
-import 'package:trikeright/features/history/data/history_item_provider.dart';
+import 'package:trikeright/features/history/data/history_list_provider.dart';
 import 'package:trikeright/features/splashscreen/presentation/pages/splash_screen.dart';
 import 'package:trikeright/features/trikeright_map/data/drag_handle_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/feature_provider.dart';
@@ -19,10 +20,13 @@ import 'package:trikeright/features/user_setup/data/passenger_types.dart';
 import 'package:trikeright/routing/app_routing.dart';
 
 void main() async {
+  Provider.debugCheckInvalidValueType = null;
   WidgetsFlutterBinding.ensureInitialized();
-  await Hive.initFlutter();
+  var dir = await getApplicationDocumentsDirectory();
+  Hive.init(dir.path);
   Hive.registerAdapter(PassengerTypeAdapter());
   Hive.registerAdapter(HistoryItemAdapter());
+  hiveBox = await Hive.openBox<HistoryItem>('historyListBox');
 
   await dotenv.load(fileName: "assets/config/.env");
   runApp(
@@ -42,8 +46,6 @@ void main() async {
 }
 
 Future _initApp() async {
-  var dir = await getApplicationDocumentsDirectory();
-  Hive.init(dir.path);
   await Future.delayed(const Duration(seconds: 3));
   return SharedPreferences.getInstance();
 }

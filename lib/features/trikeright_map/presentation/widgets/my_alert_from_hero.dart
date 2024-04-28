@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:trikeright/core/const/fare_luggage_rates.dart';
-import 'package:trikeright/core/utils/log.dart';
 import 'package:trikeright/features/history/data/history_item.dart';
-import 'package:trikeright/features/history/data/history_item_provider.dart';
+import 'package:trikeright/features/history/data/history_list_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/routeresponse_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
 import 'package:trikeright/features/trikeright_map/domain/calculate_fare_helper.dart';
@@ -294,9 +293,6 @@ class _MyAlertFromHeroState extends State<MyAlertFromHero> {
                             total: calculateTotalFare(historyItem),
                           );
                           historyListProvider.addHistoryItem(newHistoryItem);
-                          Log.i(
-                              'New History Item: ${newHistoryItem.toString()}');
-
                           Navigator.of(context).pop();
                         },
                         child: Text(

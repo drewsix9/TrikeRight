@@ -58,6 +58,17 @@ class HistoryItem {
 
   @override
   String toString() {
-    return 'HistoryItem(destination: $destination, source: $source, distance: $distance, duration: $duration, passengerType: $passengerType, baseRate: $baseRate, luggageCost: $luggageCost, total: $total)';
+    return '''
+      HistoryItem(
+      destination: $destination,
+      source: $source,
+      distance: $distance,
+      duration: $duration,
+      passengerType: $passengerType,
+      baseRate: $baseRate,
+      luggageCost: $luggageCost,
+      total: $total
+      )
+    ''';
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:trikeright/features/history/data/history_item_provider.dart';
+import 'package:trikeright/features/history/data/history_list_provider.dart';
 import 'package:trikeright/features/history/presentation/widget/my_list_view_builder.dart';
 
 class HistoryPage extends StatefulWidget {
@@ -12,48 +12,46 @@ class HistoryPage extends StatefulWidget {
 }
 
 class _HistoryPageState extends State<HistoryPage> {
+  Future<void> showDeleteDialog() async {
+    return showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          elevation: 0,
+          title: const Text('Delete History'),
+          content: const SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('You are about to delete all history.'),
+                Text('Are you sure you want to proceed?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Delete'),
+              onPressed: () {
+                Provider.of<HistoryListProvider>(context, listen: false)
+                    .deleteHistoryList();
+                setState(() {});
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    var historyListProvider =
-        Provider.of<HistoryListProvider>(context, listen: false);
-    historyListProvider.getHistoryList();
-
-    Future<void> showDeleteDialog() async {
-      return showDialog(
-        context: context,
-        barrierDismissible: true,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            elevation: 0,
-            title: const Text('Delete History'),
-            content: const SingleChildScrollView(
-              child: ListBody(
-                children: <Widget>[
-                  Text('You are about to delete all history.'),
-                  Text('Are you sure you want to proceed?'),
-                ],
-              ),
-            ),
-            actions: <Widget>[
-              TextButton(
-                child: const Text('Cancel'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              TextButton(
-                child: const Text('Delete'),
-                onPressed: () {
-                  // Call your function to delete all history here
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
-
     return Scaffold(
       backgroundColor: const Color(0xFFF7FAFC),
       // AppBar - Trike Right
