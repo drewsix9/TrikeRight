@@ -11,8 +11,6 @@ import 'package:trikeright/features/trikeright_map/data/routeresponse_provider.d
 import 'package:trikeright/features/trikeright_map/data/services/openrouteservice_api.dart';
 
 class OpenStreetMapApi extends ChangeNotifier {
-  // TODO: Fix the issue with the map not loading:
-  bool isLoading = false;
   List<latlng.LatLng> _points = [];
   List<Marker> _markers = [];
   final MapController mapController = MapController();
@@ -37,6 +35,8 @@ class OpenStreetMapApi extends ChangeNotifier {
     _bounds = value;
     notifyListeners();
   }
+
+  // TODO: Simplify calls
 
   Future<void> testProcessFeatureCoordinatesHardcoded(
       BuildContext context) async {
@@ -93,17 +93,18 @@ class OpenStreetMapApi extends ChangeNotifier {
             bounds: _bounds!,
             padding: const EdgeInsets.fromLTRB(50, 100, 50, 50)),
       );
-      notifyListeners();
     } catch (e) {
       Log.e(e);
     }
+    Fluttertoast.showToast(
+      msg: 'Routing Successful!',
+      backgroundColor: const Color(0xff4bb543),
+    );
   }
 
   Future<void> processFeatureCoordinates(
     BuildContext context,
   ) async {
-    isLoading = true;
-    notifyListeners();
     var featureProvider = Provider.of<FeatureProvider>(context, listen: false);
     var sourceFeature = featureProvider.sourceFeature;
     var destinationFeature = featureProvider.destinationFeature;
@@ -117,8 +118,6 @@ class OpenStreetMapApi extends ChangeNotifier {
       } catch (e) {
         // Handle errors
         Log.e('Error getting coordinates: $e');
-        isLoading = false;
-        notifyListeners();
       }
     }
   }
@@ -161,10 +160,7 @@ class OpenStreetMapApi extends ChangeNotifier {
       // Handle errors
       Log.e('Error getting coordinates: $e');
       rethrow;
-    } finally {
-      isLoading = false;
-      notifyListeners();
-    }
+    } finally {}
     Fluttertoast.showToast(
       msg: 'Routing Successful!',
       backgroundColor: const Color(0xff4bb543),
