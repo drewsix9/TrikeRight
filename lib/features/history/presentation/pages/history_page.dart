@@ -52,8 +52,6 @@ class _HistoryPageState extends State<HistoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF7FAFC),
-      // AppBar - Trike Right
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
@@ -71,9 +69,7 @@ class _HistoryPageState extends State<HistoryPage> {
           ),
         ],
       ),
-      // Sliding Up Panel
       body: const MyListViewBuilder(),
-      // Bottom Navigation Bar
     );
   }
 }
