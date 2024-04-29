@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:trikeright/core/themes/trikeright_theme.dart';
 import 'package:trikeright/features/trikeright_map/data/drag_handle_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/services/openstreetmap_api.dart';
 import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_build_map.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_sliding_up_panel.dart';
+import 'package:trikeright/features/user_setup/data/passenger_type_provider.dart';
 
 class TrikeRightMapPage extends StatefulWidget {
   const TrikeRightMapPage({super.key});
@@ -16,6 +18,13 @@ class TrikeRightMapPage extends StatefulWidget {
 }
 
 class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<PassengerTypeProvider>(context, listen: false)
+        .initPassengerTypeSharedPref();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -34,14 +43,8 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
           title: Text(
             'TrikeRight',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              color: const Color(0xFF0F1416),
-              fontSize: 18.sp,
-              fontFamily: 'Plus Jakarta Sans',
-              fontWeight: FontWeight.w700,
-            ),
+            style: AppTextLightTheme.trikeRightAppBarTitle,
           ),
-          backgroundColor: const Color(0xFFF7FAFC),
         ),
         // Stack containing _fAB and SlidingUpPanel
         body: Stack(
@@ -76,11 +79,11 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
               right: 16.w,
               child: _fAB(),
             ),
-            Positioned(
-              top: 200.h,
-              right: 16.w,
-              child: _fAB2(),
-            ),
+            // Positioned(
+            //   top: 200.h,
+            //   right: 16.w,
+            //   child: _fAB2(),
+            // ),
           ],
         ),
       ),
@@ -89,11 +92,9 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
 
   FloatingActionButton _fAB() {
     return FloatingActionButton(
-      backgroundColor: const Color(0xFFF7FAFC),
+      heroTag: 'fab',
       onPressed: () async {
-        Provider.of<OpenStreetMapApi>(context, listen: false)
-            .processFeatureCoordinates(context);
-        Provider.of<DragHandleProvider>(context, listen: false).closePanel();
+        _onPressFAB(context);
       },
       child: const Icon(
         Icons.directions,
@@ -104,7 +105,7 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
 
   FloatingActionButton _fAB2() {
     return FloatingActionButton(
-      backgroundColor: const Color(0xFFF7FAFC),
+      heroTag: 'fab2',
       onPressed: () async {
         var textProvider =
             Provider.of<TextEditingControllerProvider>(context, listen: false);
@@ -120,5 +121,30 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
         color: Color(0xFF1C91F2),
       ),
     );
+  }
+
+  void _onPressFAB(
+    BuildContext context,
+  ) {
+    var sourceController =
+        Provider.of<TextEditingControllerProvider>(context, listen: false)
+            .sourceController;
+    var destinationController =
+        Provider.of<TextEditingControllerProvider>(context, listen: false)
+            .destinationController;
+    if (sourceController.text.isEmpty && destinationController.text.isEmpty) {
+      const snackBar = SnackBar(
+        content: Text(
+          'Please fill in the source and destination fields.',
+        ),
+      );
+      Future.delayed(Duration.zero, () {
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      });
+    } else {
+      Provider.of<OpenStreetMapApi>(context, listen: false)
+          .processFeatureCoordinates(context);
+      Provider.of<DragHandleProvider>(context, listen: false).closePanel();
+    }
   }
 }

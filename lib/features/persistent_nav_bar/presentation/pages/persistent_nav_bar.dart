@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:trikeright/features/history/presentation/pages/history_page.dart';
@@ -13,9 +14,9 @@ class PersistentNavBar extends StatefulWidget {
 
 class _PersistentNavBarState extends State<PersistentNavBar> {
   late PersistentTabController _controller;
-
   @override
   void initState() {
+    FlutterNativeSplash.remove();
     _controller = PersistentTabController(initialIndex: 0);
     super.initState();
   }
@@ -23,6 +24,7 @@ class _PersistentNavBarState extends State<PersistentNavBar> {
   @override
   Widget build(BuildContext context) {
     return PersistentTabView(
+      margin: const EdgeInsets.only(bottom: 48),
       controller: _controller,
       tabs: [
         PersistentTabConfig(
@@ -40,7 +42,7 @@ class _PersistentNavBarState extends State<PersistentNavBar> {
           ),
         ),
       ],
-      navBarHeight: 70.h,
+      navBarHeight: 56.h,
       navBarBuilder: (navBarConfig) => Style2BottomNavBar(
         navBarConfig: navBarConfig,
         navBarDecoration: NavBarDecoration(

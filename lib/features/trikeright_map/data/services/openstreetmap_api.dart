@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart' as latlng;
 import 'package:provider/provider.dart';
 import 'package:trikeright/core/utils/log.dart';
+import 'package:trikeright/features/search/data/autocomplete_api_model.dart';
 import 'package:trikeright/features/trikeright_map/data/feature_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/routeresponse_api_model.dart';
 import 'package:trikeright/features/trikeright_map/data/routeresponse_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/services/openrouteservice_api.dart';
 
 class OpenStreetMapApi extends ChangeNotifier {
-  // TODO: Fix the issue with the map not loading:
-  bool isLoading = false;
   List<latlng.LatLng> _points = [];
   List<Marker> _markers = [];
   final MapController mapController = MapController();
@@ -27,7 +27,6 @@ class OpenStreetMapApi extends ChangeNotifier {
   }
 
   set markers(List<Marker> value) {
-    _markers.clear();
     _markers = value;
     notifyListeners();
   }
@@ -92,117 +91,89 @@ class OpenStreetMapApi extends ChangeNotifier {
             bounds: _bounds!,
             padding: const EdgeInsets.fromLTRB(50, 100, 50, 50)),
       );
-      notifyListeners();
     } catch (e) {
       Log.e(e);
     }
+    Fluttertoast.showToast(
+      msg: 'Routing Successful!',
+      backgroundColor: const Color(0xff4bb543),
+    );
   }
 
-  Future<void> processFeatureCoordinates(
-    BuildContext context,
-  ) async {
-    isLoading = true;
-    notifyListeners();
+  Future<void> processFeatureCoordinates(BuildContext context) async {
     var featureProvider = Provider.of<FeatureProvider>(context, listen: false);
     var sourceFeature = featureProvider.sourceFeature;
     var destinationFeature = featureProvider.destinationFeature;
     if (sourceFeature != null && destinationFeature != null) {
       try {
-        getCoordinates(
-          context,
-          sourceFeature.geometry!.coordinates!.join(','),
-          destinationFeature.geometry!.coordinates!.join(','),
-        );
+        await getCoordinates(context, sourceFeature, destinationFeature);
       } catch (e) {
-        // Handle errors
         Log.e('Error getting coordinates: $e');
-        isLoading = false;
-        notifyListeners();
       }
     }
   }
 
-  void getCoordinates(
-    BuildContext context,
-    String startPoint,
-    String endPoint,
-  ) async {
-    var routeResponseApiModelProvider = Provider.of<RouteResponseProvider>(
-      context,
-      listen: false,
-    );
+  Future<void> getCoordinates(BuildContext context, ACFeature sourceFeature,
+      ACFeature destinationFeature) async {
+    var routeResponseApiModelProvider =
+        Provider.of<RouteResponseProvider>(context, listen: false);
     try {
-      var response =
-          await http.get(OpenRouteServiceApi.getRouteUrl(startPoint, endPoint));
+      var response = await http.get(OpenRouteServiceApi.getRouteUrl(
+        sourceFeature.geometry!.coordinates!.join(','),
+        destinationFeature.geometry!.coordinates!.join(','),
+      ));
       if (response.statusCode == 200) {
         routeResponseApiModelProvider
             .updateRouteResponseApiModel(response.body);
-
-        Log.i(routeResponseApiModelProvider.routeResponseApiModel.toString());
-
-        // Fetch coordinates
-        points = routeResponseApiModelProvider
-            .routeResponseApiModel!.features![0].geometry!.coordinates!
-            .map((e) => latlng.LatLng(e[1].toDouble(), e[0].toDouble()))
-            .toList();
-
-        // Fetch bounds
-        bounds = routeResponseApiModelProvider.routeResponseApiModel!
-            .toLatLngBounds();
+        updatePointsAndBounds(routeResponseApiModelProvider);
         if (context.mounted) {
-          updateMarkers(context);
+          updateMarkers(context, sourceFeature, destinationFeature);
         }
-        updateBounds();
       } else {
         throw Exception('Failed to load coordinates: ${response.statusCode}');
       }
     } catch (e) {
-      // Handle errors
       Log.e('Error getting coordinates: $e');
       rethrow;
     } finally {
-      isLoading = false;
-      notifyListeners();
+      Fluttertoast.showToast(
+        msg: 'Routing Successful!',
+        backgroundColor: const Color(0xff4bb543),
+      );
     }
-
-    final snackBar = SnackBar(
-      content: Text(
-        'Distance: ${routeResponseApiModelProvider.routeResponseApiModel!.features![0].properties!.summary!.distance.toString()}',
-      ),
-    );
-    Future.delayed(Duration.zero, () {
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    });
   }
 
-  void updateMarkers(BuildContext context) {
-    var featureProvider = Provider.of<FeatureProvider>(context, listen: false);
-    var sourceFeature = featureProvider.sourceFeature;
-    var destinationFeature = featureProvider.destinationFeature;
+  void updatePointsAndBounds(
+      RouteResponseProvider routeResponseApiModelProvider) {
+    points = routeResponseApiModelProvider
+        .routeResponseApiModel!.features![0].geometry!.coordinates!
+        .map((e) => latlng.LatLng(e[1].toDouble(), e[0].toDouble()))
+        .toList();
+    bounds =
+        routeResponseApiModelProvider.routeResponseApiModel!.toLatLngBounds();
+    updateBounds();
+  }
+
+  void updateMarkers(BuildContext context, ACFeature sourceFeature,
+      ACFeature destinationFeature) {
     markers = [
-      Marker(
-        point: latlng.LatLng(
-          sourceFeature.geometry!.coordinates![1],
-          sourceFeature.geometry!.coordinates![0],
-        ),
-        child: const Icon(
-          Icons.location_on,
-          color: Colors.redAccent,
-          size: 30,
-        ),
-      ),
-      Marker(
-        point: latlng.LatLng(
-          destinationFeature.geometry!.coordinates![1],
-          destinationFeature.geometry!.coordinates![0],
-        ),
-        child: const Icon(
-          Icons.location_on,
-          color: Colors.redAccent,
-          size: 30,
-        ),
-      )
+      createMarker(sourceFeature),
+      createMarker(destinationFeature),
     ];
+  }
+
+  Marker createMarker(ACFeature feature) {
+    return Marker(
+      point: latlng.LatLng(
+        feature.geometry!.coordinates![1],
+        feature.geometry!.coordinates![0],
+      ),
+      child: const Icon(
+        Icons.location_on,
+        color: Colors.redAccent,
+        size: 30,
+      ),
+    );
   }
 
   void updateBounds() {

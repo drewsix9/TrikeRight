@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:trikeright/core/themes/trikeright_theme.dart';
 import 'package:trikeright/core/utils/log.dart';
 import 'package:trikeright/core/utils/validator.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_single_choice_chips.dart';
@@ -28,6 +30,13 @@ class _UserSetupPageState extends State<UserSetupPage> {
   final focusTextField = FocusNode();
 
   @override
+  void initState() {
+    super.initState();
+    FlutterNativeSplash.remove();
+    Provider.of<PassengerTypeProvider>(context, listen: false)
+        .initPassengerTypeSharedPref();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,14 +56,7 @@ class _UserSetupPageState extends State<UserSetupPage> {
                   bottom: 16.h,
                   child: Text(
                     'Let\'s get started with\nyour account',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 28.sp,
-                      fontFamily: 'Plus Jakarta Sans',
-                      fontWeight: FontWeight.w700,
-                      height: 1.4.h,
-                      letterSpacing: -0.70,
-                    ),
+                    style: AppTextLightTheme.titleLarge,
                     maxLines: 2,
                   ),
                 ),
@@ -80,7 +82,6 @@ class _UserSetupPageState extends State<UserSetupPage> {
             MyTextFormField(
               textInputAction: TextInputAction.done,
               autovalidateMode: AutovalidateMode.onUserInteraction,
-              // TODO: Add a validator for mobile number
               validator: (value) => Validator.isPhoneNumber(value!)
                   ? null
                   : 'Please enter a valid mobile number',
@@ -111,8 +112,6 @@ class _UserSetupPageState extends State<UserSetupPage> {
                               PassengerType.belowFiveYearsOld)) {
                     Log.i(
                         'Name: ${fullNameController.text} \n Mobile Number: ${mobileNumberController.text}');
-                    // Navigator.of(context)
-                    //     .pushReplacementNamed('/persistent_nav_bar');
                     SharedPreferences.getInstance().then((prefs) {
                       prefs.setBool('isFirstTime', false);
                       Navigator.of(context)

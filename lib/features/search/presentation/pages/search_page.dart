@@ -1,9 +1,14 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+import 'package:trikeright/core/themes/trikeright_theme.dart';
 import 'package:trikeright/core/utils/log.dart';
 import 'package:trikeright/features/search/data/autocomplete_api_model.dart';
 import 'package:trikeright/features/trikeright_map/data/feature_provider.dart';
@@ -25,61 +30,12 @@ class _SearchPageState extends State<SearchPage> {
   Timer? _debounceTimer;
   List<ACFeature> suggestionsReponse = [];
 
-  Future<void> getAutoCompleteData(String controllerText) async {
-    if (_debounceTimer != null) {
-      _debounceTimer!.cancel();
-    }
-    _debounceTimer = Timer(const Duration(milliseconds: 500), () async {
-      if (mounted) {
-        setState(() {
-          isLoading = true;
-        });
-      }
-      var response = await http
-          .get(OpenRouteServiceApi.getAutoCompleteUrl(controllerText));
-
-      if (mounted) {
-        setState(() {
-          isLoading = false;
-          if (response.statusCode == 200) {
-            var autoCompleteResponseApiModel =
-                autoCompleteResponseApiModelFromJson(response.body);
-            Log.i(autoCompleteResponseApiModel.toString());
-            suggestionsReponse = autoCompleteResponseApiModel.features!;
-          }
-        });
-      }
-    });
-  }
-
   @override
   void initState() {
     super.initState();
     searchTextEditingController.addListener(() {
-      getAutoCompleteData(searchTextEditingController.text);
+      _getAutoCompleteData(searchTextEditingController.text);
     });
-  }
-
-  void _handleListItemTap(BuildContext context, ACFeature selectedFeature) {
-    final TextEditingController sourceController =
-        Provider.of<TextEditingControllerProvider>(context, listen: false)
-            .sourceController;
-    final TextEditingController destinationController =
-        Provider.of<TextEditingControllerProvider>(context, listen: false)
-            .destinationController;
-
-    final FeatureProvider featureProvider =
-        Provider.of<FeatureProvider>(context, listen: false);
-
-    if (sourceController == widget.searchTextEditingController) {
-      featureProvider.setSourceFeature(selectedFeature);
-    } else if (destinationController == widget.searchTextEditingController) {
-      featureProvider.setDestinationFeature(selectedFeature);
-    }
-
-    widget.searchTextEditingController.text = selectedFeature.properties!.name!;
-    suggestionsReponse.clear();
-    Navigator.of(context).pop();
   }
 
   @override
@@ -91,7 +47,6 @@ class _SearchPageState extends State<SearchPage> {
         // AppBar - Search Page
         appBar: AppBar(
           automaticallyImplyLeading: true,
-          backgroundColor: Colors.transparent,
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -101,15 +56,20 @@ class _SearchPageState extends State<SearchPage> {
               child: TextFormField(
                 controller: searchTextEditingController,
                 autofocus: true,
-                onChanged: ((value) => getAutoCompleteData(value)),
+                onChanged: ((value) => _getAutoCompleteData(value)),
                 decoration: InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.h),
                   filled: true,
                   fillColor: const Color(0xFFE8EDF4),
-                  prefixIcon: const Icon(
-                    Icons.search,
-                    color: Color(0xFF5E758C),
+                  prefixIcon: IconButton(
+                    icon: const Icon(
+                      Icons.my_location_rounded,
+                      color: CupertinoColors.activeBlue,
+                    ),
+                    onPressed: () {
+                      _determinePosition(context);
+                    },
                   ),
                   suffixIcon: searchTextEditingController.text.isEmpty
                       ? null
@@ -121,13 +81,8 @@ class _SearchPageState extends State<SearchPage> {
                           },
                         ),
                   hintText: 'Search for a place',
-                  hintStyle: TextStyle(
-                    color: const Color(0xFF5E758C),
-                    fontSize: 16,
-                    fontFamily: 'Plus Jakarta Sans',
-                    fontWeight: FontWeight.w400,
-                    height: 1.h,
-                  ),
+                  hintStyle: AppTextLightTheme
+                      .searchBarTextFieldAndTextFieldToSearchAndTextFieldHintText,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: const BorderSide(
@@ -163,5 +118,124 @@ class _SearchPageState extends State<SearchPage> {
         ),
       ),
     );
+  }
+
+  void _handleListItemTap(BuildContext context, ACFeature selectedFeature) {
+    final TextEditingController sourceController =
+        Provider.of<TextEditingControllerProvider>(context, listen: false)
+            .sourceController;
+    final TextEditingController destinationController =
+        Provider.of<TextEditingControllerProvider>(context, listen: false)
+            .destinationController;
+
+    final FeatureProvider featureProvider =
+        Provider.of<FeatureProvider>(context, listen: false);
+
+    if (sourceController == widget.searchTextEditingController) {
+      featureProvider.setSourceFeature(selectedFeature);
+    } else if (destinationController == widget.searchTextEditingController) {
+      featureProvider.setDestinationFeature(selectedFeature);
+    }
+
+    widget.searchTextEditingController.text = selectedFeature.properties!.name!;
+    suggestionsReponse.clear();
+    Navigator.of(context).pop();
+  }
+
+  Future<void> _getAutoCompleteData(String controllerText) async {
+    if (_debounceTimer != null) {
+      _debounceTimer!.cancel();
+    }
+    _debounceTimer = Timer(const Duration(milliseconds: 500), () async {
+      if (mounted) {
+        setState(() {
+          isLoading = true;
+        });
+      }
+      var response = await http
+          .get(OpenRouteServiceApi.getAutoCompleteUrl(controllerText));
+
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+          if (response.statusCode == 200) {
+            var autoCompleteResponseApiModel =
+                autoCompleteResponseApiModelFromJson(response.body);
+            Log.i(autoCompleteResponseApiModel.toString());
+            suggestionsReponse = autoCompleteResponseApiModel.features!;
+          }
+        });
+      }
+    });
+  }
+
+  Future<Position?> _determinePosition(BuildContext context) async {
+    final TextEditingController sourceController =
+        Provider.of<TextEditingControllerProvider>(context, listen: false)
+            .sourceController;
+    final TextEditingController destinationController =
+        Provider.of<TextEditingControllerProvider>(context, listen: false)
+            .destinationController;
+
+    final FeatureProvider featureProvider =
+        Provider.of<FeatureProvider>(context, listen: false);
+
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      Fluttertoast.showToast(msg: 'Please enable Your Location Service');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        Fluttertoast.showToast(msg: 'Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      Fluttertoast.showToast(
+          msg:
+              'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+
+    try {
+      List<Placemark> placemarks =
+          await placemarkFromCoordinates(position.latitude, position.longitude);
+
+      Placemark place = placemarks[0];
+
+      Log.i(place.toString());
+      Log.i(position.toString());
+
+      setState(() {
+        widget.searchTextEditingController.text =
+            "${place.street}, ${place.thoroughfare}, ${place.locality}";
+      });
+    } catch (e) {
+      Log.e(e);
+    }
+
+    final generatedFeaturefromGeoCoding = ACFeature(
+        geometry: Geometry(
+      coordinates: [position.longitude, position.latitude],
+    ));
+
+    if (sourceController == widget.searchTextEditingController) {
+      featureProvider.setSourceFeature(generatedFeaturefromGeoCoding);
+    } else if (destinationController == widget.searchTextEditingController) {
+      featureProvider.setDestinationFeature(generatedFeaturefromGeoCoding);
+    }
+
+    if (context.mounted) {
+      Navigator.of(context).pop();
+    }
+    return null;
   }
 }

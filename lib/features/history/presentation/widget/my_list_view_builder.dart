@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:trikeright/core/themes/trikeright_theme.dart';
 import 'package:trikeright/features/history/data/history_list_provider.dart';
 
 class MyListViewBuilder extends StatefulWidget {
@@ -26,32 +26,17 @@ class _MyListViewBuilderState extends State<MyListViewBuilder> {
                     title: Text(
                       '${value.historyList[index].source} to ${value.historyList[index].destination}',
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        color: const Color(0xFF0C141C),
-                        fontSize: 16.sp,
-                        fontFamily: 'Plus Jakarta Sans',
-                        fontWeight: FontWeight.w500,
-                      ),
+                      style: AppTextLightTheme.listViewBuilderTitle,
                     ),
                     subtitle: Text(
                       value.historyList[index].distance > 1000
                           ? '${(value.historyList[index].distance / 1000).toStringAsFixed(2)} km'
                           : '${value.historyList[index].distance} m',
-                      style: TextStyle(
-                        color: const Color(0xFF49779B),
-                        fontSize: 14.sp,
-                        fontFamily: 'Plus Jakarta Sans',
-                        fontWeight: FontWeight.w400,
-                      ),
+                      style: AppTextLightTheme.listViewBuilderSubtitle,
                     ),
                     trailing: Text(
                       '₱  ${value.historyList[index].total}',
-                      style: TextStyle(
-                        color: const Color(0xFF0C141C),
-                        fontSize: 16.sp,
-                        fontFamily: 'Plus Jakarta Sans',
-                        fontWeight: FontWeight.w400,
-                      ),
+                      style: AppTextLightTheme.listViewBuilderTrailing,
                     ),
                   );
                 },

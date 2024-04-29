@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:trikeright/core/themes/trikeright_theme.dart';
 
 class MySearchBarTextField extends StatelessWidget {
   final String hintText;
@@ -20,13 +21,8 @@ class MySearchBarTextField extends StatelessWidget {
       child: TextField(
         keyboardType: keyboardType,
         controller: controller,
-        style: TextStyle(
-          color: const Color(0xFF0F1416),
-          fontSize: 16.sp,
-          fontFamily: 'Plus Jakarta Sans',
-          fontWeight: FontWeight.w400,
-          height: 1.h,
-        ),
+        style: AppTextLightTheme
+            .searchBarTextFieldAndTextFieldToSearchAndTextField,
         decoration: InputDecoration(
           contentPadding:
               EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.h),
@@ -37,13 +33,8 @@ class MySearchBarTextField extends StatelessWidget {
             color: Color(0xFF5E758C),
           ),
           hintText: hintText,
-          hintStyle: TextStyle(
-            color: const Color(0xFF5E758C),
-            fontSize: 16.sp,
-            fontFamily: 'Plus Jakarta Sans',
-            fontWeight: FontWeight.w400,
-            height: 1.h,
-          ),
+          hintStyle: AppTextLightTheme
+              .searchBarTextFieldAndTextFieldToSearchAndTextFieldHintText,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12.r),
             borderSide: const BorderSide(

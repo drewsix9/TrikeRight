@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:trikeright/core/themes/trikeright_theme.dart';
 import 'package:trikeright/features/history/data/history_list_provider.dart';
 import 'package:trikeright/features/history/presentation/widget/my_list_view_builder.dart';
 
@@ -40,7 +40,6 @@ class _HistoryPageState extends State<HistoryPage> {
               onPressed: () {
                 Provider.of<HistoryListProvider>(context, listen: false)
                     .deleteHistoryList();
-                setState(() {});
                 Navigator.of(context).pop();
               },
             ),
@@ -56,19 +55,12 @@ class _HistoryPageState extends State<HistoryPage> {
       backgroundColor: const Color(0xFFF7FAFC),
       // AppBar - Trike Right
       appBar: AppBar(
-        elevation: 0,
         automaticallyImplyLeading: false,
         centerTitle: true,
-        backgroundColor: const Color(0xFFF7FAFC),
         title: Text(
           'History',
           textAlign: TextAlign.center,
-          style: TextStyle(
-            color: const Color(0xFF0F1416),
-            fontSize: 18.sp,
-            fontFamily: 'Plus Jakarta Sans',
-            fontWeight: FontWeight.w700,
-          ),
+          style: AppTextLightTheme.trikeRightAppBarTitle,
         ),
         actions: [
           IconButton(
