@@ -40,7 +40,7 @@ class _CalculateFareDialogState extends State<CalculateFareDialog> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.r)),
       child: SingleChildScrollView(
         child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.fromLTRB(16.0.w, 16.0.h, 16.0.w, 32.0.h),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -72,7 +72,7 @@ class _CalculateFareDialogState extends State<CalculateFareDialog> {
                       ),
                     ),
                     Text(
-                      '₱ ${widget.historyItem.total.toStringAsFixed(2)}',
+                      '₱ ${widget.historyItem.totalFare.toStringAsFixed(2)}',
                       textAlign: TextAlign.center,
                       style: AppTextLightTheme.totalFare,
                     ),

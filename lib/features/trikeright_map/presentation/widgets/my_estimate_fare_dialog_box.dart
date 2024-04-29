@@ -40,6 +40,7 @@ class _EstimateFareDialogBoxState extends State<EstimateFareDialogBox> {
       passengerType: passengerTypeProvider.passengerType!,
       baseRate: passengerTypeToBaseRate(passengerTypeProvider.passengerType!),
       luggageCost: luggageRates[chosenLuggageIndex],
+      dateAndTime: DateTime.now().toString(),
     );
   }
 
@@ -266,7 +267,7 @@ class _EstimateFareDialogBoxState extends State<EstimateFareDialogBox> {
       HistoryItem historyItem, HistoryListProvider historyListProvider) {
     var newHistoryItem = historyItem.copyWith(
       luggageCost: luggageRates[chosenLuggageIndex],
-      total: calculateTotalFare(historyItem),
+      totalFare: calculateTotalFare(historyItem),
     );
     historyListProvider.addHistoryItem(newHistoryItem);
     GlobalKey<State> loadingKey = GlobalKey<State>();

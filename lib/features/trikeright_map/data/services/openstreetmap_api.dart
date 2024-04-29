@@ -179,7 +179,8 @@ class OpenStreetMapApi extends ChangeNotifier {
   void updateBounds() {
     mapController.fitCamera(
       CameraFit.bounds(
-          bounds: bounds!, padding: const EdgeInsets.fromLTRB(50, 100, 50, 50)),
+          bounds: bounds!,
+          padding: const EdgeInsets.fromLTRB(50, 150, 50, 200)),
     );
   }
 }

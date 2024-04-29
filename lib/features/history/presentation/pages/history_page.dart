@@ -55,6 +55,28 @@ class _HistoryPageState extends State<HistoryPage> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
+        leading: PopupMenuButton(
+          icon: const Icon(Icons.sort_rounded),
+          itemBuilder: (context) => [
+            const PopupMenuItem(
+              value: 'Sort by Fare',
+              child: Text('Sort by Fare'),
+            ),
+            const PopupMenuItem(
+              value: 'Sort by Date',
+              child: Text('Sort by Date'),
+            ),
+          ],
+          onSelected: (value) {
+            if (value == 'Sort by Fare') {
+              Provider.of<HistoryListProvider>(context, listen: false)
+                  .bucketSortByFareHistoryList();
+            } else {
+              Provider.of<HistoryListProvider>(context, listen: false)
+                  .sortByDateTimeHistoryList();
+            }
+          },
+        ),
         title: Text(
           'History',
           textAlign: TextAlign.center,

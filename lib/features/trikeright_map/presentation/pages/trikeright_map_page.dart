@@ -49,7 +49,7 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
       body: Stack(
         children: [
           // Map and SlidingUpPanel
-          const Expanded(
+          const Positioned.fill(
             child: MyBuildMap(),
           ),
           // Sliding Up Panel

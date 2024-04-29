@@ -20,7 +20,9 @@ class HistoryItem {
   @HiveField(6, defaultValue: 0.0)
   late double luggageCost = 0.0;
   @HiveField(7)
-  late double total;
+  late double totalFare;
+  @HiveField(8)
+  final String dateAndTime;
 
   HistoryItem({
     required this.destination,
@@ -30,19 +32,19 @@ class HistoryItem {
     required this.passengerType,
     required this.baseRate,
     required this.luggageCost,
-    this.total = 0.0,
+    this.totalFare = 0.0,
+    required this.dateAndTime,
   });
 
   HistoryItem copyWith({
     String? destination,
     String? source,
     double? distance,
-    double? price,
     double? duration,
     PassengerType? passengerType,
     double? baseRate,
     double? luggageCost,
-    double? total,
+    double? totalFare,
   }) {
     return HistoryItem(
       destination: destination ?? this.destination,
@@ -52,7 +54,8 @@ class HistoryItem {
       passengerType: passengerType ?? this.passengerType,
       baseRate: baseRate ?? this.baseRate,
       luggageCost: luggageCost ?? this.luggageCost,
-      total: total ?? this.total,
+      totalFare: totalFare ?? this.totalFare,
+      dateAndTime: dateAndTime,
     );
   }
 
@@ -67,7 +70,8 @@ class HistoryItem {
       passengerType: $passengerType,
       baseRate: $baseRate,
       luggageCost: $luggageCost,
-      total: $total
+      totalFare: $totalFare
+      dateAndTime: $dateAndTime
       )
     ''';
   }

@@ -101,16 +101,23 @@ class _SearchPageState extends State<SearchPage> {
                     child: ListView.builder(
                       itemCount: suggestionsReponse.length,
                       itemBuilder: (context, index) {
-                        return ListTile(
-                          title:
-                              Text(suggestionsReponse[index].properties!.name!),
-                          onTap: () {
-                            _handleListItemTap(
-                              context,
-                              suggestionsReponse[index],
-                            );
-                          },
-                        );
+                        return suggestionsReponse.isEmpty
+                            ? const Center(
+                                child: Text('No Results Found'),
+                              )
+                            : ListTile(
+                                contentPadding:
+                                    EdgeInsets.symmetric(horizontal: 24.w),
+                                title: Text(suggestionsReponse[index]
+                                    .properties!
+                                    .name!),
+                                onTap: () {
+                                  _handleListItemTap(
+                                    context,
+                                    suggestionsReponse[index],
+                                  );
+                                },
+                              );
                       },
                     ),
                   ),
