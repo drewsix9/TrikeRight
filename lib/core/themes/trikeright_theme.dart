@@ -16,6 +16,14 @@ class AppTheme {
       elevation: 0,
       backgroundColor: Color(0xFFF7FAFC),
     ),
+    popupMenuTheme: const PopupMenuThemeData(
+      elevation: 1,
+      color: Color(0xFFF7FAFC),
+      shadowColor: Color(0xFFF7FAFC),
+    ),
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      color: Color(0xFF3575AA),
+    ),
   );
 
   static ThemeData darkTheme = ThemeData(
@@ -29,6 +37,14 @@ class AppTheme {
     appBarTheme: const AppBarTheme(
       elevation: 0,
       backgroundColor: Color(0xFFF7FAFC),
+    ),
+    popupMenuTheme: const PopupMenuThemeData(
+      elevation: 1,
+      color: Color(0xFFF7FAFC),
+      shadowColor: Color(0xFFF7FAFC),
+    ),
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      color: Color(0xFF3575AA),
     ),
   );
 }

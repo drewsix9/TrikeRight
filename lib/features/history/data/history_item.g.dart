@@ -24,13 +24,15 @@ class HistoryItemAdapter extends TypeAdapter<HistoryItem> {
       passengerType: fields[4] as PassengerType,
       baseRate: fields[5] as double,
       luggageCost: fields[6] == null ? 0.0 : fields[6] as double,
-    )..total = fields[7] as double;
+      totalFare: fields[7] as double,
+      dateAndTime: fields[8] as String,
+    );
   }
 
   @override
   void write(BinaryWriter writer, HistoryItem obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.destination)
       ..writeByte(1)
@@ -46,7 +48,9 @@ class HistoryItemAdapter extends TypeAdapter<HistoryItem> {
       ..writeByte(6)
       ..write(obj.luggageCost)
       ..writeByte(7)
-      ..write(obj.total);
+      ..write(obj.totalFare)
+      ..writeByte(8)
+      ..write(obj.dateAndTime);
   }
 
   @override

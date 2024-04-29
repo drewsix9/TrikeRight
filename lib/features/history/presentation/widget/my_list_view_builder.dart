@@ -35,7 +35,7 @@ class _MyListViewBuilderState extends State<MyListViewBuilder> {
                       style: AppTextLightTheme.listViewBuilderSubtitle,
                     ),
                     trailing: Text(
-                      '₱  ${value.historyList[index].total}',
+                      '₱  ${value.historyList[index].totalFare}',
                       style: AppTextLightTheme.listViewBuilderTrailing,
                     ),
                   );
