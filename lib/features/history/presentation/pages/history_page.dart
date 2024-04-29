@@ -56,7 +56,7 @@ class _HistoryPageState extends State<HistoryPage> {
         automaticallyImplyLeading: false,
         centerTitle: true,
         leading: PopupMenuButton(
-          icon: const Icon(Icons.sort_rounded),
+          icon: const Icon(Icons.filter_list_rounded),
           itemBuilder: (context) => [
             const PopupMenuItem(
               value: 'Sort by Fare',

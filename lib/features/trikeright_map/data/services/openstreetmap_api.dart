@@ -46,9 +46,6 @@ class OpenStreetMapApi extends ChangeNotifier {
     ];
 
     try {
-      // Here, instead of calling getCoordinates function, we directly assign the coordinates to the points and bounds
-
-      // Make the HTTP GET request to the OpenRouteService API
       var response = await http.get(OpenRouteServiceApi.getRouteUrl(
           [startPoint[0][1], startPoint[0][0]].toList().join(','),
           [endPoint[0][1], endPoint[0][0]].toList().join(',')));

@@ -40,89 +40,86 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: const Color(0xFFF7FAFC),
-        resizeToAvoidBottomInset: false,
-        // AppBar - Search Page
-        appBar: AppBar(
-          automaticallyImplyLeading: true,
-        ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-              child: TextFormField(
-                controller: searchTextEditingController,
-                autofocus: true,
-                onChanged: ((value) => _getAutoCompleteData(value)),
-                decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.h),
-                  filled: true,
-                  fillColor: const Color(0xFFE8EDF4),
-                  prefixIcon: IconButton(
-                    icon: const Icon(
-                      Icons.my_location_rounded,
-                      color: CupertinoColors.activeBlue,
-                    ),
-                    onPressed: () {
-                      _determinePosition(context);
-                    },
+    return Scaffold(
+      backgroundColor: const Color(0xFFF7FAFC),
+      resizeToAvoidBottomInset: false,
+      // AppBar - Search Page
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+            child: TextFormField(
+              controller: searchTextEditingController,
+              autofocus: true,
+              onChanged: ((value) => _getAutoCompleteData(value)),
+              decoration: InputDecoration(
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.h),
+                filled: true,
+                fillColor: const Color(0xFFE8EDF4),
+                prefixIcon: IconButton(
+                  icon: const Icon(
+                    Icons.my_location_rounded,
+                    color: CupertinoColors.activeBlue,
                   ),
-                  suffixIcon: searchTextEditingController.text.isEmpty
-                      ? null
-                      : IconButton(
-                          color: const Color(0xFF5E758C),
-                          icon: const Icon(Icons.clear),
-                          onPressed: () {
-                            searchTextEditingController.clear();
-                          },
-                        ),
-                  hintText: 'Search for a place',
-                  hintStyle: AppTextLightTheme
-                      .searchBarTextFieldAndTextFieldToSearchAndTextFieldHintText,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(
-                      width: 0,
-                      style: BorderStyle.none,
-                    ),
+                  onPressed: () {
+                    _determinePosition(context);
+                  },
+                ),
+                suffixIcon: searchTextEditingController.text.isEmpty
+                    ? null
+                    : IconButton(
+                        color: const Color(0xFF5E758C),
+                        icon: const Icon(Icons.clear),
+                        onPressed: () {
+                          searchTextEditingController.clear();
+                        },
+                      ),
+                hintText: 'Search for a place',
+                hintStyle: AppTextLightTheme
+                    .searchBarTextFieldAndTextFieldToSearchAndTextFieldHintText,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(
+                    width: 0,
+                    style: BorderStyle.none,
                   ),
                 ),
               ),
             ),
-            isLoading
-                ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : Expanded(
-                    child: ListView.builder(
-                      itemCount: suggestionsReponse.length,
-                      itemBuilder: (context, index) {
-                        return suggestionsReponse.isEmpty
-                            ? const Center(
-                                child: Text('No Results Found'),
-                              )
-                            : ListTile(
-                                contentPadding:
-                                    EdgeInsets.symmetric(horizontal: 24.w),
-                                title: Text(suggestionsReponse[index]
-                                    .properties!
-                                    .name!),
-                                onTap: () {
-                                  _handleListItemTap(
-                                    context,
-                                    suggestionsReponse[index],
-                                  );
-                                },
-                              );
-                      },
-                    ),
+          ),
+          isLoading
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Expanded(
+                  child: ListView.builder(
+                    itemCount: suggestionsReponse.length,
+                    itemBuilder: (context, index) {
+                      return suggestionsReponse.isEmpty
+                          ? const Center(
+                              child: Text('No Results Found'),
+                            )
+                          : ListTile(
+                              contentPadding:
+                                  EdgeInsets.symmetric(horizontal: 24.w),
+                              title: Text(
+                                  suggestionsReponse[index].properties!.name!),
+                              onTap: () {
+                                _handleListItemTap(
+                                  context,
+                                  suggestionsReponse[index],
+                                );
+                              },
+                            );
+                    },
                   ),
-          ],
-        ),
+                ),
+        ],
       ),
     );
   }
