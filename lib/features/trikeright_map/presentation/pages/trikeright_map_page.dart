@@ -66,7 +66,7 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
           const Duration(seconds: 1)); // delay to prevent CPU overload
       if (_isRoutingComplete()) {
         if (mounted) {
-          Log.i('Routing is complete');
+          Log.i('Routing is in progress');
           _startRouting();
         }
         break;

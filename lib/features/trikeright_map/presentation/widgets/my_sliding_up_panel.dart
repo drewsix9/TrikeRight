@@ -83,15 +83,10 @@ class MySlidingUpPanel extends StatelessWidget {
   }
 
   void _onTapTextField(BuildContext context, TextEditingController controller) {
-    Navigator.of(context)
-        .pushNamed(
+    Navigator.of(context).pushNamed(
       '/search_page',
       arguments: controller,
-    )
-        .then((_) {
-      Provider.of<TextEditingControllerProvider>(context, listen: false)
-          .updateControllers();
-    });
+    );
   }
 
   void _onPressEstimateFare(
@@ -101,19 +96,11 @@ class MySlidingUpPanel extends StatelessWidget {
     var sourceController = textControllerProviderListenFalse.sourceController;
     var destinationController =
         textControllerProviderListenFalse.destinationController;
-    if (sourceController.text.isEmpty && destinationController.text.isEmpty) {
+    if ((sourceController.text.isEmpty && destinationController.text.isEmpty) ||
+        (routeResponseProvider.isInitialized == false)) {
       const snackBar = SnackBar(
         content: Text(
           'Please fill in the source and destination fields.',
-        ),
-      );
-      Future.delayed(Duration.zero, () {
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      });
-    } else if (routeResponseProvider.isInitialized == false) {
-      const snackBar = SnackBar(
-        content: Text(
-          'Please press the route button.',
         ),
       );
       Future.delayed(Duration.zero, () {

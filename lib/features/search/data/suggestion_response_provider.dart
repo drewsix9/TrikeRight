@@ -17,4 +17,11 @@ class SuggestionsResponseProvider extends ChangeNotifier {
     _suggestionsReponse.clear();
     notifyListeners();
   }
+
+  void resetSuggestionsResponse() {
+    sourceHasSelected = false;
+    destinationHasSelected = false;
+    _suggestionsReponse = [];
+    notifyListeners();
+  }
 }

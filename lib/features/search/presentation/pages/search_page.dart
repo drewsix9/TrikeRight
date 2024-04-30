@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,15 +26,9 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   get searchTextEditingController => widget.searchTextEditingController;
   late SuggestionsResponseProvider suggestionResponseProvider;
-  late TextEditingController sourceController =
-      Provider.of<TextEditingControllerProvider>(context, listen: false)
-          .sourceController;
-  late TextEditingController destinationController =
-      Provider.of<TextEditingControllerProvider>(context, listen: false)
-          .destinationController;
-
-  late FeatureProvider featureProvider =
-      Provider.of<FeatureProvider>(context, listen: false);
+  late TextEditingController sourceController;
+  late TextEditingController destinationController;
+  late FeatureProvider featureProvider;
 
   bool isLoading = false;
   Timer? _debounceTimer;
@@ -46,13 +39,15 @@ class _SearchPageState extends State<SearchPage> {
     searchTextEditingController.addListener(() {
       _getAutoCompleteData(searchTextEditingController.text);
     });
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
     suggestionResponseProvider =
-        Provider.of<SuggestionsResponseProvider>(context);
+        Provider.of<SuggestionsResponseProvider>(context, listen: false);
+    sourceController =
+        Provider.of<TextEditingControllerProvider>(context, listen: false)
+            .sourceController;
+    destinationController =
+        Provider.of<TextEditingControllerProvider>(context, listen: false)
+            .destinationController;
+    featureProvider = Provider.of<FeatureProvider>(context, listen: false);
   }
 
   @override
@@ -187,16 +182,6 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   Future<Position?> _determinePosition(BuildContext context) async {
-    final TextEditingController sourceController =
-        Provider.of<TextEditingControllerProvider>(context, listen: false)
-            .sourceController;
-    final TextEditingController destinationController =
-        Provider.of<TextEditingControllerProvider>(context, listen: false)
-            .destinationController;
-
-    final FeatureProvider featureProvider =
-        Provider.of<FeatureProvider>(context, listen: false);
-
     bool serviceEnabled;
     LocationPermission permission;
 
@@ -246,8 +231,10 @@ class _SearchPageState extends State<SearchPage> {
 
     if (sourceController == widget.searchTextEditingController) {
       featureProvider.setSourceFeature(generatedFeaturefromGeoCoding);
+      suggestionResponseProvider.sourceHasSelected = true;
     } else if (destinationController == widget.searchTextEditingController) {
       featureProvider.setDestinationFeature(generatedFeaturefromGeoCoding);
+      suggestionResponseProvider.destinationHasSelected = true;
     }
 
     if (context.mounted) {

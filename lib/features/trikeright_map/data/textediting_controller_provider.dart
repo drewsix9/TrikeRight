@@ -9,8 +9,4 @@ class TextEditingControllerProvider extends ChangeNotifier {
     destinationController.clear();
     notifyListeners();
   }
-
-  void updateControllers() {
-    notifyListeners();
-  }
 }
