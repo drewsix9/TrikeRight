@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:trikeright/core/themes/trikeright_theme.dart';
 import 'package:trikeright/features/history/data/history_item.dart';
+import 'package:trikeright/features/search/data/suggestion_response_provider.dart';
+import 'package:trikeright/features/trikeright_map/data/drag_handle_provider.dart';
+import 'package:trikeright/features/trikeright_map/data/services/openstreetmap_api.dart';
+import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
+import 'package:trikeright/features/trikeright_map/domain/state_provider.dart';
 
 class CalculateFareDialog extends StatefulWidget {
   final HistoryItem historyItem;
@@ -16,6 +22,32 @@ class CalculateFareDialog extends StatefulWidget {
 
 class _CalculateFareDialogState extends State<CalculateFareDialog> {
   get historyItem => widget.historyItem;
+  late TextEditingControllerProvider textEditingControllerProvider;
+  late TextEditingController sourceController;
+  late TextEditingController destinationController;
+  late SuggestionsResponseProvider suggestionsResponseProvider;
+  late OpenStreetMapApiProvider openStreetMapApiListenFalse;
+  late DragHandleProvider dragHandleProviderListenFalse;
+  late StateProvider stateProvider;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      textEditingControllerProvider =
+          context.read<TextEditingControllerProvider>();
+      sourceController = textEditingControllerProvider.sourceController;
+      destinationController =
+          textEditingControllerProvider.destinationController;
+      suggestionsResponseProvider =
+          context.read<SuggestionsResponseProvider>();
+      openStreetMapApiListenFalse =
+          context.read<OpenStreetMapApiProvider>();
+      dragHandleProviderListenFalse =
+          context.read<DragHandleProvider>();
+      stateProvider = context.read<StateProvider>();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +94,18 @@ class _CalculateFareDialogState extends State<CalculateFareDialog> {
                             padding: EdgeInsets.zero,
                             onPressed: () {
                               Navigator.of(context).pop();
+                              stateProvider.resetTrikeRightState(
+                                textEditingControllerProvider,
+                                suggestionsResponseProvider,
+                              );
+                              stateProvider.checkRoutingIfIsComplete(
+                                context,
+                                sourceController,
+                                destinationController,
+                                suggestionsResponseProvider,
+                                openStreetMapApiListenFalse,
+                                dragHandleProviderListenFalse,
+                              );
                             },
                             icon: const Icon(
                               Icons.close,

@@ -40,14 +40,14 @@ class _SearchPageState extends State<SearchPage> {
       _getAutoCompleteData(searchTextEditingController.text);
     });
     suggestionResponseProvider =
-        Provider.of<SuggestionsResponseProvider>(context, listen: false);
+        context.read<SuggestionsResponseProvider>();
     sourceController =
-        Provider.of<TextEditingControllerProvider>(context, listen: false)
+        context.read<TextEditingControllerProvider>()
             .sourceController;
     destinationController =
-        Provider.of<TextEditingControllerProvider>(context, listen: false)
+        context.read<TextEditingControllerProvider>()
             .destinationController;
-    featureProvider = Provider.of<FeatureProvider>(context, listen: false);
+    featureProvider = context.read<FeatureProvider>();
   }
 
   @override

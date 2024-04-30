@@ -9,6 +9,7 @@ import 'package:trikeright/features/trikeright_map/data/drag_handle_provider.dar
 import 'package:trikeright/features/trikeright_map/data/routeresponse_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/services/openstreetmap_api.dart';
 import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
+import 'package:trikeright/features/trikeright_map/domain/state_provider.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_build_map.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_sliding_up_panel.dart';
 import 'package:trikeright/features/user_setup/data/passenger_type_provider.dart';
@@ -25,6 +26,9 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
   late TextEditingController destinationController;
   late RouteResponseProvider routeResponseProvider;
   late SuggestionsResponseProvider suggestionsResponseProvider;
+  late StateProvider stateProvider;
+  late OpenStreetMapApiProvider openStreetMapApiProvider;
+  late DragHandleProvider dragHandleProvider;
 
   @override
   void initState() {
@@ -32,52 +36,30 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       sourceController =
-          Provider.of<TextEditingControllerProvider>(context, listen: false)
+          context.read<TextEditingControllerProvider>()
               .sourceController;
       destinationController =
-          Provider.of<TextEditingControllerProvider>(context, listen: false)
+          context.read<TextEditingControllerProvider>()
               .destinationController;
       routeResponseProvider =
-          Provider.of<RouteResponseProvider>(context, listen: false);
+          context.read<RouteResponseProvider>();
       suggestionsResponseProvider =
-          Provider.of<SuggestionsResponseProvider>(context, listen: false);
-      _checkRoutingIfIsComplete();
+          context.read<SuggestionsResponseProvider>();
+      stateProvider = context.read<StateProvider>();
+      openStreetMapApiProvider =
+          context.read<OpenStreetMapApiProvider>();
+      dragHandleProvider =
+          context.read<DragHandleProvider>();
+      stateProvider.checkRoutingIfIsComplete(
+          context,
+          sourceController,
+          destinationController,
+          suggestionsResponseProvider,
+          openStreetMapApiProvider,
+          dragHandleProvider);
     });
-    Provider.of<PassengerTypeProvider>(context, listen: false)
+    context.read<PassengerTypeProvider>()
         .initPassengerTypeSharedPref();
-  }
-
-  bool _isRoutingComplete() {
-    Log.i('''isRoutingComplete is called
-          sourceController: ${sourceController.text.isNotEmpty.toString()}
-          destinationController: ${destinationController.text.isNotEmpty.toString()}
-          suggestionsResponseProvider.sourceHasSelected: ${suggestionsResponseProvider.sourceHasSelected.toString()}
-          suggestionsResponseProvider.destinationHasSelected: ${suggestionsResponseProvider.destinationHasSelected.toString()}
-        ''');
-    return sourceController.text.isNotEmpty &&
-        destinationController.text.isNotEmpty &&
-        suggestionsResponseProvider.sourceHasSelected &&
-        suggestionsResponseProvider.destinationHasSelected;
-  }
-
-  void _checkRoutingIfIsComplete() async {
-    while (!_isRoutingComplete()) {
-      await Future.delayed(
-          const Duration(seconds: 1)); // delay to prevent CPU overload
-      if (_isRoutingComplete()) {
-        if (mounted) {
-          Log.i('Routing is in progress');
-          _startRouting();
-        }
-        break;
-      }
-    }
-  }
-
-  void _startRouting() {
-    Provider.of<OpenStreetMapApi>(context, listen: false)
-        .processFeatureCoordinates(context);
-    Provider.of<DragHandleProvider>(context, listen: false).closePanel();
   }
 
   @override

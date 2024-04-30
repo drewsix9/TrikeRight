@@ -38,8 +38,7 @@ class _HistoryPageState extends State<HistoryPage> {
             TextButton(
               child: const Text('Delete'),
               onPressed: () {
-                Provider.of<HistoryListProvider>(context, listen: false)
-                    .deleteHistoryList();
+                context.read<HistoryListProvider>().deleteHistoryList();
                 Navigator.of(context).pop();
               },
             ),
@@ -69,11 +68,9 @@ class _HistoryPageState extends State<HistoryPage> {
           ],
           onSelected: (value) {
             if (value == 'Sort by Fare') {
-              Provider.of<HistoryListProvider>(context, listen: false)
-                  .bucketSortByFareHistoryList();
+              context.read<HistoryListProvider>().bucketSortByFareHistoryList();
             } else {
-              Provider.of<HistoryListProvider>(context, listen: false)
-                  .sortByDateTimeHistoryList();
+              context.read<HistoryListProvider>().sortByDateTimeHistoryList();
             }
           },
         ),

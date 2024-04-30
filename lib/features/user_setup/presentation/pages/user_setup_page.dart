@@ -33,7 +33,7 @@ class _UserSetupPageState extends State<UserSetupPage> {
   void initState() {
     super.initState();
     FlutterNativeSplash.remove();
-    Provider.of<PassengerTypeProvider>(context, listen: false)
+    context.read<PassengerTypeProvider>()
         .initPassengerTypeSharedPref();
   }
 

@@ -25,9 +25,9 @@ class MySlidingUpPanel extends StatelessWidget {
     var textControllerProvider =
         Provider.of<TextEditingControllerProvider>(context);
     var textControllerProviderListenFalse =
-        Provider.of<TextEditingControllerProvider>(context, listen: false);
+        context.read<TextEditingControllerProvider>();
     var routeResponseProvider =
-        Provider.of<RouteResponseProvider>(context, listen: false);
+        context.read<RouteResponseProvider>();
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [

@@ -11,7 +11,7 @@ import 'package:trikeright/features/trikeright_map/data/routeresponse_api_model.
 import 'package:trikeright/features/trikeright_map/data/routeresponse_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/services/openrouteservice_api.dart';
 
-class OpenStreetMapApi extends ChangeNotifier {
+class OpenStreetMapApiProvider extends ChangeNotifier {
   List<latlng.LatLng> _points = [];
   List<Marker> _markers = [];
   final MapController mapController = MapController();
@@ -53,7 +53,7 @@ class OpenStreetMapApi extends ChangeNotifier {
       RouteResponseApiModel rRAM = routeResponseApiModelFromJson(response.body);
 
       if (context.mounted) {
-        Provider.of<RouteResponseProvider>(context, listen: false)
+        context.read<RouteResponseProvider>()
             .routeResponseApiModel = rRAM;
       }
 
@@ -98,7 +98,7 @@ class OpenStreetMapApi extends ChangeNotifier {
   }
 
   Future<void> processFeatureCoordinates(BuildContext context) async {
-    var featureProvider = Provider.of<FeatureProvider>(context, listen: false);
+    var featureProvider = context.read<FeatureProvider>();
     var sourceFeature = featureProvider.sourceFeature;
     var destinationFeature = featureProvider.destinationFeature;
     if (sourceFeature != null && destinationFeature != null) {
@@ -113,7 +113,7 @@ class OpenStreetMapApi extends ChangeNotifier {
   Future<void> getCoordinates(BuildContext context, ACFeature sourceFeature,
       ACFeature destinationFeature) async {
     var routeResponseApiModelProvider =
-        Provider.of<RouteResponseProvider>(context, listen: false);
+        context.read<RouteResponseProvider>();
     try {
       var response = await http.get(OpenRouteServiceApi.getRouteUrl(
         sourceFeature.geometry!.coordinates!.join(','),

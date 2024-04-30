@@ -17,7 +17,7 @@ class MyBuildMap extends StatefulWidget {
 class MyBuildMapState extends State<MyBuildMap> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<OpenStreetMapApi>(
+    return Consumer<OpenStreetMapApiProvider>(
       builder: (context, value, child) {
         return FlutterMap(
           mapController: value.mapController,

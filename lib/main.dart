@@ -18,6 +18,7 @@ import 'package:trikeright/features/trikeright_map/data/feature_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/routeresponse_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/services/openstreetmap_api.dart';
 import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
+import 'package:trikeright/features/trikeright_map/domain/state_provider.dart';
 import 'package:trikeright/features/user_setup/data/passenger_type_provider.dart';
 import 'package:trikeright/features/user_setup/data/passenger_types.dart';
 import 'package:trikeright/features/user_setup/presentation/pages/user_setup_page.dart';
@@ -48,10 +49,11 @@ void main() async {
         ChangeNotifierProvider(create: (_) => TextEditingControllerProvider()),
         ChangeNotifierProvider(create: (_) => FeatureProvider()),
         ChangeNotifierProvider(create: (_) => RouteResponseProvider()),
-        ChangeNotifierProvider(create: (_) => OpenStreetMapApi()),
+        ChangeNotifierProvider(create: (_) => OpenStreetMapApiProvider()),
         ChangeNotifierProvider(create: (_) => DragHandleProvider()),
         ChangeNotifierProvider(create: (_) => HistoryListProvider()),
         ChangeNotifierProvider(create: (_) => SuggestionsResponseProvider()),
+        ChangeNotifierProvider(create: (_) => StateProvider()),
       ],
       child: const MyApp(),
     ),
