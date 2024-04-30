@@ -12,6 +12,7 @@ import 'package:trikeright/core/themes/trikeright_theme.dart';
 import 'package:trikeright/features/history/data/history_item.dart';
 import 'package:trikeright/features/history/data/history_list_provider.dart';
 import 'package:trikeright/features/persistent_nav_bar/presentation/pages/persistent_nav_bar.dart';
+import 'package:trikeright/features/search/data/suggestion_response_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/drag_handle_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/feature_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/routeresponse_provider.dart';
@@ -50,6 +51,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => OpenStreetMapApi()),
         ChangeNotifierProvider(create: (_) => DragHandleProvider()),
         ChangeNotifierProvider(create: (_) => HistoryListProvider()),
+        ChangeNotifierProvider(create: (_) => SuggestionsResponseProvider()),
       ],
       child: const MyApp(),
     ),

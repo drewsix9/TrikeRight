@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:trikeright/core/themes/trikeright_theme.dart';
 import 'package:trikeright/core/utils/log.dart';
 import 'package:trikeright/features/search/data/autocomplete_api_model.dart';
+import 'package:trikeright/features/search/data/suggestion_response_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/feature_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/services/openrouteservice_api.dart';
 import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
@@ -25,10 +26,10 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   get searchTextEditingController => widget.searchTextEditingController;
+  late SuggestionsResponseProvider suggestionResponseProvider;
 
   bool isLoading = false;
   Timer? _debounceTimer;
-  List<ACFeature> suggestionsReponse = [];
 
   @override
   void initState() {
@@ -36,6 +37,13 @@ class _SearchPageState extends State<SearchPage> {
     searchTextEditingController.addListener(() {
       _getAutoCompleteData(searchTextEditingController.text);
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    suggestionResponseProvider =
+        Provider.of<SuggestionsResponseProvider>(context);
   }
 
   @override
@@ -98,21 +106,24 @@ class _SearchPageState extends State<SearchPage> {
                 )
               : Expanded(
                   child: ListView.builder(
-                    itemCount: suggestionsReponse.length,
+                    itemCount:
+                        suggestionResponseProvider.suggestionsReponse.length,
                     itemBuilder: (context, index) {
-                      return suggestionsReponse.isEmpty
+                      return suggestionResponseProvider
+                              .suggestionsReponse.isEmpty
                           ? const Center(
                               child: Text('No Results Found'),
                             )
                           : ListTile(
                               contentPadding:
                                   EdgeInsets.symmetric(horizontal: 24.w),
-                              title: Text(
-                                  suggestionsReponse[index].properties!.name!),
+                              title: Text(suggestionResponseProvider
+                                  .suggestionsReponse[index].properties!.name!),
                               onTap: () {
                                 _handleListItemTap(
                                   context,
-                                  suggestionsReponse[index],
+                                  suggestionResponseProvider
+                                      .suggestionsReponse[index],
                                 );
                               },
                             );
@@ -142,7 +153,7 @@ class _SearchPageState extends State<SearchPage> {
     }
 
     widget.searchTextEditingController.text = selectedFeature.properties!.name!;
-    suggestionsReponse.clear();
+    suggestionResponseProvider.clearSuggestionsReponse();
     Navigator.of(context).pop();
   }
 
@@ -166,7 +177,8 @@ class _SearchPageState extends State<SearchPage> {
             var autoCompleteResponseApiModel =
                 autoCompleteResponseApiModelFromJson(response.body);
             Log.i(autoCompleteResponseApiModel.toString());
-            suggestionsReponse = autoCompleteResponseApiModel.features!;
+            suggestionResponseProvider.suggestionsReponse =
+                autoCompleteResponseApiModel.features!;
           }
         });
       }

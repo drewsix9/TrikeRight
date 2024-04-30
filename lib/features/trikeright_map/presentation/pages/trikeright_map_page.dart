@@ -3,7 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:trikeright/core/themes/trikeright_theme.dart';
+import 'package:trikeright/core/utils/log.dart';
+import 'package:trikeright/features/search/data/suggestion_response_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/drag_handle_provider.dart';
+import 'package:trikeright/features/trikeright_map/data/routeresponse_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/services/openstreetmap_api.dart';
 import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
 import 'package:trikeright/features/trikeright_map/presentation/widgets/my_build_map.dart';
@@ -18,11 +21,53 @@ class TrikeRightMapPage extends StatefulWidget {
 }
 
 class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
+  late TextEditingController sourceController;
+  late TextEditingController destinationController;
+  late RouteResponseProvider routeResponseProvider;
+  late SuggestionsResponseProvider suggestionsResponseProvider;
+
   @override
   void initState() {
+    Log.i('TrikeRightMapPage initState is called');
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      sourceController =
+          Provider.of<TextEditingControllerProvider>(context, listen: false)
+              .sourceController;
+      destinationController =
+          Provider.of<TextEditingControllerProvider>(context, listen: false)
+              .destinationController;
+      routeResponseProvider =
+          Provider.of<RouteResponseProvider>(context, listen: false);
+      suggestionsResponseProvider =
+          Provider.of<SuggestionsResponseProvider>(context, listen: false);
+      checkRoutingIfIsComplete();
+    });
     Provider.of<PassengerTypeProvider>(context, listen: false)
         .initPassengerTypeSharedPref();
+  }
+
+  bool isRoutingComplete() {
+    Log.i('isRoutingComplete is called');
+    return sourceController.text.isNotEmpty &&
+        destinationController.text.isNotEmpty &&
+        suggestionsResponseProvider.suggestionsReponse.isEmpty;
+  }
+
+  void checkRoutingIfIsComplete() async {
+    while (!isRoutingComplete()) {
+      await Future.delayed(
+          const Duration(seconds: 1)); // delay to prevent CPU overload
+      if (isRoutingComplete()) {
+        if (mounted) {
+          Log.i('Routing is complete');
+          Provider.of<OpenStreetMapApi>(context, listen: false)
+              .processFeatureCoordinates(context);
+          Provider.of<DragHandleProvider>(context, listen: false).closePanel();
+        }
+        break;
+      }
+    }
   }
 
   @override
@@ -71,11 +116,11 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
               ),
             ),
           ),
-          Positioned(
-            top: 88.h,
-            right: 12.w,
-            child: _fAB(),
-          ),
+          // Positioned(
+          //   top: 88.h,
+          //   right: 12.w,
+          //   child: _fAB(),
+          // ),
           // Positioned(
           //   top: 200.h,
           //   right: 16.w,
