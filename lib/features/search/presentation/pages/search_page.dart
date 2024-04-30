@@ -27,6 +27,15 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   get searchTextEditingController => widget.searchTextEditingController;
   late SuggestionsResponseProvider suggestionResponseProvider;
+  late TextEditingController sourceController =
+      Provider.of<TextEditingControllerProvider>(context, listen: false)
+          .sourceController;
+  late TextEditingController destinationController =
+      Provider.of<TextEditingControllerProvider>(context, listen: false)
+          .destinationController;
+
+  late FeatureProvider featureProvider =
+      Provider.of<FeatureProvider>(context, listen: false);
 
   bool isLoading = false;
   Timer? _debounceTimer;
@@ -48,6 +57,11 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    // if (searchTextEditingController == sourceController) {
+    //   suggestionResponseProvider.sourceHasSelected = false;
+    // } else if (searchTextEditingController == destinationController) {
+    //   suggestionResponseProvider.destinationHasSelected = false;
+    // }
     return Scaffold(
       backgroundColor: const Color(0xFFF7FAFC),
       resizeToAvoidBottomInset: false,
@@ -136,19 +150,11 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   void _handleListItemTap(BuildContext context, ACFeature selectedFeature) {
-    final TextEditingController sourceController =
-        Provider.of<TextEditingControllerProvider>(context, listen: false)
-            .sourceController;
-    final TextEditingController destinationController =
-        Provider.of<TextEditingControllerProvider>(context, listen: false)
-            .destinationController;
-
-    final FeatureProvider featureProvider =
-        Provider.of<FeatureProvider>(context, listen: false);
-
     if (sourceController == widget.searchTextEditingController) {
+      suggestionResponseProvider.sourceHasSelected = true;
       featureProvider.setSourceFeature(selectedFeature);
     } else if (destinationController == widget.searchTextEditingController) {
+      suggestionResponseProvider.destinationHasSelected = true;
       featureProvider.setDestinationFeature(selectedFeature);
     }
 

@@ -4,6 +4,8 @@ import 'package:trikeright/features/search/data/autocomplete_api_model.dart';
 class SuggestionsResponseProvider extends ChangeNotifier {
   bool isInitialized = false;
   List<ACFeature> _suggestionsReponse = [];
+  bool sourceHasSelected = false;
+  bool destinationHasSelected = false;
 
   List<ACFeature> get suggestionsReponse => _suggestionsReponse;
 

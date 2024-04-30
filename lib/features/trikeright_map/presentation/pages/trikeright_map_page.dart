@@ -48,10 +48,16 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
   }
 
   bool isRoutingComplete() {
-    Log.i('isRoutingComplete is called');
+    Log.i('''isRoutingComplete is called
+          sourceController: ${sourceController.text.isNotEmpty.toString()}
+          destinationController: ${destinationController.text.isNotEmpty.toString()}
+          suggestionsResponseProvider.sourceHasSelected: ${suggestionsResponseProvider.sourceHasSelected.toString()}
+          suggestionsResponseProvider.destinationHasSelected: ${suggestionsResponseProvider.destinationHasSelected.toString()}
+        ''');
     return sourceController.text.isNotEmpty &&
         destinationController.text.isNotEmpty &&
-        suggestionsResponseProvider.suggestionsReponse.isEmpty;
+        suggestionsResponseProvider.sourceHasSelected &&
+        suggestionsResponseProvider.destinationHasSelected;
   }
 
   void checkRoutingIfIsComplete() async {
