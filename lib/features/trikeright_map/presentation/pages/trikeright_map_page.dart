@@ -41,13 +41,13 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
           Provider.of<RouteResponseProvider>(context, listen: false);
       suggestionsResponseProvider =
           Provider.of<SuggestionsResponseProvider>(context, listen: false);
-      checkRoutingIfIsComplete();
+      _checkRoutingIfIsComplete();
     });
     Provider.of<PassengerTypeProvider>(context, listen: false)
         .initPassengerTypeSharedPref();
   }
 
-  bool isRoutingComplete() {
+  bool _isRoutingComplete() {
     Log.i('''isRoutingComplete is called
           sourceController: ${sourceController.text.isNotEmpty.toString()}
           destinationController: ${destinationController.text.isNotEmpty.toString()}
@@ -60,20 +60,24 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
         suggestionsResponseProvider.destinationHasSelected;
   }
 
-  void checkRoutingIfIsComplete() async {
-    while (!isRoutingComplete()) {
+  void _checkRoutingIfIsComplete() async {
+    while (!_isRoutingComplete()) {
       await Future.delayed(
           const Duration(seconds: 1)); // delay to prevent CPU overload
-      if (isRoutingComplete()) {
+      if (_isRoutingComplete()) {
         if (mounted) {
           Log.i('Routing is complete');
-          Provider.of<OpenStreetMapApi>(context, listen: false)
-              .processFeatureCoordinates(context);
-          Provider.of<DragHandleProvider>(context, listen: false).closePanel();
+          _startRouting();
         }
         break;
       }
     }
+  }
+
+  void _startRouting() {
+    Provider.of<OpenStreetMapApi>(context, listen: false)
+        .processFeatureCoordinates(context);
+    Provider.of<DragHandleProvider>(context, listen: false).closePanel();
   }
 
   @override
@@ -122,76 +126,8 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
               ),
             ),
           ),
-          // Positioned(
-          //   top: 88.h,
-          //   right: 12.w,
-          //   child: _fAB(),
-          // ),
-          // Positioned(
-          //   top: 200.h,
-          //   right: 16.w,
-          //   child: _fAB2(),
-          // ),
         ],
       ),
     );
-  }
-
-  FloatingActionButton _fAB() {
-    return FloatingActionButton(
-      heroTag: 'fab',
-      onPressed: () async {
-        _onPressFAB(context);
-      },
-      child: const Icon(
-        Icons.directions,
-        color: Color(0xFF1C91F2),
-      ),
-    );
-  }
-
-  FloatingActionButton _fAB2() {
-    return FloatingActionButton(
-      heroTag: 'fab2',
-      onPressed: () async {
-        var textProvider =
-            Provider.of<TextEditingControllerProvider>(context, listen: false);
-        textProvider.sourceController.text = 'Bohol Wisdom School';
-        textProvider.destinationController.text =
-            'Bohol Island State University';
-        Provider.of<OpenStreetMapApi>(context, listen: false)
-            .testProcessFeatureCoordinatesHardcoded(context);
-        Provider.of<DragHandleProvider>(context, listen: false).closePanel();
-      },
-      child: const Icon(
-        Icons.directions,
-        color: Color(0xFF1C91F2),
-      ),
-    );
-  }
-
-  void _onPressFAB(
-    BuildContext context,
-  ) {
-    var sourceController =
-        Provider.of<TextEditingControllerProvider>(context, listen: false)
-            .sourceController;
-    var destinationController =
-        Provider.of<TextEditingControllerProvider>(context, listen: false)
-            .destinationController;
-    if (sourceController.text.isEmpty && destinationController.text.isEmpty) {
-      const snackBar = SnackBar(
-        content: Text(
-          'Please fill in the source and destination fields.',
-        ),
-      );
-      Future.delayed(Duration.zero, () {
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      });
-    } else {
-      Provider.of<OpenStreetMapApi>(context, listen: false)
-          .processFeatureCoordinates(context);
-      Provider.of<DragHandleProvider>(context, listen: false).closePanel();
-    }
   }
 }

@@ -57,11 +57,6 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    // if (searchTextEditingController == sourceController) {
-    //   suggestionResponseProvider.sourceHasSelected = false;
-    // } else if (searchTextEditingController == destinationController) {
-    //   suggestionResponseProvider.destinationHasSelected = false;
-    // }
     return Scaffold(
       backgroundColor: const Color(0xFFF7FAFC),
       resizeToAvoidBottomInset: false,
