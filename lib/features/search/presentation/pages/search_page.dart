@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,9 +30,7 @@ class _SearchPageState extends State<SearchPage> {
   late TextEditingController destinationController;
   late FeatureProvider featureProvider;
 
-  bool _isGettingLocation = false;
-  bool isGettingSuggestions = false;
-
+  bool isLoading = false;
   Timer? _debounceTimer;
 
   @override
@@ -107,7 +104,7 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ),
           ),
-          (isGettingSuggestions || _isGettingLocation)
+          isLoading
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
@@ -163,7 +160,7 @@ class _SearchPageState extends State<SearchPage> {
     _debounceTimer = Timer(const Duration(milliseconds: 500), () async {
       if (mounted) {
         setState(() {
-          isGettingSuggestions = true;
+          isLoading = true;
         });
       }
       var response = await http
@@ -171,7 +168,7 @@ class _SearchPageState extends State<SearchPage> {
 
       if (mounted) {
         setState(() {
-          isGettingSuggestions = false;
+          isLoading = false;
           if (response.statusCode == 200) {
             var autoCompleteResponseApiModel =
                 autoCompleteResponseApiModelFromJson(response.body);
@@ -187,10 +184,6 @@ class _SearchPageState extends State<SearchPage> {
   Future<Position?> _determinePosition(BuildContext context) async {
     bool serviceEnabled;
     LocationPermission permission;
-
-    setState(() {
-      _isGettingLocation = true;
-    });
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
@@ -247,11 +240,6 @@ class _SearchPageState extends State<SearchPage> {
     if (context.mounted) {
       Navigator.of(context).pop();
     }
-
-    setState(() {
-      _isGettingLocation = false;
-    });
-
     return null;
   }
 }
