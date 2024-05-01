@@ -35,10 +35,12 @@ class OpenStreetMapApiProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // TODO: Review this method
   void resetOpenStreetMap() {
     _points = [];
     _markers = [];
     _bounds = null;
+    notifyListeners();
   }
 
   Future<void> processFeatureCoordinates(BuildContext context) async {
