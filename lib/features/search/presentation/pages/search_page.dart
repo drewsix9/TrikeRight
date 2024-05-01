@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,7 +31,8 @@ class _SearchPageState extends State<SearchPage> {
   late TextEditingController destinationController;
   late FeatureProvider featureProvider;
 
-  bool isLoading = false;
+  bool isGettingSuggestions = false;
+  bool isGettingLocation = false;
   Timer? _debounceTimer;
 
   @override
@@ -39,14 +41,11 @@ class _SearchPageState extends State<SearchPage> {
     searchTextEditingController.addListener(() {
       _getAutoCompleteData(searchTextEditingController.text);
     });
-    suggestionResponseProvider =
-        context.read<SuggestionsResponseProvider>();
+    suggestionResponseProvider = context.read<SuggestionsResponseProvider>();
     sourceController =
-        context.read<TextEditingControllerProvider>()
-            .sourceController;
+        context.read<TextEditingControllerProvider>().sourceController;
     destinationController =
-        context.read<TextEditingControllerProvider>()
-            .destinationController;
+        context.read<TextEditingControllerProvider>().destinationController;
     featureProvider = context.read<FeatureProvider>();
   }
 
@@ -104,7 +103,7 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ),
           ),
-          isLoading
+          (isGettingSuggestions || isGettingLocation)
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
@@ -160,7 +159,7 @@ class _SearchPageState extends State<SearchPage> {
     _debounceTimer = Timer(const Duration(milliseconds: 500), () async {
       if (mounted) {
         setState(() {
-          isLoading = true;
+          isGettingSuggestions = true;
         });
       }
       var response = await http
@@ -168,7 +167,7 @@ class _SearchPageState extends State<SearchPage> {
 
       if (mounted) {
         setState(() {
-          isLoading = false;
+          isGettingSuggestions = false;
           if (response.statusCode == 200) {
             var autoCompleteResponseApiModel =
                 autoCompleteResponseApiModelFromJson(response.body);
@@ -184,6 +183,10 @@ class _SearchPageState extends State<SearchPage> {
   Future<Position?> _determinePosition(BuildContext context) async {
     bool serviceEnabled;
     LocationPermission permission;
+
+    setState(() {
+      isGettingLocation = true;
+    });
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
@@ -240,6 +243,11 @@ class _SearchPageState extends State<SearchPage> {
     if (context.mounted) {
       Navigator.of(context).pop();
     }
+
+    setState(() {
+      isGettingLocation = false;
+    });
+
     return null;
   }
 }

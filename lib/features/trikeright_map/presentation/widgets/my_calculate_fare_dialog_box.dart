@@ -39,12 +39,9 @@ class _CalculateFareDialogState extends State<CalculateFareDialog> {
       sourceController = textEditingControllerProvider.sourceController;
       destinationController =
           textEditingControllerProvider.destinationController;
-      suggestionsResponseProvider =
-          context.read<SuggestionsResponseProvider>();
-      openStreetMapApiListenFalse =
-          context.read<OpenStreetMapApiProvider>();
-      dragHandleProviderListenFalse =
-          context.read<DragHandleProvider>();
+      suggestionsResponseProvider = context.read<SuggestionsResponseProvider>();
+      openStreetMapApiListenFalse = context.read<OpenStreetMapApiProvider>();
+      dragHandleProviderListenFalse = context.read<DragHandleProvider>();
       stateProvider = context.read<StateProvider>();
     });
   }
@@ -94,10 +91,10 @@ class _CalculateFareDialogState extends State<CalculateFareDialog> {
                             padding: EdgeInsets.zero,
                             onPressed: () {
                               Navigator.of(context).pop();
-                              stateProvider.resetTrikeRightState(
-                                textEditingControllerProvider,
-                                suggestionsResponseProvider,
-                              );
+                              stateProvider.resetTrikeRightMapState(
+                                  textEditingControllerProvider,
+                                  suggestionsResponseProvider,
+                                  openStreetMapApiListenFalse);
                               stateProvider.checkRoutingIfIsComplete(
                                 context,
                                 sourceController,

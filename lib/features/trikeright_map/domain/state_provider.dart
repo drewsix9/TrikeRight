@@ -6,13 +6,16 @@ import 'package:trikeright/features/trikeright_map/data/services/openstreetmap_a
 import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
 
 class StateProvider extends ChangeNotifier {
-  void resetTrikeRightState(
+  void resetTrikeRightMapState(
     TextEditingControllerProvider textEditingControllerProvider,
     SuggestionsResponseProvider suggestionsResponseProvider,
+    OpenStreetMapApiProvider openStreetMapApiProvider,
   ) {
     Log.i('resetTrikeRightState is called');
     textEditingControllerProvider.clearControllers();
     suggestionsResponseProvider.resetSuggestionsResponse();
+    openStreetMapApiProvider.resetOpenStreetMap();
+
     notifyListeners();
   }
 
@@ -23,18 +26,17 @@ class StateProvider extends ChangeNotifier {
       SuggestionsResponseProvider suggestionsResponseProvider,
       OpenStreetMapApiProvider openStreetMapApiListenFalse,
       DragHandleProvider dragHandleProviderListenFalse) async {
-    while (!isRoutingComplete(
-        sourceController, destinationController, suggestionsResponseProvider)) {
-      await Future.delayed(const Duration(seconds: 1));
+    while (true) {
       if (isRoutingComplete(sourceController, destinationController,
           suggestionsResponseProvider)) {
         if (context.mounted) {
-          Log.i('Routing is in progress');
-          startRouting(context, openStreetMapApiListenFalse,
-              dragHandleProviderListenFalse);
+        Log.i('Passed context.mounted check');
+        startRouting(context, openStreetMapApiListenFalse,
+            dragHandleProviderListenFalse);
         }
         break;
       }
+      await Future.delayed(const Duration(seconds: 1));
     }
   }
 
@@ -58,6 +60,7 @@ class StateProvider extends ChangeNotifier {
       BuildContext context,
       OpenStreetMapApiProvider openStreetMapApiListenFalse,
       DragHandleProvider dragHandleProviderListenFalse) {
+    Log.i('startRouting is called');
     openStreetMapApiListenFalse.processFeatureCoordinates(context);
     dragHandleProviderListenFalse.closePanel();
   }

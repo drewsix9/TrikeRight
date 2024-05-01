@@ -33,8 +33,9 @@ class _UserSetupPageState extends State<UserSetupPage> {
   void initState() {
     super.initState();
     FlutterNativeSplash.remove();
-    context.read<PassengerTypeProvider>()
-        .initPassengerTypeSharedPref();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<PassengerTypeProvider>().initPassengerTypeSharedPref();
+    });
   }
 
   @override
