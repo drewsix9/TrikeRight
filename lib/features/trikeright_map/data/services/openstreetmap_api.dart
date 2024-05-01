@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart' as latlng;
 import 'package:provider/provider.dart';
+import 'package:trikeright/core/const/coordinates.dart';
 import 'package:trikeright/core/utils/log.dart';
 import 'package:trikeright/features/search/data/autocomplete_api_model.dart';
 import 'package:trikeright/features/trikeright_map/data/feature_provider.dart';
@@ -12,34 +14,33 @@ import 'package:trikeright/features/trikeright_map/data/services/openrouteservic
 
 class OpenStreetMapApiProvider extends ChangeNotifier {
   List<latlng.LatLng> _points = [];
-  List<Marker> _markers = [];
-  final MapController mapController = MapController();
-  LatLngBounds? _bounds;
-
   List<latlng.LatLng> get points => _points;
-  List<Marker> get markers => _markers;
-  LatLngBounds? get bounds => _bounds;
-
   set points(List<latlng.LatLng> value) {
     _points = value;
     notifyListeners();
   }
 
+  List<Marker> _markers = [];
+  List<Marker> get markers => _markers;
   set markers(List<Marker> value) {
     _markers = value;
     notifyListeners();
   }
 
+  LatLngBounds? _bounds;
+  LatLngBounds? get bounds => _bounds;
   set bounds(LatLngBounds? value) {
     _bounds = value;
     notifyListeners();
   }
 
-  // TODO: Review this method
+  final MapController mapController = MapController();
+
   void resetOpenStreetMap() {
     _points = [];
     _markers = [];
     _bounds = null;
+    resetCamera();
     notifyListeners();
   }
 
@@ -122,7 +123,11 @@ class OpenStreetMapApiProvider extends ChangeNotifier {
     mapController.fitCamera(
       CameraFit.bounds(
           bounds: bounds!,
-          padding: const EdgeInsets.fromLTRB(50, 150, 50, 250)),
+          padding: EdgeInsets.fromLTRB(50.w, 100.h, 50.w, 250.h)),
     );
+  }
+
+  void resetCamera() {
+    mapController.move(tagbilaranLatLng, 14);
   }
 }

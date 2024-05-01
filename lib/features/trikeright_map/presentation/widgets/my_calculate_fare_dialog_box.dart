@@ -77,6 +77,7 @@ class _CalculateFareDialogState extends State<CalculateFareDialog> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    // TODO: remove this if close icon and add a button to find a new route
                     SizedBox(
                       width: double.infinity,
                       child: Row(
