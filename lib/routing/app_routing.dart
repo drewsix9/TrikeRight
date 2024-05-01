@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:trikeright/features/persistent_nav_bar/presentation/pages/persistent_nav_bar.dart';
 import 'package:trikeright/features/search/presentation/pages/search_page.dart';
 import 'package:trikeright/features/splashscreen/presentation/pages/splash_screen.dart';

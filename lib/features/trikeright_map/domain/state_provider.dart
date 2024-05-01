@@ -6,6 +6,8 @@ import 'package:trikeright/features/trikeright_map/data/services/openstreetmap_a
 import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
 
 class StateProvider extends ChangeNotifier {
+  late BuildContext context;
+
   void resetTrikeRightMapState(
     TextEditingControllerProvider textEditingControllerProvider,
     SuggestionsResponseProvider suggestionsResponseProvider,
@@ -15,12 +17,10 @@ class StateProvider extends ChangeNotifier {
     textEditingControllerProvider.clearControllers();
     suggestionsResponseProvider.resetSuggestionsResponse();
     openStreetMapApiProvider.resetOpenStreetMap();
-
     notifyListeners();
   }
 
   void checkRoutingIfIsComplete(
-      BuildContext context,
       TextEditingController sourceController,
       TextEditingController destinationController,
       SuggestionsResponseProvider suggestionsResponseProvider,
@@ -30,9 +30,11 @@ class StateProvider extends ChangeNotifier {
       if (isRoutingComplete(sourceController, destinationController,
           suggestionsResponseProvider)) {
         if (context.mounted) {
-        Log.i('Passed context.mounted check');
-        startRouting(context, openStreetMapApiListenFalse,
-            dragHandleProviderListenFalse);
+          Log.i('Passed context.mounted check');
+          startRouting(
+              openStreetMapApiListenFalse, dragHandleProviderListenFalse);
+        } else {
+          Log.i('context.mounted check failed');
         }
         break;
       }
@@ -56,9 +58,7 @@ class StateProvider extends ChangeNotifier {
         suggestionsResponseProvider.destinationHasSelected;
   }
 
-  void startRouting(
-      BuildContext context,
-      OpenStreetMapApiProvider openStreetMapApiListenFalse,
+  void startRouting(OpenStreetMapApiProvider openStreetMapApiListenFalse,
       DragHandleProvider dragHandleProviderListenFalse) {
     Log.i('startRouting is called');
     openStreetMapApiListenFalse.processFeatureCoordinates(context);

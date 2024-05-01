@@ -36,30 +36,23 @@ class _TrikeRightMapPageState extends State<TrikeRightMapPage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       sourceController =
-          context.read<TextEditingControllerProvider>()
-              .sourceController;
+          context.read<TextEditingControllerProvider>().sourceController;
       destinationController =
-          context.read<TextEditingControllerProvider>()
-              .destinationController;
-      routeResponseProvider =
-          context.read<RouteResponseProvider>();
-      suggestionsResponseProvider =
-          context.read<SuggestionsResponseProvider>();
+          context.read<TextEditingControllerProvider>().destinationController;
+      routeResponseProvider = context.read<RouteResponseProvider>();
+      suggestionsResponseProvider = context.read<SuggestionsResponseProvider>();
       stateProvider = context.read<StateProvider>();
-      openStreetMapApiProvider =
-          context.read<OpenStreetMapApiProvider>();
-      dragHandleProvider =
-          context.read<DragHandleProvider>();
+      stateProvider.context = context;
+      openStreetMapApiProvider = context.read<OpenStreetMapApiProvider>();
+      dragHandleProvider = context.read<DragHandleProvider>();
       stateProvider.checkRoutingIfIsComplete(
-          context,
           sourceController,
           destinationController,
           suggestionsResponseProvider,
           openStreetMapApiProvider,
           dragHandleProvider);
     });
-    context.read<PassengerTypeProvider>()
-        .initPassengerTypeSharedPref();
+    context.read<PassengerTypeProvider>().initPassengerTypeSharedPref();
   }
 
   @override

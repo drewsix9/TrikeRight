@@ -96,7 +96,6 @@ class _CalculateFareDialogState extends State<CalculateFareDialog> {
                                   suggestionsResponseProvider,
                                   openStreetMapApiListenFalse);
                               stateProvider.checkRoutingIfIsComplete(
-                                context,
                                 sourceController,
                                 destinationController,
                                 suggestionsResponseProvider,

@@ -108,7 +108,6 @@ class MySlidingUpPanel extends StatelessWidget {
       });
     } else {
       GlobalKey<State> loadingKey = GlobalKey<State>();
-
       showDialog(
         context: context,
         barrierDismissible: false,
