@@ -77,7 +77,6 @@ class _CalculateFareDialogState extends State<CalculateFareDialog> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // TODO: remove this if close icon and add a button to find a new route
                     SizedBox(
                       width: double.infinity,
                       child: Row(
@@ -88,27 +87,6 @@ class _CalculateFareDialogState extends State<CalculateFareDialog> {
                             textAlign: TextAlign.center,
                             style: AppTextLightTheme.yourFareIs,
                           ),
-                          IconButton(
-                            padding: EdgeInsets.zero,
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                              stateProvider.resetTrikeRightMapState(
-                                  textEditingControllerProvider,
-                                  suggestionsResponseProvider,
-                                  openStreetMapApiListenFalse);
-                              stateProvider.checkRoutingIfIsComplete(
-                                sourceController,
-                                destinationController,
-                                suggestionsResponseProvider,
-                                openStreetMapApiListenFalse,
-                                dragHandleProviderListenFalse,
-                              );
-                            },
-                            icon: const Icon(
-                              Icons.close,
-                              color: Color(0xFF0F1416),
-                            ),
-                          )
                         ],
                       ),
                     ),
@@ -117,11 +95,51 @@ class _CalculateFareDialogState extends State<CalculateFareDialog> {
                       textAlign: TextAlign.center,
                       style: AppTextLightTheme.totalFare,
                     ),
+                    SizedBox(height: 16.h),
+                    _buildButton(
+                        'Calculate New Route', _onPressCalculateNewRoute)
                   ],
                 )
               ],
             )),
       ),
+    );
+  }
+
+  Widget _buildButton(String label, Function() onPressed) {
+    return SizedBox(
+      // height: 72.h,
+      // width: 390.w,
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF1C91F2),
+            minimumSize: Size(180.w, 48.h),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+          ),
+          onPressed: onPressed,
+          child: Text(
+            label,
+            style: AppTextLightTheme.elevatedButtonTextStyle,
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _onPressCalculateNewRoute() {
+    Navigator.of(context).pop();
+    stateProvider.resetTrikeRightMapState(textEditingControllerProvider,
+        suggestionsResponseProvider, openStreetMapApiListenFalse);
+    stateProvider.checkRoutingIfIsComplete(
+      sourceController,
+      destinationController,
+      suggestionsResponseProvider,
+      openStreetMapApiListenFalse,
+      dragHandleProviderListenFalse,
     );
   }
 }
