@@ -68,6 +68,7 @@ class OpenStreetMapApiProvider extends ChangeNotifier {
       if (response.statusCode == 200) {
         routeResponseApiModelProvider
             .updateRouteResponseApiModel(response.body);
+        Log.i(routeResponseApiModelProvider.routeResponseApiModel.toString());
         updatePointsAndBounds(routeResponseApiModelProvider);
         if (context.mounted) {
           updateMarkers(context, sourceFeature, destinationFeature);
