@@ -17,15 +17,15 @@ class HistoryItemAdapter extends TypeAdapter<HistoryItem> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return HistoryItem(
-      destination: fields[0] as String,
-      source: fields[1] as String,
+      destination: (fields[0] as String?) ?? '',
+      source: (fields[1] as String?) ?? '',
       distance: fields[2] as double,
       duration: fields[3] as double,
       passengerType: fields[4] as PassengerType,
       baseRate: fields[5] as double,
       luggageCost: fields[6] == null ? 0.0 : fields[6] as double,
       totalFare: fields[7] as double,
-      dateAndTime: fields[8] as String,
+      dateAndTime: (fields[8] as String?) ?? '',
     );
   }
 

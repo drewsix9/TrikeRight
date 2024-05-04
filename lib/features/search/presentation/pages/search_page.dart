@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:trikeright/core/themes/trikeright_theme.dart';
 import 'package:trikeright/core/utils/log.dart';
 import 'package:trikeright/features/search/data/autocomplete_api_model.dart';
+import 'package:trikeright/features/search/data/suggestion_response_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/feature_provider.dart';
 import 'package:trikeright/features/trikeright_map/data/services/openrouteservice_api.dart';
 import 'package:trikeright/features/trikeright_map/data/textediting_controller_provider.dart';
@@ -25,10 +26,14 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   get searchTextEditingController => widget.searchTextEditingController;
+  late SuggestionsResponseProvider suggestionResponseProvider;
+  late TextEditingController sourceController;
+  late TextEditingController destinationController;
+  late FeatureProvider featureProvider;
 
-  bool isLoading = false;
+  bool isGettingSuggestions = false;
+  bool isGettingLocation = false;
   Timer? _debounceTimer;
-  List<ACFeature> suggestionsReponse = [];
 
   @override
   void initState() {
@@ -36,6 +41,12 @@ class _SearchPageState extends State<SearchPage> {
     searchTextEditingController.addListener(() {
       _getAutoCompleteData(searchTextEditingController.text);
     });
+    suggestionResponseProvider = context.read<SuggestionsResponseProvider>();
+    sourceController =
+        context.read<TextEditingControllerProvider>().sourceController;
+    destinationController =
+        context.read<TextEditingControllerProvider>().destinationController;
+    featureProvider = context.read<FeatureProvider>();
   }
 
   @override
@@ -92,27 +103,30 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ),
           ),
-          isLoading
+          (isGettingSuggestions || isGettingLocation)
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
               : Expanded(
                   child: ListView.builder(
-                    itemCount: suggestionsReponse.length,
+                    itemCount:
+                        suggestionResponseProvider.suggestionsReponse.length,
                     itemBuilder: (context, index) {
-                      return suggestionsReponse.isEmpty
+                      return suggestionResponseProvider
+                              .suggestionsReponse.isEmpty
                           ? const Center(
                               child: Text('No Results Found'),
                             )
                           : ListTile(
                               contentPadding:
                                   EdgeInsets.symmetric(horizontal: 24.w),
-                              title: Text(
-                                  suggestionsReponse[index].properties!.name!),
+                              title: Text(suggestionResponseProvider
+                                  .suggestionsReponse[index].properties!.name!),
                               onTap: () {
                                 _handleListItemTap(
                                   context,
-                                  suggestionsReponse[index],
+                                  suggestionResponseProvider
+                                      .suggestionsReponse[index],
                                 );
                               },
                             );
@@ -125,24 +139,16 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   void _handleListItemTap(BuildContext context, ACFeature selectedFeature) {
-    final TextEditingController sourceController =
-        Provider.of<TextEditingControllerProvider>(context, listen: false)
-            .sourceController;
-    final TextEditingController destinationController =
-        Provider.of<TextEditingControllerProvider>(context, listen: false)
-            .destinationController;
-
-    final FeatureProvider featureProvider =
-        Provider.of<FeatureProvider>(context, listen: false);
-
     if (sourceController == widget.searchTextEditingController) {
+      suggestionResponseProvider.sourceHasSelected = true;
       featureProvider.setSourceFeature(selectedFeature);
     } else if (destinationController == widget.searchTextEditingController) {
+      suggestionResponseProvider.destinationHasSelected = true;
       featureProvider.setDestinationFeature(selectedFeature);
     }
 
     widget.searchTextEditingController.text = selectedFeature.properties!.name!;
-    suggestionsReponse.clear();
+    suggestionResponseProvider.clearSuggestionsReponse();
     Navigator.of(context).pop();
   }
 
@@ -153,7 +159,7 @@ class _SearchPageState extends State<SearchPage> {
     _debounceTimer = Timer(const Duration(milliseconds: 500), () async {
       if (mounted) {
         setState(() {
-          isLoading = true;
+          isGettingSuggestions = true;
         });
       }
       var response = await http
@@ -161,12 +167,13 @@ class _SearchPageState extends State<SearchPage> {
 
       if (mounted) {
         setState(() {
-          isLoading = false;
+          isGettingSuggestions = false;
           if (response.statusCode == 200) {
             var autoCompleteResponseApiModel =
                 autoCompleteResponseApiModelFromJson(response.body);
             Log.i(autoCompleteResponseApiModel.toString());
-            suggestionsReponse = autoCompleteResponseApiModel.features!;
+            suggestionResponseProvider.suggestionsReponse =
+                autoCompleteResponseApiModel.features!;
           }
         });
       }
@@ -174,18 +181,12 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   Future<Position?> _determinePosition(BuildContext context) async {
-    final TextEditingController sourceController =
-        Provider.of<TextEditingControllerProvider>(context, listen: false)
-            .sourceController;
-    final TextEditingController destinationController =
-        Provider.of<TextEditingControllerProvider>(context, listen: false)
-            .destinationController;
-
-    final FeatureProvider featureProvider =
-        Provider.of<FeatureProvider>(context, listen: false);
-
     bool serviceEnabled;
     LocationPermission permission;
+
+    setState(() {
+      isGettingLocation = true;
+    });
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
@@ -233,13 +234,20 @@ class _SearchPageState extends State<SearchPage> {
 
     if (sourceController == widget.searchTextEditingController) {
       featureProvider.setSourceFeature(generatedFeaturefromGeoCoding);
+      suggestionResponseProvider.sourceHasSelected = true;
     } else if (destinationController == widget.searchTextEditingController) {
       featureProvider.setDestinationFeature(generatedFeaturefromGeoCoding);
+      suggestionResponseProvider.destinationHasSelected = true;
     }
 
     if (context.mounted) {
       Navigator.of(context).pop();
     }
+
+    setState(() {
+      isGettingLocation = false;
+    });
+
     return null;
   }
 }

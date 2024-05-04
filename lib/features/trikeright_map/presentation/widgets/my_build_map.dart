@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart' as latlng;
 import 'package:provider/provider.dart';
+import 'package:trikeright/core/const/coordinates.dart';
 import 'package:trikeright/features/trikeright_map/data/services/openstreetmap_api.dart';
-
-const latlng.LatLng tagbilaranLatLng =
-    latlng.LatLng(9.64697490569609, 123.85528213870656);
 
 class MyBuildMap extends StatefulWidget {
   const MyBuildMap({super.key});
@@ -17,7 +14,7 @@ class MyBuildMap extends StatefulWidget {
 class MyBuildMapState extends State<MyBuildMap> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<OpenStreetMapApi>(
+    return Consumer<OpenStreetMapApiProvider>(
       builder: (context, value, child) {
         return FlutterMap(
           mapController: value.mapController,
@@ -28,7 +25,7 @@ class MyBuildMapState extends State<MyBuildMap> {
                   InteractiveFlag.drag,
             ),
             initialCenter: tagbilaranLatLng,
-            initialZoom: 15,
+            initialZoom: 14,
           ),
           children: [
             TileLayer(
