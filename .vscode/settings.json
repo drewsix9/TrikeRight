@@ -5,4 +5,5 @@
     "source.organizeImports": "always",
     "editor.minimap.showSlider": "always"
   },
+  "postman.settings.dotenv-detection-notification-visibility": false
 }
