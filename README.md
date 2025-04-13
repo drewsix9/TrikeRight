@@ -23,7 +23,7 @@ In Tagbilaran City, tricycle fares can vary, and passengers are sometimes unsure
 
 ```bash
 # Clone this repository
-git clone https://github.com/yourusername/trikeright.git
+git clone https://github.com/drewsix9/TrikeRight.git
 
 # Navigate into the directory
 cd trikeright
